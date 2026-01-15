@@ -54,6 +54,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "princesa"
     },
+    "image12": {
+        "data": "hwQQABAAAACqqqzKqsyszMzMPMqqzKzMzKM8//////8zo/zu7u7u7jOj70REREREM6pP7u7u7u4z+k7u7u7u7qz65O7u7u7uzPzk7u7u7u6s+k7u7v7u7qOqT+7u7u7uM6rvREREREQzqvzu7u7u7jOqrP//////PKo8yqrMrMzMzDzKqsyszA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "escaleras"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",

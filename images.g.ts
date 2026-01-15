@@ -430,6 +430,25 @@ ccccccccccccccccbccccc
 . . . . f f 3 3 f f . . . . . . 
 . . . . . . f f f . . . . . . . 
 `;
+            case "image12":
+            case "escaleras":return img`
+a c c 3 3 3 3 c c c 3 3 3 3 c c 
+a c c 3 3 3 3 a c a a 3 3 3 3 c 
+a c 3 3 3 a a a c a a a a a a c 
+a c a a a a f f f f a a a a a c 
+c c c c f f e 4 4 e f f c c c c 
+a 3 3 f e 4 4 e e 4 4 e f a 3 3 
+a a f e 4 e e e e e e 4 e f a a 
+c c f e 4 e e e e e e 4 e f c c 
+a a f e 4 e e e e e e 4 e f a a 
+a a f e 4 e e e e e e 4 e f a a 
+c c f e 4 e e e e e e 4 e f c c 
+c c f e 4 e e e e f e 4 e f c c 
+c c f e 4 e e e e e e 4 e f c c 
+a a f e 4 e e e e e e 4 e f a a 
+c c f e 4 e e e e e e 4 e f c c 
+c c f e 4 e e e e e e 4 e f c c 
+`;
         }
         return null;
     })
