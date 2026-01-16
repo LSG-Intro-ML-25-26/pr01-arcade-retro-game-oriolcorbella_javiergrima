@@ -59,6 +59,46 @@
         ],
         "displayName": "nivel6"
     },
+    "nivel1": {
+        "id": "nivel1",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAwYTAwMDgwMDBlMGIwZTBiMGUwYjBlMGIwZTBiMGEwYTBhMGEwYTBhMGEwYTBhMGEwNzAyMDIwMjAyMDIwMjAyMDIwNjA5MDEwMTAxMDEwMTAxMDEwMTA1MDkwMTAxMDEwMTAxMDEwMTAxMDUwODAzMDMwMzAzMDMwMzAzMDMwNDBhMGEwYTBhMGEwYTBhMGEwYTBhMGQwYzBkMGMwZDBjMGQwYzBkMGMwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
+        "tileset": [
+            "myTiles.transparency16",
+            "sprites.dungeon.darkGroundCenter",
+            "sprites.dungeon.darkGroundNorth",
+            "sprites.dungeon.darkGroundSouth",
+            "sprites.dungeon.darkGroundSouthEast0",
+            "sprites.dungeon.darkGroundEast",
+            "sprites.dungeon.darkGroundNorthEast0",
+            "sprites.dungeon.darkGroundNorthWest0",
+            "sprites.dungeon.darkGroundSouthWest0",
+            "sprites.dungeon.darkGroundWest",
+            "sprites.dungeon.floorMixed",
+            "sprites.dungeon.purpleOuterNorth2",
+            "sprites.dungeon.purpleOuterSouth2",
+            "sprites.dungeon.purpleOuterSouth0",
+            "sprites.dungeon.purpleOuterNorth1"
+        ],
+        "displayName": "nivel3"
+    },
+    "piso1": {
+        "id": "piso1",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAwYTAwMDgwMDAyMDYwNTAyMDUwNjAyMDYwNTAyMDgwODA4MDgwODA4MDgwODA4MDgwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTA4MDgwODA4MDgwODA4MDgwODA4MDMwNzA0MDMwNzA0MDMwNDA3MDMwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
+        "tileset": [
+            "myTiles.transparency16",
+            "sprites.dungeon.floorLight2",
+            "sprites.dungeon.greenOuterNorth2",
+            "sprites.dungeon.greenOuterSouth2",
+            "sprites.dungeon.greenOuterSouth0",
+            "sprites.dungeon.greenOuterNorth1",
+            "sprites.dungeon.greenOuterNorth0",
+            "sprites.dungeon.greenOuterSouth1",
+            "sprites.dungeon.floorMixed"
+        ],
+        "displayName": "piso2"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
