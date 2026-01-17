@@ -183,41 +183,6 @@ ddddddddddddddddd4ddddddddddddddddddd4ddddddddddddd4dddddddddddddddddddddddddddd
 4ddddddd4d444dd4dd4ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd4ddddddddddddddddddddddddddddddd4ddddddddddddddddddddddddddddd4ddddddddd
 dddddddddd444ddddd3ddddddddddddd4ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd44dddddddddddddddddddddddddddddddddd4ddddddddd
 `;
-            case "image5":
-            case "puerta":return img`
-bbbbbbbbbbbccccbbbbbbc
-bbbbbbbbbbbccccbbbbbbc
-bbbcccccbcccccccbbbbbb
-bbccbbbbcccbbcbccbbbbb
-bbbbbbbccbcbbcbcccbccb
-bbbccbcccbcbbcbccccccb
-bbbbbbcccbcbbcbcbccbcb
-cccbbccbcbcbbcbcbccbbb
-ccbbbccbcbcbbcbcbccbbb
-bbbbbccbcbcbbcbcbccbbb
-bbbbcccbcbcbbcbcbcccbb
-bbbbcccbcbcbbcbcbcccbb
-bbcbcccbcbcbbcbcbcccbb
-cccccccbcbcbbcbcbcccbc
-ccbbcccbcbcbbcbcbcccbb
-bbbbcccbcbcbbcbcbcccbb
-bbbbcccbcbcbbcbcbcccbc
-bbbbcccbcbcbbcbcbccccc
-bbbbcccbcbcbbcbcbcccbc
-cccbcccbcbcbbcbcbccccc
-cccbcccbcbcbbcbcbcccbc
-bbbbcccbcbcbbcbcbcccbb
-bbbbcccbcbcbbcbcbcccbb
-cccbcccbcbcbbcbcbcccbb
-ccbbcccbcbcbbcbcbcccbb
-bbcccccbcbcbbcbcbcccbb
-ccccbbbbbbbbbbbbbcccbb
-ccbbccccccccccccbccccb
-ccbbcccccccccccccccccc
-bbbbbbbbbbbbbbbbbccccc
-ccccccccccccccccbccccc
-ccccccccccccccccbccccc
-`;
             case "image6":
             case "limite":return img`
 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -524,6 +489,60 @@ b e e e e e e e e e e e e e e b
 b c e e e e e e e e e e e e c b 
 b b b b b b b b b b b b b b b b 
 . b b . . . . . . . . . . b b . 
+`;
+            case "image5":
+            case "puerta":return img`
+99999999999999999999999999999999
+9999999999999ffffff9999999999999
+999999999fffffeddefffff999999999
+9999999fffeeee4dd4eeeefff9999999
+9999ffffee4444edde4444eeffff9999
+9999feee44eeeeeddeeeee44eeef9999
+999ffe44eeeeeeeddeeeeeee44eff999
+999fe4eeeeeeeeeddeeeeeeeee4ef999
+999fe4eeeeeeeeeddeeeeeeeee4ef999
+99ffe4eeeeeeeeeddeeeeeeeee4eff99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99f11d11d11d111dd111d11d11d11f99
+99f111111111111dd111111111111f99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99f11d11d11d111dd111d11d11d11f99
+99f111111111111dd111111111111f99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99f11d11d11d111dd111d11d11d11f99
+99f111111111111dd111111111111f99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+99fe4eeeeeeeeeeddeeeeeeeeee4ef99
+88888888888888888888888888888888
+`;
+            case "image17":
+            case "caballero":return img`
+. . . . f f f f f . . . 
+. . f f e e e e e f . . 
+. f f e e e e e e e f . 
+f f f f e e e e e e e f 
+f f f f f e e e 4 e e f 
+f f f f e e e 4 4 e e f 
+f f f f 4 4 4 4 4 e f f 
+f f 4 e 4 f f 4 4 e f f 
+. f 4 d 4 d d d d f f . 
+. f f f 4 d d b b f . . 
+. . f e e 4 4 4 e f . . 
+. . 4 d d e 1 1 1 f . . 
+. . e d d e 1 1 1 f . . 
+. . f e e f 6 6 6 f . . 
+. . . f f f f f f . . . 
+. . . . f f f . . . . . 
 `;
         }
         return null;
