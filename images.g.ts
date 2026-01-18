@@ -433,25 +433,6 @@ c c f e 4 e e e e e e 4 e f c c
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "image16":
-            case "CofreAbierto":return img`
-. b b b b b b b b b b b b b b . 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 4 b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e e 4 4 4 4 4 4 4 4 4 4 e e b 
-b b b b b b b d d b b b b b b b 
-. b b b b b b c c b b b b b b . 
-b c c c c c b c c b c c c c c b 
-b c c c c c c b b c c c c c c b 
-b c c c c c c c c c c c c c c b 
-b c c c c c c c c c c c c c c b 
-b b b b b b b b b b b b b b b b 
-b e e e e e e e e e e e e e e b 
-b e e e e e e e e e e e e e e b 
-b c e e e e e e e e e e e e c b 
-b b b b b b b b b b b b b b b b 
-. b b . . . . . . . . . . b b . 
-`;
             case "image14":
             case "corazon":return img`
 . . . . . . . . . . . . . . . . 
@@ -543,6 +524,165 @@ f f 4 e 4 f f 4 4 e f f
 . . f e e f 6 6 6 f . . 
 . . . f f f f f f . . . 
 . . . . f f f . . . . . 
+`;
+            case "image18":
+            case "mago":return img`
+. . . . . . . c c c . . . . . . 
+. . . . . . c b 5 c . . . . . . 
+. . . . c c c 5 5 c c c . . . . 
+. . c c b c 5 5 5 5 c c c c . . 
+. c b b 5 b 5 5 5 5 b 5 b b c . 
+. c b 5 5 b b 5 5 b b 5 5 b c . 
+. . f 5 5 5 b b b b 5 5 5 c . . 
+. . f f 5 5 5 5 5 5 5 5 f f . . 
+. . f f f b f e e f b f f f . . 
+. . f f f 1 f b b f 1 f f f . . 
+. . . f f b b b b b b f f . . . 
+. . . e e f e e e e f e e . . . 
+. . e b c b 5 b b 5 b f b e . . 
+. . e e f 5 5 5 5 5 5 f e e . . 
+. . . . c b 5 5 5 5 b c . . . . 
+. . . . . f f f f f f . . . . . 
+`;
+            case "image16":
+            case "CofreAbierto":return img`
+. b b b b b b b b b b b b b b . 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 4 b 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+b e e 4 4 4 4 4 4 4 4 4 4 e e b 
+b b b b b b b d d b b b b b b b 
+. b b b b b b c c b b b b b b . 
+b c c c c c b c c b c c c c c b 
+b c c c c c c b b c c c c c c b 
+b c c c c c c c c c c c c c c b 
+b c c c c c c c c c c c c c c b 
+b b b b b b b b b b b b b b b b 
+b e e e e e e e e e e e e e e b 
+b e e e e e e e e e e e e e e b 
+b c e e e e e e e e e e e e c b 
+b b b b b b b b b b b b b b b b 
+. b b . . . . . . . . . . b b . 
+`;
+            case "image19":
+            case "agujero":return img`
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffff
+`;
+            case "image20":
+            case "miImagen5":return img`
+................................
+......6666......................
+....66655666....................
+...7777666666...................
+..677778881166..................
+..777778881156..................
+.67777888885566.................
+.67778886666566.................
+.66778866666666.................
+.68778866666666.................
+..687786666686..................
+..688788666866..................
+...6888888886...................
+....66888866....................
+......6666......................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+`;
+            case "image21":
+            case "miImagen6":return img`
+................................
+................................
+................................
+................................
+......2..................8......
+.....22..................88.....
+....242..................868....
+...2442..................8668...
+..2442......ffffffff......8668..
+..f42f...fff11111111fff....86f..
+.f12f..ff11122222222111ff..f81f.
+.f11f.f11888244e444222211f.f11f.
+f111ff188868824444e4442221ff111f
+f111f186969688222444ee44221f111f
+f111f18669996888824e4444221f111f
+.fff.f18866669968822442221f.fff.
+......f118886666668822211f......
+.......ff11188888888111ff.......
+.........fff11111111fff.........
+............ffffffff............
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
+................................
 `;
         }
         return null;
