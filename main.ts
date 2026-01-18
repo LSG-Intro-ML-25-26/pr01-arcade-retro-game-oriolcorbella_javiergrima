@@ -91,6 +91,35 @@ function DialogoMago () {
     game.showLongText("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar algo para poder derrotarlos. Aqui delante tienes 2 cofres, pero solo 1 contiene el poder, sabrás elegir bien...", DialogLayout.Bottom)
     pause(2000)
 }
+function PisoEnemigos () {
+    tiles.setCurrentTilemap(tilemap`nivel`)
+    nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+    nena.setPosition(76, 98)
+    controller.moveSprite(nena)
+    scene.cameraFollowSprite(nena)
+    tiles.placeOnTile(nena, tiles.getTileLocation(31, 62))
+    cofre3 = sprites.create(assets.image`cofre`, SpriteKind.Player)
+    cofre4 = sprites.create(assets.image`cofre`, SpriteKind.Player)
+    cofre5 = sprites.create(assets.image`cofre0`, SpriteKind.Player)
+    cofre6 = sprites.create(assets.image`cofre0`, SpriteKind.Player)
+    puertaOjo = sprites.create(assets.image`miImagen7`, SpriteKind.Player)
+    tiles.placeOnTile(cofre3, tiles.getTileLocation(10, 30))
+    tiles.placeOnTile(cofre4, tiles.getTileLocation(54, 30))
+    tiles.placeOnTile(cofre5, tiles.getTileLocation(90, 60))
+    tiles.placeOnTile(cofre6, tiles.getTileLocation(10, 60))
+    tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 33))
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function () {
+    sprites.destroy(nena)
+    sprites.destroy(cofre)
+    sprites.destroy(cofre2)
+    sprites.destroy(mago)
+    sprites.destroy(portal)
+    sprites.destroy(CofreAbierto)
+    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
+    pause(2000)
+    PisoEnemigos()
+})
 function CofreBueno () {
     sprites.destroy(cofre)
     CofreAbierto = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
@@ -149,6 +178,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function () {
     pause(2000)
     Piso1()
 })
+let puertaOjo: Sprite = null
+let cofre6: Sprite = null
+let cofre5: Sprite = null
+let cofre4: Sprite = null
+let cofre3: Sprite = null
 let caballero: Sprite = null
 let puerta: Sprite = null
 let portal: Sprite = null
