@@ -25,9 +25,6 @@ function DialogoCaballero () {
 function DialogoPrincesa () {
     game.showLongText("klk manin, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la ha robado un mamahuevo y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare un chupachups de limon, ahora puedes pasar por la puerta y avanzar al siguiente piso.", DialogLayout.Bottom)
     pause(1000)
-    if (nena.overlapsWith(puerta2)) {
-        Piso1()
-    }
 }
 function PantallaPrincipal () {
     tiles.setCurrentTilemap(tilemap`castillo1`)
