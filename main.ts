@@ -47,6 +47,7 @@ function CofreTrampa () {
     sprites.destroy(cofre)
     sprites.destroy(agujero)
     sprites.destroy(nena)
+    sprites.destroy(portal)
     tiles.setCurrentTilemap(tilemap`PantallaCarga`)
     pause(2000)
     Pantalla2()
@@ -148,9 +149,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function () {
     pause(2000)
     Piso1()
 })
-let portal: Sprite = null
 let caballero: Sprite = null
 let puerta: Sprite = null
+let portal: Sprite = null
 let CofreAbierto: Sprite = null
 let agujero: Sprite = null
 let mago: Sprite = null
