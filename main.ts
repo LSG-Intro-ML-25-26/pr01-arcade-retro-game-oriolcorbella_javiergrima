@@ -14,6 +14,7 @@ namespace SpriteKind {
     export const CofreAbierto = SpriteKind.create()
     export const agujero = SpriteKind.create()
     export const portal = SpriteKind.create()
+    export const key = SpriteKind.create()
 }
 function Piso1 () {
     tiles.setCurrentTilemap(tilemap`piso2`)
@@ -23,9 +24,9 @@ function Piso1 () {
     sprites.destroy(princesa)
     sprites.destroy(puerta2)
     cofre = sprites.create(assets.image`cofre`, SpriteKind.cofre)
-    cofre.setPosition(23, 59)
+    cofre.setPosition(23, 55)
     cofre2 = sprites.create(assets.image`cofre`, SpriteKind.cofre2)
-    cofre2.setPosition(136, 59)
+    cofre2.setPosition(136, 55)
     mago = sprites.create(assets.image`mago`, SpriteKind.mago)
     mago.setPosition(81, 42)
 }
@@ -48,7 +49,7 @@ function DialogoPrincesa () {
 function CofreTrampa () {
     sprites.destroy(cofre2)
     agujero = sprites.create(assets.image`agujero`, SpriteKind.agujero)
-    agujero.setPosition(136, 59)
+    agujero.setPosition(136, 55)
     pause(200)
     sprites.destroy(CofreAbierto)
     sprites.destroy(mago)
@@ -94,6 +95,7 @@ function DialogoMago () {
 function PisoEnemigos () {
     tiles.setCurrentTilemap(tilemap`nivel`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+    esta_enemigos = 1
     nena.setPosition(76, 98)
     controller.moveSprite(nena)
     scene.cameraFollowSprite(nena)
@@ -131,8 +133,30 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 function CofreBueno () {
     sprites.destroy(cofre)
     CofreAbierto = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
-    CofreAbierto.setPosition(23, 59)
+    CofreAbierto.setPosition(23, 55)
     game.showLongText("¡Has conseguido el poder del fuego!", DialogLayout.Bottom)
+    for (let value of tiles.getTilesByType(assets.tile`tile_key1`)) {
+        RedKey = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . 5 5 5 5 . . . . . . . . . 
+            . . 5 5 5 5 5 5 . . . . . . . . 
+            . . 5 5 . . 5 5 5 5 5 5 5 5 5 . 
+            . . 5 5 . . 5 5 5 5 5 5 5 5 5 . 
+            . . 5 5 5 5 5 5 b b b 5 b 5 5 . 
+            . . b 5 5 5 5 b . . b 5 b 5 5 . 
+            . . . b b b b . . . . b . 5 5 . 
+            . . . . . . . . . . . . . b b . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.key)
+        sprites.setDataString(RedKey, "name", "RED")
+        tiles.placeOnTile(RedKey, value)
+    }
     pause(500)
     portal = sprites.create(assets.image`miImagen6`, SpriteKind.portal)
     portal.setPosition(81, 79)
@@ -170,6 +194,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.mago, function () {
 })
 function addItem (name: string, image2: Image) {
     toolbar.get_items().push(Inventory.create_item(name, image2))
+    toolbar.update()
 }
 function Pantalla2 () {
     tiles.setCurrentTilemap(tilemap`nivel6`)
@@ -186,21 +211,26 @@ function Pantalla2 () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.princesa, function () {
     DialogoPrincesa()
 })
+function juego2 () {
+	
+}
 function removeitem (name: string) {
     toolbar.get_items().removeAt(findvalue(name))
     toolbar.update()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSprite) {
+    addItem(sprites.readDataString(otherSprite, "name"), otherSprite.image)
+    sprites.destroy(otherSprite)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.caballero, function () {
     DialogoCaballero()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function () {
-    sprites.destroy(princesa)
-    sprites.destroy(puerta2)
     sprites.destroy(nena)
-    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
-    pause(2000)
+    pause(1000)
     Piso1()
 })
+let RedKey: Sprite = null
 let puertaOjo: Sprite = null
 let cofre6: Sprite = null
 let cofre5: Sprite = null
@@ -217,10 +247,17 @@ let cofre2: Sprite = null
 let cofre: Sprite = null
 let puerta2: Sprite = null
 let princesa: Sprite = null
+let esta_enemigos = 0
 let nena: Sprite = null
-PantallaPrincipal()
 createtoolbar()
+PantallaPrincipal()
 nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+esta_enemigos = 0
 nena.setPosition(145, 88)
 controller.moveSprite(nena)
 info.setLife(3)
+game.onUpdateInterval(500, function () {
+    if (esta_enemigos == 1) {
+    	
+    }
+})

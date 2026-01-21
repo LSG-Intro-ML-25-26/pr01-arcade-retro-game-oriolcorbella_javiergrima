@@ -3,7 +3,8 @@
     "description": "",
     "dependencies": {
         "device": "*",
-        "Inventory": "github:unsignedarduino/inventory#v1.1.1"
+        "Inventory": "github:unsignedarduino/inventory#v1.1.1",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1"
     },
     "files": [
         "main.blocks",
