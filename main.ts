@@ -15,7 +15,12 @@ namespace SpriteKind {
     export const agujero = SpriteKind.create()
     export const portal = SpriteKind.create()
     export const key = SpriteKind.create()
+    export const cofre3 = SpriteKind.create()
+    export const mechero = SpriteKind.create()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
+    esta_portal = 1
+})
 function Piso1 () {
     tiles.setCurrentTilemap(tilemap`piso2`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
@@ -30,6 +35,9 @@ function Piso1 () {
     mago = sprites.create(assets.image`mago`, SpriteKind.mago)
     mago.setPosition(81, 42)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
+    mine_plataformas()
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     nena,
@@ -42,6 +50,48 @@ function DialogoCaballero () {
     game.showLongText("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!", DialogLayout.Bottom)
     pause(2000)
 }
+function mine_plataformas () {
+    mySprite = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . 3 3 3 . . . . . . . . 
+        . . . . 3 . . . 3 3 . . . . . . 
+        . . . 3 . 3 3 3 3 3 3 3 . . . . 
+        . . . 3 3 . . . . . 3 3 . . . . 
+        . . . 3 . . . . . . 3 . 3 . . . 
+        . . . 3 . . 3 3 3 3 3 . 3 3 3 . 
+        . . . 3 3 . 3 . . 3 3 3 3 3 3 . 
+        . . . 3 3 . 3 . 3 . . 3 3 3 . 3 
+        . . . 3 3 3 3 3 . 3 3 3 3 3 . 3 
+        . . . . 3 3 3 3 3 3 3 . 3 . 3 3 
+        . . . . . 3 3 . . . . 3 3 3 3 3 
+        . . . . . . . 3 3 3 3 3 3 . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre3, function () {
+    Cofre3_nether()
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (esta_portal == 1) {
+        if (findvalue("MECHERO") != -1) {
+            for (let value of tiles.getTilesByType(assets.tile`bloques_portal`)) {
+                tiles.setTileAt(value, assets.tile`myTile1`)
+                removeitem("MECHERO")
+            }
+        }
+    }
+    if (esta_porta_red == 1) {
+        if (findvalue("REDKEY") != -1) {
+            for (let value of tiles.getTilesByType(assets.tile`transparency16`)) {
+                tiles.setTileAt(value, assets.tile`transparency16`)
+                tiles.setWallAt(value, false)
+                removeitem("REDKEY")
+            }
+        }
+    }
+})
 function DialogoPrincesa () {
     game.showLongText("klk manin, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la ha robado un mamahuevo y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare un chupachups de limon, ahora puedes pasar por la puerta y avanzar al siguiente piso.", DialogLayout.Bottom)
     pause(2000)
@@ -69,6 +119,9 @@ function PantallaPrincipal () {
     caballero.setPosition(112, 88)
     puerta.setPosition(66, 80)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`miMosaico42`, function (sprite, location) {
+    esta_porta_red = 1
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     nena,
@@ -98,17 +151,11 @@ function PisoEnemigos () {
     esta_enemigos = 1
     nena.setPosition(76, 98)
     controller.moveSprite(nena)
+    cofre3 = sprites.create(assets.image`cofre`, SpriteKind.cofre3)
+    tiles.placeOnTile(cofre3, tiles.getTileLocation(13, 51))
     scene.cameraFollowSprite(nena)
     tiles.placeOnTile(nena, tiles.getTileLocation(31, 62))
-    cofre3 = sprites.create(assets.image`cofre`, SpriteKind.Player)
-    cofre4 = sprites.create(assets.image`cofre`, SpriteKind.Player)
-    cofre5 = sprites.create(assets.image`cofre0`, SpriteKind.Player)
-    cofre6 = sprites.create(assets.image`cofre0`, SpriteKind.Player)
     puertaOjo = sprites.create(assets.image`miImagen7`, SpriteKind.Player)
-    tiles.placeOnTile(cofre3, tiles.getTileLocation(10, 30))
-    tiles.placeOnTile(cofre4, tiles.getTileLocation(54, 30))
-    tiles.placeOnTile(cofre5, tiles.getTileLocation(90, 60))
-    tiles.placeOnTile(cofre6, tiles.getTileLocation(10, 60))
     tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 33))
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function () {
@@ -143,18 +190,18 @@ function CofreBueno () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
-            . . . 5 5 5 5 . . . . . . . . . 
-            . . 5 5 5 5 5 5 . . . . . . . . 
-            . . 5 5 . . 5 5 5 5 5 5 5 5 5 . 
-            . . 5 5 . . 5 5 5 5 5 5 5 5 5 . 
-            . . 5 5 5 5 5 5 b b b 5 b 5 5 . 
-            . . b 5 5 5 5 b . . b 5 b 5 5 . 
-            . . . b b b b . . . . b . 5 5 . 
-            . . . . . . . . . . . . . b b . 
+            . . . 2 2 2 2 . . . . . . . . . 
+            . . 2 2 2 2 2 2 . . . . . . . . 
+            . . 2 2 . . 2 2 2 2 2 2 2 2 2 . 
+            . . 2 2 . . 2 2 2 2 2 2 2 2 2 . 
+            . . 2 2 2 2 2 2 e e e 2 e 2 2 . 
+            . . e 2 2 2 2 e . . e 2 e 2 2 . 
+            . . . e e e e . . . . e . 2 2 . 
+            . . . . . . . . . . . . . e e . 
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.key)
-        sprites.setDataString(RedKey, "name", "RED")
+        sprites.setDataString(RedKey, "name", "REDKEY")
         tiles.placeOnTile(RedKey, value)
     }
     pause(500)
@@ -196,6 +243,9 @@ function addItem (name: string, image2: Image) {
     toolbar.get_items().push(Inventory.create_item(name, image2))
     toolbar.update()
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`bloques_portal`, function (sprite, location) {
+    mine_plataformas()
+})
 function Pantalla2 () {
     tiles.setCurrentTilemap(tilemap`nivel6`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
@@ -211,14 +261,42 @@ function Pantalla2 () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.princesa, function () {
     DialogoPrincesa()
 })
-function juego2 () {
-	
+function Cofre3_nether () {
+    sprites.destroy(cofre3)
+    CofreAbierto = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
+    tiles.placeOnTile(CofreAbierto, tiles.getTileLocation(13, 51))
+    for (let value of tiles.getTilesByType(assets.tile`mecheroDrop`)) {
+        mechero = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . f f f . . . . . . . . . . 
+            . . f f f f f . . . . . . . . . 
+            . . f f . . . . . . . . . . . . 
+            . . f f . . . . . . . . . . . . 
+            . . f f 1 . . . . . . . . . . . 
+            . . . f f f . . . . . f f . . . 
+            . . . f f f . . . . f f f f . . 
+            . . . . . . . . . f f f f f f . 
+            . . . . . . . . f f f f f f f . 
+            . . . . . . . . f f f 1 f f f . 
+            . . . . . . . f f f 1 1 f f f . 
+            . . . . . . . f f f f f f f f . 
+            . . . . . . . . f f f f f f f . 
+            . . . . . . . . . . f f f . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.mechero)
+        sprites.setDataString(mechero, "name", "MECHERO")
+        tiles.placeOnTile(mechero, value)
+    }
 }
 function removeitem (name: string) {
     toolbar.get_items().removeAt(findvalue(name))
     toolbar.update()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSprite) {
+    addItem(sprites.readDataString(otherSprite, "name"), otherSprite.image)
+    sprites.destroy(otherSprite)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.mechero, function (sprite, otherSprite) {
     addItem(sprites.readDataString(otherSprite, "name"), otherSprite.image)
     sprites.destroy(otherSprite)
 })
@@ -230,34 +308,32 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function () {
     pause(1000)
     Piso1()
 })
+let mechero: Sprite = null
 let RedKey: Sprite = null
 let puertaOjo: Sprite = null
-let cofre6: Sprite = null
-let cofre5: Sprite = null
-let cofre4: Sprite = null
-let cofre3: Sprite = null
 let toolbar: Inventory.Toolbar = null
 let caballero: Sprite = null
 let puerta: Sprite = null
 let portal: Sprite = null
 let CofreAbierto: Sprite = null
 let agujero: Sprite = null
+let cofre3: Sprite = null
+let mySprite: Sprite = null
 let mago: Sprite = null
 let cofre2: Sprite = null
 let cofre: Sprite = null
 let puerta2: Sprite = null
 let princesa: Sprite = null
+let esta_porta_red = 0
+let esta_portal = 0
 let esta_enemigos = 0
 let nena: Sprite = null
 createtoolbar()
 PantallaPrincipal()
 nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
 esta_enemigos = 0
+esta_portal = 0
+esta_porta_red = 0
 nena.setPosition(145, 88)
 controller.moveSprite(nena)
 info.setLife(3)
-game.onUpdateInterval(500, function () {
-    if (esta_enemigos == 1) {
-    	
-    }
-})
