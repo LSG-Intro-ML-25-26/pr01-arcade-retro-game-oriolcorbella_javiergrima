@@ -25,6 +25,7 @@ namespace SpriteKind {
     export const bluekey = SpriteKind.create()
     export const puerta_mine = SpriteKind.create()
     export const cofre_laberito = SpriteKind.create()
+    export const greenkey = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const salto_pluma = StatusBarKind.create()
@@ -869,6 +870,10 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.greenkey, function (sprite, otherSprite) {
+    addItem(sprites.readDataString(otherSprite, "name"), otherSprite.image)
+    sprites.destroy(otherSprite)
+})
 function DialogoPrincesa () {
     game.showLongText("klk manin, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la ha robado un mamahuevo y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare un chupachups de limon, ahora puedes pasar por la puerta y avanzar al siguiente piso.", DialogLayout.Bottom)
     pause(2000)
@@ -978,6 +983,33 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function (sprite, other
 sprites.onOverlap(SpriteKind.Player, SpriteKind.princesa, function (sprite, otherSprite) {
     DialogoPrincesa()
 })
+function cofre_obert_laberint () {
+    sprites.destroy(cofre_laberinto)
+    CofreAbierto2 = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
+    tiles.placeOnTile(CofreAbierto2, tiles.getTileLocation(2, 30))
+    for (let value11 of tiles.getTilesByType(assets.tile`cofre_laberinto_tile`)) {
+        greenkey = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . 7 7 7 7 . . . . . . . . . 
+            . . 7 7 7 7 7 7 . . . . . . . . 
+            . . 7 7 . . 7 7 7 7 7 7 7 7 7 . 
+            . . 7 7 . . 7 7 7 7 7 7 7 7 7 . 
+            . . 7 7 7 7 7 7 6 6 6 7 6 7 7 . 
+            . . 6 7 7 7 7 6 . . 6 7 6 7 7 . 
+            . . . 6 6 6 6 . . . . 6 . 7 7 . 
+            . . . . . . . . . . . . . 6 6 . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.greenkey)
+        sprites.setDataString(greenkey, "name", "GREENKEY")
+        tiles.placeOnTile(greenkey, value11)
+    }
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.bluekey, function (sprite, otherSprite) {
     addItem(sprites.readDataString(otherSprite, "name"), otherSprite.image)
     sprites.destroy(otherSprite)
@@ -1149,12 +1181,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puertaCastillo, function (sprite
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre2, function (sprite, otherSprite) {
     CofreTrampa()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre_laberito, function (sprite, otherSprite) {
+    cofre_obert_laberint()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.caballero, function (sprite, otherSprite) {
     DialogoCaballero()
 })
 let mechero2: Sprite = null
 let BlueKey: Sprite = null
 let RedKey: Sprite = null
+let greenkey: Sprite = null
 let puertaOjo: Sprite = null
 let cofre_laberinto: Sprite = null
 let cofre32: Sprite = null
