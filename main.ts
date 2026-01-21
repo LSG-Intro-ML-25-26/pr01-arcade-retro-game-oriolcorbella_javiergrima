@@ -36,7 +36,7 @@ function Piso1 () {
     mago.setPosition(81, 42)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
-    mine_plataformas()
+	
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -49,26 +49,6 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 function DialogoCaballero () {
     game.showLongText("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!", DialogLayout.Bottom)
     pause(2000)
-}
-function mine_plataformas () {
-    mySprite = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . 3 3 3 . . . . . . . . 
-        . . . . 3 . . . 3 3 . . . . . . 
-        . . . 3 . 3 3 3 3 3 3 3 . . . . 
-        . . . 3 3 . . . . . 3 3 . . . . 
-        . . . 3 . . . . . . 3 . 3 . . . 
-        . . . 3 . . 3 3 3 3 3 . 3 3 3 . 
-        . . . 3 3 . 3 . . 3 3 3 3 3 3 . 
-        . . . 3 3 . 3 . 3 . . 3 3 3 . 3 
-        . . . 3 3 3 3 3 . 3 3 3 3 3 . 3 
-        . . . . 3 3 3 3 3 3 3 . 3 . 3 3 
-        . . . . . 3 3 . . . . 3 3 3 3 3 
-        . . . . . . . 3 3 3 3 3 3 . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Player)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre3, function () {
     Cofre3_nether()
@@ -84,8 +64,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     if (esta_porta_red == 1) {
         if (findvalue("REDKEY") != -1) {
-            for (let value of tiles.getTilesByType(assets.tile`transparency16`)) {
-                tiles.setTileAt(value, assets.tile`transparency16`)
+            for (let value of tiles.getTilesByType(assets.tile`puertaCandadoRED`)) {
+                tiles.setTileAt(value, assets.tile`puertaSinCandadoRED`)
                 tiles.setWallAt(value, false)
                 removeitem("REDKEY")
             }
@@ -148,6 +128,7 @@ function DialogoMago () {
 function PisoEnemigos () {
     tiles.setCurrentTilemap(tilemap`nivel`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+    tiles.placeOnTile(cofre3, tiles.getTileLocation(9, 48))
     esta_enemigos = 1
     nena.setPosition(76, 98)
     controller.moveSprite(nena)
@@ -243,9 +224,6 @@ function addItem (name: string, image2: Image) {
     toolbar.get_items().push(Inventory.create_item(name, image2))
     toolbar.update()
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`bloques_portal`, function (sprite, location) {
-    mine_plataformas()
-})
 function Pantalla2 () {
     tiles.setCurrentTilemap(tilemap`nivel6`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
@@ -318,7 +296,6 @@ let portal: Sprite = null
 let CofreAbierto: Sprite = null
 let agujero: Sprite = null
 let cofre3: Sprite = null
-let mySprite: Sprite = null
 let mago: Sprite = null
 let cofre2: Sprite = null
 let cofre: Sprite = null

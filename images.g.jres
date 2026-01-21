@@ -104,6 +104,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "nena-front"
     },
+    "image3": {
+        "data": "hwQgABAAAAD//////////y8iIiIiIiLyLyIiIiIiIvIvIiIiIiIi8i/y///////yL/IiIi8iIvIv8iIiLyIi8i/yIiL/LyLyL/IiIi/yIvIvIv//IiL/8i8iIiIiIiLyLyIiIiIiIvIvIiIiIiIi8i/y///////yL/IiIi8i8vIv8iIiLyLy8i/yIiIvIvLyL/IiIiIi8vIv8iIiIiLy8i8iIiIiIiLyLyIiIiIiIvIvIiIiIiIi8i/y///////yL/IiIiIi8vIv8iIiIiLy8i/yLyIiIvLyLyL/IiLy//IvIvL///8i8i8iIiIiIiLyLyIiIiIiIvIvIiIiIiIi8v//////////",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
