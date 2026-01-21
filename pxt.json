@@ -2,7 +2,8 @@
     "name": "MakeCode-Arcade-Template - Copia",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "Inventory": "github:unsignedarduino/inventory#v1.1.1"
     },
     "files": [
         "main.blocks",

@@ -29,6 +29,14 @@ function Piso1 () {
     mago = sprites.create(assets.image`mago`, SpriteKind.mago)
     mago.setPosition(81, 42)
 }
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-up`,
+    500,
+    false
+    )
+})
 function DialogoCaballero () {
     game.showLongText("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!", DialogLayout.Bottom)
     pause(2000)
@@ -60,22 +68,6 @@ function PantallaPrincipal () {
     caballero.setPosition(112, 88)
     puerta.setPosition(66, 80)
 }
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-down`,
-    500,
-    false
-    )
-})
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-right`,
-    500,
-    false
-    )
-})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     nena,
@@ -87,6 +79,14 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre2, function () {
     CofreTrampa()
 })
+function createtoolbar () {
+    toolbar = Inventory.create_toolbar([], 4)
+    toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
+    toolbar.left = 4
+    toolbar.bottom = 116
+    toolbar.z = 100
+    toolbar.setFlag(SpriteFlag.RelativeToCamera, true)
+}
 function DialogoMago () {
     game.showLongText("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar algo para poder derrotarlos. Aqui delante tienes 2 cofres, pero solo 1 contiene el poder, sabrás elegir bien...", DialogLayout.Bottom)
     pause(2000)
@@ -120,6 +120,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function () {
     pause(2000)
     PisoEnemigos()
 })
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-right`,
+    500,
+    false
+    )
+})
 function CofreBueno () {
     sprites.destroy(cofre)
     CofreAbierto = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
@@ -130,14 +138,14 @@ function CofreBueno () {
     portal.setPosition(81, 79)
     game.showLongText("Ya estas preparado, cruza el portal y derrota el mal!", DialogLayout.Bottom)
 }
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-up`,
-    500,
-    false
-    )
-})
+function findvalue (name: string) {
+    for (let value of toolbar.get_items()) {
+        if (value.get_text(ItemTextAttribute.Name) == name) {
+            return toolbar.get_items().indexOf(value)
+        }
+    }
+    return -1
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.puertaCastillo, function () {
     sprites.destroy(puerta)
     sprites.destroy(caballero)
@@ -146,12 +154,23 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puertaCastillo, function () {
     pause(2000)
     Pantalla2()
 })
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-down`,
+    500,
+    false
+    )
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre, function () {
     CofreBueno()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.mago, function () {
     DialogoMago()
 })
+function addItem (name: string, image2: Image) {
+    toolbar.get_items().push(Inventory.create_item(name, image2))
+}
 function Pantalla2 () {
     tiles.setCurrentTilemap(tilemap`nivel6`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
@@ -167,6 +186,10 @@ function Pantalla2 () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.princesa, function () {
     DialogoPrincesa()
 })
+function removeitem (name: string) {
+    toolbar.get_items().removeAt(findvalue(name))
+    toolbar.update()
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.caballero, function () {
     DialogoCaballero()
 })
@@ -183,6 +206,7 @@ let cofre6: Sprite = null
 let cofre5: Sprite = null
 let cofre4: Sprite = null
 let cofre3: Sprite = null
+let toolbar: Inventory.Toolbar = null
 let caballero: Sprite = null
 let puerta: Sprite = null
 let portal: Sprite = null
@@ -195,6 +219,7 @@ let puerta2: Sprite = null
 let princesa: Sprite = null
 let nena: Sprite = null
 PantallaPrincipal()
+createtoolbar()
 nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
 nena.setPosition(145, 88)
 controller.moveSprite(nena)
