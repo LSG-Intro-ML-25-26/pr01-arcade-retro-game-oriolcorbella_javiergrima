@@ -21,6 +21,8 @@ namespace SpriteKind {
     export const feather = SpriteKind.create()
     export const tp = SpriteKind.create()
     export const tp2 = SpriteKind.create()
+    export const cofre_mine = SpriteKind.create()
+    export const bluekey = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const salto_pluma = StatusBarKind.create()
@@ -809,6 +811,8 @@ function mine_plataformas () {
         tiles.placeOnTile(tp_plataformas2, value)
         tiles.setTileAt(value, assets.tile`transparency16`)
     }
+    cofre_plataformas = sprites.create(assets.image`cofre`, SpriteKind.cofre_mine)
+    tiles.placeOnTile(nena, tiles.getTileLocation(59, 6))
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre3, function () {
     Cofre3_nether()
@@ -839,6 +843,9 @@ function DialogoPrincesa () {
     game.showLongText("klk manin, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la ha robado un mamahuevo y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare un chupachups de limon, ahora puedes pasar por la puerta y avanzar al siguiente piso.", DialogLayout.Bottom)
     pause(2000)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre_mine, function () {
+    cofre_plataformes_mine()
+})
 function CofreTrampa () {
     sprites.destroy(cofre2)
     agujero = sprites.create(assets.image`agujero`, SpriteKind.agujero)
@@ -1023,6 +1030,16 @@ function addItem (name: string, image2: Image) {
     toolbar.get_items().push(Inventory.create_item(name, image2))
     toolbar.update()
 }
+function cofre_plataformes_mine () {
+    sprites.destroy(cofre3)
+    CofreAbierto = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
+    tiles.placeOnTile(CofreAbierto, tiles.getTileLocation(13, 51))
+    for (let value of tiles.getTilesByType(assets.tile`tile_mine`)) {
+        BlueKey = sprites.create(assets.image`redkey`, SpriteKind.bluekey)
+        sprites.setDataString(BlueKey, "name", "BLUEKEY")
+        tiles.placeOnTile(BlueKey, value)
+    }
+}
 function Pantalla2 () {
     tiles.setCurrentTilemap(tilemap`nivel6`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
@@ -1086,6 +1103,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function () {
     Piso1()
 })
 let mechero: Sprite = null
+let BlueKey: Sprite = null
 let RedKey: Sprite = null
 let puertaOjo: Sprite = null
 let toolbar: Inventory.Toolbar = null
@@ -1096,6 +1114,7 @@ let portal: Sprite = null
 let CofreAbierto: Sprite = null
 let agujero: Sprite = null
 let cofre3: Sprite = null
+let cofre_plataformas: Sprite = null
 let tp_plataformas2: Sprite = null
 let tp_plataformas: Sprite = null
 let pluma: Sprite = null
