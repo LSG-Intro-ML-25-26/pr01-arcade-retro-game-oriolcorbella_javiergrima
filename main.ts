@@ -26,6 +26,7 @@ namespace SpriteKind {
     export const puerta_mine = SpriteKind.create()
     export const cofre_laberito = SpriteKind.create()
     export const greenkey = SpriteKind.create()
+    export const Map = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const salto_pluma = StatusBarKind.create()
@@ -52,6 +53,9 @@ function Piso1 () {
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
     mine_plataformas()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
+    esta_porta_green = 1
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -865,7 +869,16 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             for (let value7 of tiles.getTilesByType(assets.tile`puertaCandadoBLUE`)) {
                 tiles.setTileAt(value7, assets.tile`puertaSinCandadoBLUE`)
                 tiles.setWallAt(value7, false)
-                removeitem("REDKEY")
+                removeitem("BLUEKEY")
+            }
+        }
+    }
+    if (esta_porta_green == 1) {
+        if (findvalue("GREENKEY") != -1) {
+            for (let value7 of tiles.getTilesByType(assets.tile`puertaCandadoGREEN`)) {
+                tiles.setTileAt(value7, assets.tile`puertaSinCandadoGREEN`)
+                tiles.setWallAt(value7, false)
+                removeitem("GREENKEY")
             }
         }
     }
@@ -904,6 +917,12 @@ function PantallaPrincipal () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`miMosaico42`, function (sprite, location) {
     esta_porta_red = 1
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile15`, function (sprite, location) {
+    esta_porta_blue = 1
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
+    esta_porta_blue = 1
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (nena.vy == 0 && esta_plataformes == 1) {
         nena.vy = fuerza_salto
@@ -914,9 +933,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.feather, function (sprite, other
     efecto_salto()
     sprites.destroy(statusbar)
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`blau_esq`, function (sprite, location) {
+    scene.cameraFollowSprite(nena)
+    Zoom.SetZoomFilter(1, Mode.Center)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta_mine, function (sprite, otherSprite) {
     sprites.destroy(nena, effects.spray, 100)
     PisoEnemigos()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile12`, function (sprite, location) {
+    esta_porta_blue = 1
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -925,6 +951,9 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     500,
     false
     )
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
+    esta_porta_blue = 1
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre3, function (sprite, otherSprite) {
     Cofre3_nether()
@@ -941,6 +970,9 @@ function createtoolbar () {
     toolbar.z = 100
     toolbar.setFlag(SpriteFlag.RelativeToCamera, true)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite, location) {
+    esta_porta_green = 1
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function (sprite, otherSprite) {
     sprites.destroy(nena)
     sprites.destroy(cofre4)
@@ -963,6 +995,7 @@ function PisoEnemigos () {
     tiles.setCurrentTilemap(tilemap`nivel`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
     tiles.placeOnTile(cofre32, tiles.getTileLocation(9, 48))
+    esta_mapa_enemigos = 1
     esta_enemigos = 1
     nena.setPosition(76, 98)
     controller.moveSprite(nena)
@@ -987,7 +1020,7 @@ function cofre_obert_laberint () {
     sprites.destroy(cofre_laberinto)
     CofreAbierto2 = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
     tiles.placeOnTile(CofreAbierto2, tiles.getTileLocation(2, 30))
-    for (let value11 of tiles.getTilesByType(assets.tile`cofre_laberinto_tile`)) {
+    for (let value12 of tiles.getTilesByType(assets.tile`cofre_laberinto_tile`)) {
         greenkey = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -1007,15 +1040,18 @@ function cofre_obert_laberint () {
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.greenkey)
         sprites.setDataString(greenkey, "name", "GREENKEY")
-        tiles.placeOnTile(greenkey, value11)
+        tiles.placeOnTile(greenkey, value12)
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.bluekey, function (sprite, otherSprite) {
     addItem(sprites.readDataString(otherSprite, "name"), otherSprite.image)
     sprites.destroy(otherSprite)
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`miMosaico39`, function (sprite, location) {
-    esta_porta_blue = 1
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
+    esta_porta_green = 1
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, location) {
+    esta_porta_green = 1
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -1024,6 +1060,9 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     500,
     false
     )
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, location) {
+    esta_porta_green = 1
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.coin, function (sprite, otherSprite) {
     info.changeScoreBy(1)
@@ -1109,8 +1148,28 @@ function cofre_plataformes_mine () {
         tiles.placeOnTile(BlueKey, tiles.getTileLocation(59, 6))
     }
 }
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (mapa_abierto == 0) {
+        myMinimap = minimap.minimap(MinimapScale.Quarter, 2, 0)
+        mapSprite = sprites.create(minimap.getImage(minimap.minimap()), SpriteKind.Map)
+        mapSprite.setPosition(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
+        controller.moveSprite(nena, 0, 0)
+        minimap.includeSprite(myMinimap, nena, MinimapSpriteScale.MinimapScale)
+        mapa_abierto = 1
+    } else if (mapa_abierto == 0 && esta_mapa_enemigos == 1) {
+        myMinimap = minimap.minimap(MinimapScale.Half, 2, 0)
+    } else {
+        sprites.destroy(mapSprite)
+        controller.moveSprite(nena)
+        mapa_abierto = 0
+    }
+})
 info.onLifeZero(function () {
     PisoEnemigos()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`blau_dreta`, function (sprite, location) {
+    scene.cameraFollowSprite(nena)
+    Zoom.SetZoomFilter(1, Mode.Center)
 })
 function Pantalla2 () {
     tiles.setCurrentTilemap(tilemap`nivel6`)
@@ -1187,7 +1246,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre_laberito, function (sprite
 sprites.onOverlap(SpriteKind.Player, SpriteKind.caballero, function (sprite, otherSprite) {
     DialogoCaballero()
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile14`, function (sprite, location) {
+    esta_porta_blue = 1
+})
 let mechero2: Sprite = null
+let mapSprite: Sprite = null
+let myMinimap: minimap.Minimap = null
 let BlueKey: Sprite = null
 let RedKey: Sprite = null
 let greenkey: Sprite = null
@@ -1213,20 +1277,26 @@ let cofre4: Sprite = null
 let puerta22: Sprite = null
 let princesa2: Sprite = null
 let fuerza_salto = 0
+let esta_porta_green = 0
 let esta_plataformes = 0
 let esta_porta_blue = 0
 let esta_porta_red = 0
 let esta_portal = 0
 let esta_enemigos = 0
+let esta_mapa_enemigos = 0
+let mapa_abierto = 0
 let nena: Sprite = null
 createtoolbar()
 PantallaPrincipal()
 nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+mapa_abierto = 0
+esta_mapa_enemigos = 0
 esta_enemigos = 0
 esta_portal = 0
 esta_porta_red = 0
 esta_porta_blue = 0
 esta_plataformes = 0
+esta_porta_green = 0
 fuerza_salto = -163
 nena.setPosition(145, 88)
 controller.moveSprite(nena)
