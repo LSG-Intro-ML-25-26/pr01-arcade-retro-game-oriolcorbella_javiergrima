@@ -57,14 +57,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
     esta_porta_green = 1
 })
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-up`,
-    500,
-    false
-    )
-})
 function DialogoCaballero () {
     game.showLongText("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!", DialogLayout.Bottom)
     pause(2000)
@@ -846,6 +838,109 @@ function mine_plataformas () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.tp, function (sprite, otherSprite) {
     tiles.placeOnTile(nena, tiles.getTileLocation(39, 1))
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.greenkey, function (sprite, otherSprite) {
+    addItem(sprites.readDataString(otherSprite, "name"), otherSprite.image)
+    sprites.destroy(otherSprite)
+})
+function DialogoPrincesa () {
+    game.showLongText("klk manin, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la ha robado un mamahuevo y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare un chupachups de limon, ahora puedes pasar por la puerta y avanzar al siguiente piso.", DialogLayout.Bottom)
+    pause(2000)
+}
+function CofreTrampa () {
+    sprites.destroy(cofre22)
+    agujero2 = sprites.create(assets.image`agujero`, SpriteKind.agujero)
+    agujero2.setPosition(136, 55)
+    pause(200)
+    sprites.destroy(CofreAbierto2)
+    sprites.destroy(mago2)
+    sprites.destroy(cofre4)
+    sprites.destroy(agujero2)
+    sprites.destroy(nena)
+    sprites.destroy(portal2)
+    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
+    pause(2000)
+    Pantalla2()
+    game.showLongText("Parece que has escogido el cofre equivocado y te has caido por el agujero al piso anterior, sube e intentalo de nuevo!", DialogLayout.Bottom)
+}
+function PantallaPrincipal () {
+    tiles.setCurrentTilemap(tilemap`castillo1`)
+    puerta = sprites.create(assets.image`puerta`, SpriteKind.puertaCastillo)
+    caballero2 = sprites.create(assets.image`caballero`, SpriteKind.caballero)
+    caballero2.setPosition(112, 88)
+    puerta.setPosition(66, 80)
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`miMosaico42`, function (sprite, location) {
+    esta_porta_red = 1
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-down`,
+    500,
+    false
+    )
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile15`, function (sprite, location) {
+    esta_porta_blue = 1
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
+    esta_porta_blue = 1
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.feather, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite)
+    efecto_salto()
+    sprites.destroy(statusbar)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`blau_esq`, function (sprite, location) {
+    scene.cameraFollowSprite(nena)
+    Zoom.SetZoomFilter(1, Mode.Center)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta_mine, function (sprite, otherSprite) {
+    sprites.destroy(nena, effects.spray, 100)
+    PisoEnemigos()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile12`, function (sprite, location) {
+    esta_porta_blue = 1
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
+    esta_porta_blue = 1
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre3, function (sprite, otherSprite) {
+    Cofre3_nether()
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-right`,
+    500,
+    false
+    )
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
+    info.setScore(0)
+    tiles.placeOnTile(nena, tiles.getTileLocation(0, 11))
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-left`,
+    500,
+    false
+    )
+})
+function createtoolbar () {
+    toolbar = Inventory.create_toolbar([], 4)
+    toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
+    toolbar.left = 4
+    toolbar.bottom = 116
+    toolbar.z = 100
+    toolbar.setFlag(SpriteFlag.RelativeToCamera, true)
+}
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (nena.vy == 0 && esta_plataformes == 1) {
+        nena.vy = fuerza_salto
+    }
+})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (esta_portal == 1) {
         if (findvalue("MECHERO") != -1) {
@@ -883,93 +978,6 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.greenkey, function (sprite, otherSprite) {
-    addItem(sprites.readDataString(otherSprite, "name"), otherSprite.image)
-    sprites.destroy(otherSprite)
-})
-function DialogoPrincesa () {
-    game.showLongText("klk manin, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la ha robado un mamahuevo y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare un chupachups de limon, ahora puedes pasar por la puerta y avanzar al siguiente piso.", DialogLayout.Bottom)
-    pause(2000)
-}
-function CofreTrampa () {
-    sprites.destroy(cofre22)
-    agujero2 = sprites.create(assets.image`agujero`, SpriteKind.agujero)
-    agujero2.setPosition(136, 55)
-    pause(200)
-    sprites.destroy(CofreAbierto2)
-    sprites.destroy(mago2)
-    sprites.destroy(cofre4)
-    sprites.destroy(agujero2)
-    sprites.destroy(nena)
-    sprites.destroy(portal2)
-    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
-    pause(2000)
-    Pantalla2()
-    game.showLongText("Parece que has escogido el cofre equivocado y te has caido por el agujero al piso anterior, sube e intentalo de nuevo!", DialogLayout.Bottom)
-}
-function PantallaPrincipal () {
-    tiles.setCurrentTilemap(tilemap`castillo1`)
-    puerta = sprites.create(assets.image`puerta`, SpriteKind.puertaCastillo)
-    caballero2 = sprites.create(assets.image`caballero`, SpriteKind.caballero)
-    caballero2.setPosition(112, 88)
-    puerta.setPosition(66, 80)
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`miMosaico42`, function (sprite, location) {
-    esta_porta_red = 1
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile15`, function (sprite, location) {
-    esta_porta_blue = 1
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
-    esta_porta_blue = 1
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (nena.vy == 0 && esta_plataformes == 1) {
-        nena.vy = fuerza_salto
-    }
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.feather, function (sprite, otherSprite) {
-    sprites.destroy(otherSprite)
-    efecto_salto()
-    sprites.destroy(statusbar)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`blau_esq`, function (sprite, location) {
-    scene.cameraFollowSprite(nena)
-    Zoom.SetZoomFilter(1, Mode.Center)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta_mine, function (sprite, otherSprite) {
-    sprites.destroy(nena, effects.spray, 100)
-    PisoEnemigos()
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile12`, function (sprite, location) {
-    esta_porta_blue = 1
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-left`,
-    500,
-    false
-    )
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
-    esta_porta_blue = 1
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre3, function (sprite, otherSprite) {
-    Cofre3_nether()
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
-    info.setScore(0)
-    tiles.placeOnTile(nena, tiles.getTileLocation(0, 11))
-})
-function createtoolbar () {
-    toolbar = Inventory.create_toolbar([], 4)
-    toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
-    toolbar.left = 4
-    toolbar.bottom = 116
-    toolbar.z = 100
-    toolbar.setFlag(SpriteFlag.RelativeToCamera, true)
-}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite, location) {
     esta_porta_green = 1
 })
@@ -1053,14 +1061,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, location) {
     esta_porta_green = 1
 })
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-right`,
-    500,
-    false
-    )
-})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, location) {
     esta_porta_green = 1
 })
@@ -1103,6 +1103,30 @@ function CofreBueno () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre, function (sprite, otherSprite) {
     CofreBueno()
 })
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (mapa_abierto == 0) {
+        myMinimap = minimap.minimap(MinimapScale.Quarter, 2, 0)
+        mapSprite = sprites.create(minimap.getImage(minimap.minimap()), SpriteKind.Map)
+        mapSprite.setPosition(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
+        controller.moveSprite(nena, 0, 0)
+        minimap.includeSprite(myMinimap, nena, MinimapSpriteScale.MinimapScale)
+        mapa_abierto = 1
+    } else if (mapa_abierto == 0 && esta_mapa_enemigos == 1) {
+        myMinimap = minimap.minimap(MinimapScale.Half, 2, 0)
+    } else {
+        sprites.destroy(mapSprite)
+        controller.moveSprite(nena)
+        mapa_abierto = 0
+    }
+})
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-up`,
+    500,
+    false
+    )
+})
 function findvalue (name: string) {
     for (let value9 of toolbar.get_items()) {
         if (value9.get_text(ItemTextAttribute.Name) == name) {
@@ -1126,14 +1150,6 @@ function efecto_salto () {
     }
     fuerza_salto = -163
 }
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-down`,
-    500,
-    false
-    )
-})
 function addItem (name: string, image2: Image) {
     toolbar.get_items().push(Inventory.create_item(name, image2))
     toolbar.update()
@@ -1148,22 +1164,6 @@ function cofre_plataformes_mine () {
         tiles.placeOnTile(BlueKey, tiles.getTileLocation(59, 6))
     }
 }
-controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mapa_abierto == 0) {
-        myMinimap = minimap.minimap(MinimapScale.Quarter, 2, 0)
-        mapSprite = sprites.create(minimap.getImage(minimap.minimap()), SpriteKind.Map)
-        mapSprite.setPosition(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
-        controller.moveSprite(nena, 0, 0)
-        minimap.includeSprite(myMinimap, nena, MinimapSpriteScale.MinimapScale)
-        mapa_abierto = 1
-    } else if (mapa_abierto == 0 && esta_mapa_enemigos == 1) {
-        myMinimap = minimap.minimap(MinimapScale.Half, 2, 0)
-    } else {
-        sprites.destroy(mapSprite)
-        controller.moveSprite(nena)
-        mapa_abierto = 0
-    }
-})
 info.onLifeZero(function () {
     PisoEnemigos()
 })
@@ -1250,9 +1250,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile14`, function (sprite, 
     esta_porta_blue = 1
 })
 let mechero2: Sprite = null
+let BlueKey: Sprite = null
 let mapSprite: Sprite = null
 let myMinimap: minimap.Minimap = null
-let BlueKey: Sprite = null
 let RedKey: Sprite = null
 let greenkey: Sprite = null
 let puertaOjo: Sprite = null
