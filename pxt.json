@@ -2,7 +2,11 @@
     "name": "MakeCode-Arcade-Template - Copia",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "Inventory": "github:unsignedarduino/inventory#v1.1.1",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
+        "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
+        "pxt-zoom": "github:kiwiphoenix364/pxt-zoom#v3.0.3"
     },
     "files": [
         "main.blocks",

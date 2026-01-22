@@ -452,25 +452,6 @@ c c f e 4 e e e e e e 4 e f c c
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "image15":
-            case "cofre":return img`
-. . b b b b b b b b b b b b . . 
-. b e 4 4 4 4 4 4 4 4 4 4 e b . 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e e 4 4 4 4 4 4 4 4 4 4 e e b 
-b e e e e e e e e e e e e e e b 
-b e e e e e e e e e e e e e e b 
-b b b b b b b d d b b b b b b b 
-c b b b b b b c c b b b b b b c 
-c c c c c c b c c b c c c c c c 
-b e e e e e c b b c e e e e e b 
-b e e e e e e e e e e e e e e b 
-b c e e e e e e e e e e e e c b 
-b b b b b b b b b b b b b b b b 
-. b b . . . . . . . . . . b b . 
-`;
             case "image5":
             case "puerta":return img`
 99999999999999999999999999999999
@@ -543,25 +524,6 @@ f f 4 e 4 f f 4 4 e f f
 . . e e f 5 5 5 5 5 5 f e e . . 
 . . . . c b 5 5 5 5 b c . . . . 
 . . . . . f f f f f f . . . . . 
-`;
-            case "image16":
-            case "CofreAbierto":return img`
-. b b b b b b b b b b b b b b . 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 4 b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e e 4 4 4 4 4 4 4 4 4 4 e e b 
-b b b b b b b d d b b b b b b b 
-. b b b b b b c c b b b b b b . 
-b c c c c c b c c b c c c c c b 
-b c c c c c c b b c c c c c c b 
-b c c c c c c c c c c c c c c b 
-b c c c c c c c c c c c c c c b 
-b b b b b b b b b b b b b b b b 
-b e e e e e e e e e e e e e e b 
-b e e e e e e e e e e e e e e b 
-b c e e e e e e e e e e e e c b 
-b b b b b b b b b b b b b b b b 
-. b b . . . . . . . . . . b b . 
 `;
             case "image19":
             case "agujero":return img`
@@ -683,6 +645,184 @@ f111f18669996888824e4444221f111f
 ................................
 ................................
 ................................
+`;
+            case "image23":
+            case "miImagen8":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`;
+            case "image22":
+            case "miImagen7":return img`
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfffffffffffffffffffffffffffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfffffffffffffffffffffffffffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbffffffffffffffffffffffeeeeeeeeeeefffffeeeeeeeeeeeffffffffffffffffffffffbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbffffffeeeeeeeeeeeeeeeeeeeeee77777777777fffff77777777777eeeeeeeeeeeeeeeeeeeeeeffffffbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbffffffeeeeeeeeeeeeeeeeeeeeee77777777777fffff77777777777eeeeeeeeeeeeeeeeeeeeeeffffffbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfeeeeee7777777777777777777777eeeeeeeeeeefffffeeeeeeeeeee7777777777777777777777eeeeeefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfeeeeee7777777777777777777777eeeeeeeeeeefffffeeeeeeeeeee7777777777777777777777eeeeeefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfeeeeee7777777777777777777777eeeeeeeeeeefffffeeeeeeeeeee7777777777777777777777eeeeeefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfee7777eeeeeeeeeeeeeeeeeeeeee77777777777fffff77777777777eeeeeeeeeeeeeeeeeeeeee7777eefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfee7777eeeeeeeeeeeeeeeeeeeeee77777777777fffff77777777777eeeeeeeeeeeeeeeeeeeeee7777eefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfee7777eeeeeeeeeeeeeeeeeeeeee77777777777fffff77777777777eeeeeeeeeeeeeeeeeeeeee7777eefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfee7eee7777777777777777777777eeeeeeeeeeefffffeeeeeeeeeee7777777777777777777777eee7eefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfee7eee77eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee77eee7eefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfee7eee77eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee77eee7eefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfee7eee77eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee77eee7eefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbfee7eee77eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee77eee7eefbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbfffe77e777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777e77efffbbbbbbbbbbbb
+bbbbbbbbbbbbbfffe77e777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777e77efffbbbbbbbbbbbb
+bbbbbbbbbbbbbfffe77e777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777e77efffbbbbbbbbbbbb
+bbbbbbbbbbbbbfffe77e777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777e77efffbbbbbbbbbbbb
+bbbbbbbbbbbbbfffe77e777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777e77efffbbbbbbbbbbbb
+bbbbbbbbbbbbbfffe77e777eeeeeeeeeeeeeeeeeeeeee77eeeeeeeeefffffeeeeeeeee77eeeeeeeeeeeeeeeeeeeeee777e77efffbbbbbbbbbbbb
+bbbbbbbbbbbbbfffe77e777eeeeeeeeeeeeeeeeeeeeee77eeeeeeeeefffffeeeeeeeee77eeeeeeeeeeeeeeeeeeeeee777e77efffbbbbbbbbbbbb
+bbbbbbbbbbbbbfffe77e777eeeeeeeeeeeeeeeeeeeeee77eeeeeeeeefffffeeeeeeeee77eeeeeeeeeeeeeeeeeeeeee777e77efffbbbbbbbbbbbb
+bbbbbbbbbbbbbfffe77e777eeeeeeeeeeeeeeeeeeeeee77eeeeeeeeefffffeeeeeeeee77eeeeeeeeeeeeeeeeeeeeee777e77efffbbbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeeeeeeeeeeeeeee777eeeeeeeefffffeeeeeeee777eeeeeeeeeeeeeeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeeeeeeeeeeeeeeeee7eeeeeeeefffffeeeeeeee7eeeeeeeeeeeeeeeeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeeeeeeeeeeeeeeeee7eeeeeeeefffffeeeeeeee7eeeeeeeeeeeeeeeeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeee77eeeeeeeeeeeeeeeeeefffffffffffeeeeeeeeeeeeeeeeee77eeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeee77eeeeeeeeeeeeeeeeeefffffffffffeeeeeeeeeeeeeeeeee77eeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeee77777eeeeeeeeefffffffffffffffffffffffeeeeeeeee77777eeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeeeee777eeeffffffffffff77777777777ffffffffffffeee777eeeeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeeeee777eeeffffffffffff77777777777ffffffffffffeee777eeeeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeeeeeeeeeffffffff77777777771111111777777ffffffffeeeeeeeeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeeeeeeeeeeeeeeeeffffffff77777777771111111777777ffffffffeeeeeeeeeeeeeeeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeee77eeeeeeeeeefff1fff777777777777111111111111777fff1fffeeeeeeee7777eeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeee777777eeeffff111fff777777777777777777711111177fff111ffffeee777777eeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeee777777eeeffff111fff777777777777777777711111177fff111ffffeee777777eeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeee777777eeeffff111fff777777777777777777711111177fff111ffffeee777777eeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbbffeee7ee7eeeeee777777eeeffff111fff777777777777777777711111177fff111ffffeee777777eeeeee7ee7eeeffbbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeee7777efffff111f777777777777fffffffff777711177777f111fffffe77eeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeee7777efffff111f777777777777fffffffff777711177777f111fffffe77eeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeeeeeeefff111111f77777777777fffffffffff77777177777f111111fffeeeeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeeeeeeefff111111f77777777777fffffffffff77777177777f111111fffeeeeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77e777777eefffff11111111f77777777777fffffffffff77777111777f11111111fffeeee777777e77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeeeeeeefff111111f77777111777fffffffffff77777111777f111111fffeeeeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeeeeeeefff111111f77777111777fffffffffff77777111777f111111fffeeeeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeee7777efffff111f777771117777fffffffff777777777777f111fffffe77eeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeee7777efffff111f777771117777fffffffff777777777777f111fffffe77eeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeee777777eeeffff111fff777117777777777777777777777fff111ffffeee777777eeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeee77eeeeeeeeeefff1fff777111111777777777777777777fff1fffeeeeeeee7777eeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeee77eeeeeeeeeefff1fff777111111777777777777777777fff1fffeeeeeeee7777eeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeeeeeeeeeeeeeeffffffff77711117777777777777777ffffffffeeeeeeeeeeeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeeeeeeeeeeeeeeffffffff77711117777777777777777ffffffffeeeeeeeeeeeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeeeeeeeeeeeeeeffffffff77711117777777777777777ffffffffeeeeeeeeeeeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbbbbfee777e77eeeeeeeeeeeeeeeeeeeeffffffff77711117777777777777777ffffffffeeeeeeeeeeeeeeeeeeee77e777eefbbbbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeeeee777eeeffffffffffff77777777777ffffffffffffeee777eeeeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeeeee777eeeffffffffffff77777777777ffffffffffffeee777eeeeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeee77777eeeeeeeeefffffffffffffffffffffffeeeeeeeee77777eeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeee77eeeeeeeeeeeeeeeeeefffffffffffeeeeeeeeeeeeeeeeee77eeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeee77eeeeeeeeeeeeeeeeeefffffffffffeeeeeeeeeeeeeeeeee77eeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeeeeeeeeeeeeeeeee7eeeeeeeefffffeeeeeeee7eeeeeeeeeeeeeeeeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeeeeeeeeeeeeeeeee7eeeeeeeefffffeeeeeeee7eeeeeeeeeeeeeeeeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeeeeeeeeeeeeeee777eeeeeeeefffffeeeeeeee777eeeeeeeeeeeeeeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeeeeeeeeeeeeeee77eeeeeeeeefffffeeeeeeeee77eeeeeeeeeeeeeeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbbbfffe77eee7eeeeeeeeeeeeeeeeeeeeeeeeeeee77eeeeeeeeefffffeeeeeeeee77eeeeeeeeeeeeeeeeeeeeeeeeeeee7eee77efffbbbbbb
+bbbbbffeee7ee777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777ee7eeeffbbbb
+bbbbbffeee7ee777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777ee7eeeffbbbb
+bbbbbffeee7ee777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777ee7eeeffbbbb
+bbbbbffeee7ee777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777ee7eeeffbbbb
+bbbbbffeee7ee777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777ee7eeeffbbbb
+bbbbbffeee7ee777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777ee7eeeffbbbb
+bbbbbffeee7ee777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777ee7eeeffbbbb
+bbbbbffeee7ee777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777ee7eeeffbbbb
+bbbbbffeee7ee777eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee777ee7eeeffbbbb
+bbbbfee777e77eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee77e777eefbbb
+bbbbfee777e77eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee77e777eefbbb
+bbbbfee777e77eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee77e777eefbbb
+bbbbfee777e77eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee77e777eefbbb
+`;
+            case "image15":
+            case "cofre":return img`
+. . b b b b b b b b b b b b . . 
+. b 8 6 6 6 6 6 6 6 6 6 6 8 b . 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 8 b 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 8 b 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 8 b 
+b 8 8 6 6 6 6 6 6 6 6 6 6 8 8 b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b b b b b b b d d b b b b b b b 
+c b b b b b b c c b b b b b b c 
+c c c c c c b c c b c c c c c c 
+b 8 8 8 8 8 c b b c 8 8 8 8 8 b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b c 8 8 8 8 8 8 8 8 8 8 8 8 c b 
+b b b b b b b b b b b b b b b b 
+. b b . . . . . . . . . . b b . 
+`;
+            case "image16":
+            case "CofreAbierto":return img`
+. b b b b b b b b b b b b b b . 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 8 b 
+b 8 8 6 6 6 6 6 6 6 6 6 6 8 8 b 
+b b b b b b b d d b b b b b b b 
+. b b b b b b c c b b b b b b . 
+b c c c c c b c c b c c c c c b 
+b c c c c c c b b c c c c c c b 
+b c c c c c c c c c c c c c c b 
+b c c c c c c c c c c c c c c b 
+b b b b b b b b b b b b b b b b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b c 8 8 8 8 8 8 8 8 8 8 8 8 c b 
+b b b b b b b b b b b b b b b b 
+. b b . . . . . . . . . . b b . 
+`;
+            case "image24":
+            case "cofre0":return img`
+. b b . . . . . . . . . . b b . 
+b b b b b b b b b b b b b b b b 
+b c 8 8 8 8 8 8 8 8 8 8 8 8 c b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b 8 8 8 8 8 c b b c 8 8 8 8 8 b 
+c c c c c c b c c b c c c c c c 
+c b b b b b b c c b b b b b b c 
+b b b b b b b d d b b b b b b b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b 8 8 6 6 6 6 6 6 6 6 6 6 8 8 b 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 8 b 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 8 b 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 8 b 
+. b e 6 6 6 6 6 6 6 6 6 6 e b . 
+. . b b b b b b b b b b b b . . 
+`;
+            case "image25":
+            case "CofreAbierto0":return img`
+. b b . . . . . . . . . . b b . 
+b b b b b b b b b b b b b b b b 
+b c 8 8 8 8 8 8 8 8 8 8 8 8 c b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b 8 8 8 8 8 8 8 8 8 8 8 8 8 8 b 
+b b b b b b b b b b b b b b b b 
+b c c c c c c c c c c c c c c b 
+b c c c c c c c c c c c c c c b 
+b c c c c c c b b c c c c c c b 
+b c c c c c b c c b c c c c c b 
+. b b b b b b c c b b b b b b . 
+b b b b b b b d d b b b b b b b 
+b 8 8 6 6 6 6 6 6 6 6 6 6 8 8 b 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 8 b 
+b 8 6 6 6 6 6 6 6 6 6 6 6 6 6 b 
+. b b b b b b b b b b b b b b . 
 `;
         }
         return null;
