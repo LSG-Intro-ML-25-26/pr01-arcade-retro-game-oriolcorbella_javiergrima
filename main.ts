@@ -843,7 +843,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.greenkey, function (sprite, othe
     sprites.destroy(otherSprite)
 })
 function DialogoPrincesa () {
-    game.showLongText("klk manin, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la ha robado un mamahuevo y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare un chupachups de limon, ahora puedes pasar por la puerta y avanzar al siguiente piso.", DialogLayout.Bottom)
+    game.showLongText("Bienvenido a mi castillo, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la han robado y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare todo el oro que quieras, ahora puedes pasar por la puerta y avanzar al siguiente piso.", DialogLayout.Bottom)
     pause(2000)
 }
 function CofreTrampa () {
@@ -858,7 +858,7 @@ function CofreTrampa () {
     sprites.destroy(nena)
     sprites.destroy(portal2)
     tiles.setCurrentTilemap(tilemap`PantallaCarga`)
-    pause(2000)
+    pause(1000)
     Pantalla2()
     game.showLongText("Parece que has escogido el cofre equivocado y te has caido por el agujero al piso anterior, sube e intentalo de nuevo!", DialogLayout.Bottom)
 }
@@ -970,9 +970,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     if (esta_porta_green == 1) {
         if (findvalue("GREENKEY") != -1) {
-            for (let value7 of tiles.getTilesByType(assets.tile`puertaCandadoGREEN`)) {
-                tiles.setTileAt(value7, assets.tile`puertaSinCandadoGREEN`)
-                tiles.setWallAt(value7, false)
+            for (let value72 of tiles.getTilesByType(assets.tile`puertaCandadoGREEN`)) {
+                tiles.setTileAt(value72, assets.tile`puertaSinCandadoGREEN`)
+                tiles.setWallAt(value72, false)
                 removeitem("GREENKEY")
             }
         }
@@ -989,11 +989,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function (sprite, otherS
     sprites.destroy(portal2)
     sprites.destroy(CofreAbierto2)
     tiles.setCurrentTilemap(tilemap`PantallaCarga`)
-    pause(2000)
+    pause(1000)
     PisoEnemigos()
 })
 function DialogoMago () {
-    game.showLongText("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar algo para poder derrotarlos. Aqui delante tienes 2 cofres, pero solo 1 contiene el poder, sabrás elegir bien...", DialogLayout.Bottom)
+    game.showLongText("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...", DialogLayout.Bottom)
     pause(2000)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.tp2, function (sprite, otherSprite) {
@@ -1005,19 +1005,22 @@ function PisoEnemigos () {
     tiles.placeOnTile(cofre32, tiles.getTileLocation(9, 48))
     esta_mapa_enemigos = 1
     esta_enemigos = 1
-    nena.setPosition(76, 98)
+    nena.setPosition(70, 72)
     controller.moveSprite(nena)
     cofre32 = sprites.create(assets.image`cofre`, SpriteKind.cofre3)
-    tiles.placeOnTile(cofre32, tiles.getTileLocation(13, 51))
+    tiles.placeOnTile(cofre32, tiles.getTileLocation(13, 27))
     cofre_laberinto = sprites.create(assets.image`cofre`, SpriteKind.cofre_laberito)
-    tiles.placeOnTile(cofre_laberinto, tiles.getTileLocation(2, 30))
+    tiles.placeOnTile(cofre_laberinto, tiles.getTileLocation(2, 6))
     scene.cameraFollowSprite(nena)
-    tiles.placeOnTile(nena, tiles.getTileLocation(31, 62))
+    tiles.placeOnTile(nena, tiles.getTileLocation(31, 39))
     puertaOjo = sprites.create(assets.image`miImagen7`, SpriteKind.Player)
-    tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 33))
+    tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 10))
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function (sprite, otherSprite) {
     sprites.destroy(nena)
+    sprites.destroy(princesa2)
+    sprites.destroy(puerta22)
+    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
     pause(1000)
     Piso1()
 })
@@ -1029,7 +1032,7 @@ function cofre_obert_laberint () {
     CofreAbierto2 = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
     tiles.placeOnTile(CofreAbierto2, tiles.getTileLocation(2, 30))
     for (let value12 of tiles.getTilesByType(assets.tile`cofre_laberinto_tile`)) {
-        greenkey = sprites.create(img`
+        greenkey2 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -1047,8 +1050,8 @@ function cofre_obert_laberint () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.greenkey)
-        sprites.setDataString(greenkey, "name", "GREENKEY")
-        tiles.placeOnTile(greenkey, value12)
+        sprites.setDataString(greenkey2, "name", "GREENKEY")
+        tiles.placeOnTile(greenkey2, value12)
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.bluekey, function (sprite, otherSprite) {
@@ -1072,7 +1075,7 @@ function CofreBueno () {
     sprites.destroy(cofre4)
     CofreAbierto2 = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
     CofreAbierto2.setPosition(23, 55)
-    game.showLongText("¡Has conseguido el poder del fuego!", DialogLayout.Bottom)
+    game.showLongText("¡Has conseguido una llave roja!", DialogLayout.Bottom)
     for (let value8 of tiles.getTilesByType(assets.tile`tile_key1`)) {
         RedKey = sprites.create(img`
             . . . . . . . . . . . . . . . . 
@@ -1234,7 +1237,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puertaCastillo, function (sprite
     sprites.destroy(caballero2)
     sprites.destroy(nena)
     tiles.setCurrentTilemap(tilemap`PantallaCarga`)
-    pause(2000)
+    pause(1000)
     Pantalla2()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre2, function (sprite, otherSprite) {
@@ -1254,7 +1257,7 @@ let BlueKey: Sprite = null
 let mapSprite: Sprite = null
 let myMinimap: minimap.Minimap = null
 let RedKey: Sprite = null
-let greenkey: Sprite = null
+let greenkey2: Sprite = null
 let puertaOjo: Sprite = null
 let cofre_laberinto: Sprite = null
 let cofre32: Sprite = null
