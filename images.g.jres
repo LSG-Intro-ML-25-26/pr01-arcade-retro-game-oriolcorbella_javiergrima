@@ -29,11 +29,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "escaleras"
     },
-    "image13": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAgAAAAAAAFQlAAAAAAAAVCUAAAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "bala"
-    },
     "image14": {
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8PAAAAAADwM/MPAAAAAPAzM/8AAAAA8DOz+w8AAAAAP7O7DwAAAPAzs/sPAAAA8BMz/wAAAADwM/MPAAAAAAD/DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
@@ -143,6 +138,26 @@
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYGaGAAAAAABmZmYIAAAAAGYAZggAAAAAZgBmCAAAAABmZmYIAAAAAGBmhgAAAAAAAGYIAAAAAAAAZggAAAAAAABmiAAAAAAAAGZmCAAAAAAAZogAAAAAAABmZoYAAAAAAGZmhgAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "redkey"
+    },
+    "image31": {
+        "data": "hwQQABAAAAAAAGBmZmYAAABgZmZmZmYAAGaWmZmZZgYAZpmZmZlpBmCWmRERkZlmYJYZERERmWZglhkRERGZZmCWmRERkZlmAGaZERGRaQYAZpkZEZlpBgBglpmRmWYAAGBmmZlpZgAAAGaWmWYGAAAAYGZmZgAAAABgZmZmAAAAAABmYAYAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "bala_izquierda"
+    },
+    "image13": {
+        "data": "hwQQABAAAAAAAGZmAAAAAABmZmZmAAAAYGaZmWZmAABglpmZmWYGAGaZGZGZaWYGZpkREZGZZmZmmREREZlpZmaZERERkWkGZpkRERGZaWZmmRERkZlmZmaZGZGZaWYGYJaZmZlmBgBgZpmZZmYAAABmZmZmAAAAAABmZgAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "bala_arriba"
+    },
+    "image30": {
+        "data": "hwQQABAAAAAAAGAGZgAAAAAAZmZmBgAAAABmZmYGAAAAYGaZaWYAAABmlpmZZgYAAGaZGZlpBgBglpkRkZlmAGCWGRERmWYAZpkZERGZaQZmmREREZFpBmaZERERkWkGZpkZERGZaQZglpmZmZlmAGBmmZmZaWYAAGZmZmZmBgAAAGZmZgYAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "bala_derecha"
+    },
+    "image32": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAABmZgAAAAAAZmZmZgAAAGZmmZlmBgBgZpmZmWkGYGaWmRmRmWZmZpkZERGZZmaWmREREZlmYJYZERERmWZmlpkRERGZZmZmmRkREZlmYGaWmRmRmWYAYGaZmZlpBgAAZmaZmWYGAAAAZmZmZgAAAAAAZmYAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "bala_abajo"
     },
     "anim1": {
         "namespace": "myAnimations",

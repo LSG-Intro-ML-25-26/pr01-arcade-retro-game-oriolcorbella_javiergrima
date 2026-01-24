@@ -879,12 +879,28 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     500,
     false
     )
+    disparo = 2
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile15`, function (sprite, location) {
     esta_porta_blue = 1
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
     esta_porta_blue = 1
+})
+controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    if (disparo == 1) {
+        projectile = sprites.createProjectileFromSprite(assets.image`bala_arriba`, nena, 0, -50)
+        music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
+    } else if (disparo == 2) {
+        projectile = sprites.createProjectileFromSprite(assets.image`bala_abajo`, nena, 0, 50)
+        music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
+    } else if (disparo == 3) {
+        projectile = sprites.createProjectileFromSprite(assets.image`bala_izquierda`, nena, -100, 0)
+        music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
+    } else if (disparo == 4) {
+        projectile = sprites.createProjectileFromSprite(assets.image`bala_derecha`, nena, 100, 0)
+        music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
+    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.feather, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
@@ -915,6 +931,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     500,
     false
     )
+    disparo = 4
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
     info.setScore(0)
@@ -927,6 +944,7 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     500,
     false
     )
+    disparo = 3
 })
 function createtoolbar () {
     toolbar = Inventory.create_toolbar([], 4)
@@ -1014,7 +1032,7 @@ function PisoEnemigos () {
     scene.cameraFollowSprite(nena)
     tiles.placeOnTile(nena, tiles.getTileLocation(31, 39))
     puertaOjo = sprites.create(assets.image`miImagen7`, SpriteKind.Player)
-    tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 10))
+    tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 9))
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function (sprite, otherSprite) {
     sprites.destroy(nena)
@@ -1129,6 +1147,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     500,
     false
     )
+    disparo = 1
 })
 function findvalue (name: string) {
     for (let value9 of toolbar.get_items()) {
@@ -1263,6 +1282,7 @@ let cofre_laberinto: Sprite = null
 let cofre32: Sprite = null
 let toolbar: Inventory.Toolbar = null
 let statusbar: StatusBarSprite = null
+let projectile: Sprite = null
 let caballero2: Sprite = null
 let puerta: Sprite = null
 let portal2: Sprite = null
@@ -1279,6 +1299,7 @@ let cofre22: Sprite = null
 let cofre4: Sprite = null
 let puerta22: Sprite = null
 let princesa2: Sprite = null
+let disparo = 0
 let fuerza_salto = 0
 let esta_porta_green = 0
 let esta_plataformes = 0
@@ -1301,6 +1322,7 @@ esta_porta_blue = 0
 esta_plataformes = 0
 esta_porta_green = 0
 fuerza_salto = -163
+disparo = 0
 nena.setPosition(145, 88)
 controller.moveSprite(nena)
 info.setLife(3)
