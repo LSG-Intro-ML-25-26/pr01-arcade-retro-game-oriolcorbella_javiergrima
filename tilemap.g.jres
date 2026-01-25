@@ -706,6 +706,18 @@
         "tilemapTile": true,
         "displayName": "myTile20"
     },
+    "tile118": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "miMosaico78"
+    },
+    "tile119": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "miMosaico79"
+    },
     "piso1Castillo1": {
         "id": "piso1Castillo1",
         "mimeType": "application/mkcd-tilemap",
@@ -999,6 +1011,16 @@
             "myTiles.tile117"
         ],
         "displayName": "nivel"
+    },
+    "nivel14": {
+        "id": "nivel14",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAwYTAwMDgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMTAxMDEwMTAxMDEwMTAxMDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMg==",
+        "tileset": [
+            "myTiles.transparency16",
+            "sprites.dungeon.purpleOuterNorth1"
+        ],
+        "displayName": "nivel15"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",

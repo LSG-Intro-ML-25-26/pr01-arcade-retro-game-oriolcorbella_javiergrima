@@ -236,6 +236,10 @@ namespace myTiles {
     export const tile116 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile117 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile118 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile119 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -615,6 +619,17 @@ namespace myTiles {
 2..................2......2..........2......2..................2
 22222222222222222222......2..........2......22222222222222222222
 `, [myTiles.transparency16,myTiles.tile41,myTiles.tile42,myTiles.tile43,myTiles.tile44,myTiles.tile45,myTiles.tile46,myTiles.tile47,myTiles.tile48,myTiles.tile49,myTiles.tile29,myTiles.tile52,myTiles.tile53,myTiles.tile54,myTiles.tile55,myTiles.tile56,myTiles.tile61,myTiles.tile62,myTiles.tile63,myTiles.tile64,myTiles.tile66,myTiles.tile69,myTiles.tile70,myTiles.tile71,myTiles.tile72,myTiles.tile73,sprites.dungeon.floorLight2,myTiles.tile60,myTiles.tile74,myTiles.tile58,myTiles.tile67,myTiles.tile68,myTiles.tile76,myTiles.tile77,myTiles.tile57,myTiles.tile59,myTiles.tile78,myTiles.tile79,myTiles.tile80,myTiles.tile84,myTiles.tile86,myTiles.tile87,myTiles.tile89,myTiles.tile91,myTiles.tile93,sprites.dungeon.purpleOuterSouth1,sprites.dungeon.purpleOuterSouthWest,sprites.dungeon.purpleOuterSouthEast,sprites.dungeon.purpleOuterNorthEast,sprites.dungeon.purpleOuterNorthWest,sprites.dungeon.purpleOuterNorth0,sprites.builtin.brick,myTiles.tile103,myTiles.tile104,myTiles.tile105,myTiles.tile106,myTiles.tile107,myTiles.tile108,myTiles.tile109,myTiles.tile110,myTiles.tile111,myTiles.tile112,myTiles.tile113,myTiles.tile114,myTiles.tile115,myTiles.tile116,myTiles.tile117], TileScale.Sixteen);
+            case "nivel15":
+            case "nivel14":return tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101`, img`
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+2 2 2 2 2 2 2 2 2 2 
+`, [myTiles.transparency16,sprites.dungeon.purpleOuterNorth1], TileScale.Sixteen);
         }
         return null;
     })
@@ -856,6 +871,10 @@ namespace myTiles {
             case "tile116":return tile116;
             case "myTile20":
             case "tile117":return tile117;
+            case "miMosaico78":
+            case "tile118":return tile118;
+            case "miMosaico79":
+            case "tile119":return tile119;
         }
         return null;
     })
