@@ -27,6 +27,7 @@ namespace SpriteKind {
     export const cofre_laberito = SpriteKind.create()
     export const greenkey = SpriteKind.create()
     export const Map = SpriteKind.create()
+    export const jefe = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const salto_pluma = StatusBarKind.create()
@@ -82,6 +83,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function (sprite20, oth
     pause(1000)
     Piso1()
 })
+function JefeFinal () {
+    jefe = sprites.create(assets.image`miImagen1`, SpriteKind.jefe)
+    vidaJefe = statusbars.create(115, 5, StatusBarKind.EnemyHealth)
+    vidaJefe.setColor(7, 2, 5)
+    vidaJefe.setPosition(101, 4)
+    vidaJefe.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
+    vidaJefe.max = 200
+}
 function mine_plataformas () {
     esta_plataformes = 1
     scene.setBackgroundImage(img`
@@ -1018,6 +1027,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre, function (sprite27, otherSprite13) {
     CofreBueno()
 })
+statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
+    sprites.destroy(statusbar.spriteAttachedTo(), effects.fire, 2000)
+})
 function DialogoMago () {
     game.showLongText("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...", DialogLayout.Bottom)
     pause(2000)
@@ -1038,6 +1050,26 @@ function PisoEnemigos () {
     tiles.placeOnTile(nena, tiles.getTileLocation(31, 39))
     puertaOjo = sprites.create(assets.image`miImagen7`, SpriteKind.Player)
     tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 9))
+}
+function animacionJefe () {
+    scene.setBackgroundImage(assets.image`castillo_trono`)
+    sprites.destroy(toolbar)
+    jefe = sprites.create(assets.image`miImagen1`, SpriteKind.jefe)
+    jefe.setPosition(80, 16)
+    jefe.changeScale(3, ScaleAnchor.Top)
+    game.showLongText("Vaya, vaya... ¿quién se atreve a entrar en mi sala?", DialogLayout.Bottom)
+    game.showLongText("Veo que la princesa ha traído otra mascota para entretenerme.", DialogLayout.Bottom)
+    game.showLongText("Si has venido por la corona... tendrás que arrebatármela tú mismo.", DialogLayout.Bottom)
+    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
+    sprites.destroy(jefe)
+    pause(1000)
+}
+function SaludPersonaje () {
+    vidaPersonaje = statusbars.create(50, 4, StatusBarKind.Health)
+    vidaPersonaje.max = 5
+    vidaPersonaje.setColor(7, 2, 5)
+    vidaPersonaje.setPosition(29, 117)
+    vidaPersonaje.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
 }
 function cofre_obert_laberint () {
     sprites.destroy(cofre_laberinto)
@@ -1259,13 +1291,20 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.greenkey, function (sprite6, oth
     addItem(sprites.readDataString(otherSprite3, "name"), otherSprite3.image)
     sprites.destroy(otherSprite3)
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.jefe, function () {
+    sprites.destroy(projectile)
+    statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, jefe).value += -20
+})
 function PisoJefe () {
+    animacionJefe()
     scene.setBackgroundImage(assets.image`castillo_trono`)
     tiles.setCurrentTilemap(tilemap`nivel15`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
     nena.setPosition(10, 104)
     controller.moveSprite(nena)
     sprites.destroy(toolbar)
+    JefeFinal()
+    SaludPersonaje()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite23, location12) {
     esta_porta_green = 1
@@ -1285,6 +1324,7 @@ let mapSprite: Sprite = null
 let myMinimap: minimap.Minimap = null
 let RedKey: Sprite = null
 let greenkey2: Sprite = null
+let vidaPersonaje: StatusBarSprite = null
 let puertaOjo: Sprite = null
 let cofre_laberinto: Sprite = null
 let cofre32: Sprite = null
@@ -1300,6 +1340,8 @@ let tp_plataformas2: Sprite = null
 let tp_plataformas: Sprite = null
 let pluma: Sprite = null
 let moneda: Sprite = null
+let vidaJefe: StatusBarSprite = null
+let jefe: Sprite = null
 let CofreAbierto2: Sprite = null
 let portal2: Sprite = null
 let mago2: Sprite = null
@@ -1333,4 +1375,3 @@ fuerza_salto = -163
 disparo = 0
 nena.setPosition(145, 88)
 controller.moveSprite(nena)
-info.setLife(3)

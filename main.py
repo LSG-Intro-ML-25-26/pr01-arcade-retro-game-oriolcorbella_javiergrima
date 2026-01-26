@@ -28,22 +28,32 @@ class SpriteKind:
     cofre_laberito = SpriteKind.create()
     greenkey = SpriteKind.create()
     Map = SpriteKind.create()
+    jefe = SpriteKind.create()
 @namespace
 class StatusBarKind:
     salto_pluma = StatusBarKind.create()
 
+def on_overlap_tile(sprite16, location10):
+    info.set_score(0)
+    tiles.place_on_tile(nena, tiles.get_tile_location(0, 11))
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile3
+        """),
+    on_overlap_tile)
+
+def on_overlap_tile2(sprite8, location5):
+    global esta_porta_blue
+    esta_porta_blue = 1
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile15
+        """),
+    on_overlap_tile2)
+
 def on_on_overlap(sprite, otherSprite):
     cofre_plataformes_mine()
 sprites.on_overlap(SpriteKind.player, SpriteKind.cofre_mine, on_on_overlap)
-
-def on_overlap_tile(sprite2, location):
-    global esta_portal
-    esta_portal = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile0
-        """),
-    on_overlap_tile)
 
 def Piso1():
     global nena, cofre4, cofre22, mago2
@@ -70,27 +80,110 @@ def Piso1():
         """), SpriteKind.mago)
     mago2.set_position(81, 42)
 
-def on_overlap_tile2(sprite3, location2):
-    mine_plataformas()
+def on_overlap_tile3(sprite11, location7):
+    scene.camera_follow_sprite(nena)
+    Zoom.set_zoom_filter(1, Mode.CENTER)
 scene.on_overlap_tile(SpriteKind.player,
     assets.tile("""
-        myTile1
-        """),
-    on_overlap_tile2)
-
-def on_overlap_tile3(sprite4, location3):
-    global esta_porta_green
-    esta_porta_green = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile19
+        blau_esq
         """),
     on_overlap_tile3)
+
+def on_on_overlap2(sprite18, otherSprite7):
+    sprites.destroy(nena)
+    sprites.destroy(cofre4)
+    sprites.destroy(cofre22)
+    sprites.destroy(mago2)
+    sprites.destroy(portal2)
+    sprites.destroy(CofreAbierto2)
+    tiles.set_current_tilemap(tilemap("""
+        PantallaCarga
+        """))
+    pause(1000)
+    PisoEnemigos()
+sprites.on_overlap(SpriteKind.player, SpriteKind.portal, on_on_overlap2)
 
 def DialogoCaballero():
     game.show_long_text("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!",
         DialogLayout.BOTTOM)
     pause(2000)
+
+def on_on_overlap3(sprite20, otherSprite9):
+    sprites.destroy(nena)
+    sprites.destroy(princesa2)
+    sprites.destroy(puerta22)
+    tiles.set_current_tilemap(tilemap("""
+        PantallaCarga
+        """))
+    pause(1000)
+    Piso1()
+sprites.on_overlap(SpriteKind.player, SpriteKind.puerta1, on_on_overlap3)
+
+def JefeFinal():
+    mySprite: Sprite = None
+    animation.run_image_animation(mySprite,
+        [img("""
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            """)],
+        500,
+        False)
+    animation.run_image_animation(mySprite,
+        [img("""
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            """)],
+        500,
+        False)
+    animation.run_image_animation(mySprite,
+        [img("""
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            """)],
+        500,
+        False)
 def mine_plataformas():
     global esta_plataformes, nena, moneda, pluma, tp_plataformas, tp_plataformas2, cofre_plataformas, porta_mine
     esta_plataformes = 1
@@ -901,15 +994,21 @@ def mine_plataformas():
         SpriteKind.puerta_mine)
     tiles.place_on_tile(porta_mine, tiles.get_tile_location(59, 8))
 
-def on_on_overlap2(sprite5, otherSprite2):
-    tiles.place_on_tile(nena, tiles.get_tile_location(39, 1))
-sprites.on_overlap(SpriteKind.player, SpriteKind.tp, on_on_overlap2)
+def on_on_overlap4(sprite31, otherSprite15):
+    addItem(sprites.read_data_string(otherSprite15, "name"),
+        otherSprite15.image)
+    sprites.destroy(otherSprite15)
+sprites.on_overlap(SpriteKind.player, SpriteKind.key, on_on_overlap4)
 
-def on_on_overlap3(sprite6, otherSprite3):
-    addItem(sprites.read_data_string(otherSprite3, "name"),
-        otherSprite3.image)
-    sprites.destroy(otherSprite3)
-sprites.on_overlap(SpriteKind.player, SpriteKind.greenkey, on_on_overlap3)
+def on_on_overlap5(sprite15, otherSprite6):
+    Cofre3_nether()
+sprites.on_overlap(SpriteKind.player, SpriteKind.cofre3, on_on_overlap5)
+
+def on_on_overlap6(sprite10, otherSprite4):
+    sprites.destroy(otherSprite4)
+    efecto_salto()
+    sprites.destroy(statusbar)
+sprites.on_overlap(SpriteKind.player, SpriteKind.feather, on_on_overlap6)
 
 def DialogoPrincesa():
     game.show_long_text("Bienvenido a mi castillo, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la han robado y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare todo el oro que quieras, ahora puedes pasar por la puerta y avanzar al siguiente piso.",
@@ -952,15 +1051,6 @@ def PantallaPrincipal():
     caballero2.set_position(112, 88)
     puerta.set_position(66, 80)
 
-def on_overlap_tile4(sprite7, location4):
-    global esta_porta_red
-    esta_porta_red = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        miMosaico42
-        """),
-    on_overlap_tile4)
-
 def on_down_pressed():
     global disparo
     animation.run_image_animation(nena,
@@ -971,24 +1061,6 @@ def on_down_pressed():
         False)
     disparo = 2
 controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
-
-def on_overlap_tile5(sprite8, location5):
-    global esta_porta_blue
-    esta_porta_blue = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile15
-        """),
-    on_overlap_tile5)
-
-def on_overlap_tile6(sprite9, location6):
-    global esta_porta_blue
-    esta_porta_blue = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile13
-        """),
-    on_overlap_tile6)
 
 def on_player2_button_a_pressed():
     global projectile
@@ -1020,47 +1092,48 @@ controller.player2.on_button_event(ControllerButton.A,
     ControllerButtonEvent.PRESSED,
     on_player2_button_a_pressed)
 
-def on_on_overlap4(sprite10, otherSprite4):
-    sprites.destroy(otherSprite4)
-    efecto_salto()
-    sprites.destroy(statusbar)
-sprites.on_overlap(SpriteKind.player, SpriteKind.feather, on_on_overlap4)
-
-def on_overlap_tile7(sprite11, location7):
-    scene.camera_follow_sprite(nena)
-    Zoom.set_zoom_filter(1, Mode.CENTER)
+def on_overlap_tile4(sprite3, location2):
+    mine_plataformas()
 scene.on_overlap_tile(SpriteKind.player,
     assets.tile("""
-        blau_esq
+        myTile1
         """),
-    on_overlap_tile7)
+    on_overlap_tile4)
 
-def on_on_overlap5(sprite12, otherSprite5):
-    sprites.destroy(nena, effects.spray, 100)
-    PisoEnemigos()
-sprites.on_overlap(SpriteKind.player, SpriteKind.puerta_mine, on_on_overlap5)
+def on_on_overlap7(sprite33, otherSprite17):
+    sprites.destroy(puerta)
+    sprites.destroy(caballero2)
+    sprites.destroy(nena)
+    tiles.set_current_tilemap(tilemap("""
+        PantallaCarga
+        """))
+    pause(1000)
+    Pantalla2()
+sprites.on_overlap(SpriteKind.player, SpriteKind.puertaCastillo, on_on_overlap7)
 
-def on_overlap_tile8(sprite13, location8):
-    global esta_porta_blue
-    esta_porta_blue = 1
+def on_on_overlap8(sprite35, otherSprite19):
+    cofre_obert_laberint()
+sprites.on_overlap(SpriteKind.player, SpriteKind.cofre_laberito, on_on_overlap8)
+
+def on_on_overlap9(sprite26, otherSprite12):
+    info.change_score_by(1)
+    sprites.destroy(otherSprite12)
+sprites.on_overlap(SpriteKind.player, SpriteKind.coin, on_on_overlap9)
+
+def on_on_overlap10(sprite32, otherSprite16):
+    addItem(sprites.read_data_string(otherSprite16, "name"),
+        otherSprite16.image)
+    sprites.destroy(otherSprite16)
+sprites.on_overlap(SpriteKind.player, SpriteKind.mechero, on_on_overlap10)
+
+def on_overlap_tile5(sprite4, location3):
+    global esta_porta_green
+    esta_porta_green = 1
 scene.on_overlap_tile(SpriteKind.player,
     assets.tile("""
-        myTile12
+        myTile19
         """),
-    on_overlap_tile8)
-
-def on_overlap_tile9(sprite14, location9):
-    global esta_porta_blue
-    esta_porta_blue = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile9
-        """),
-    on_overlap_tile9)
-
-def on_on_overlap6(sprite15, otherSprite6):
-    Cofre3_nether()
-sprites.on_overlap(SpriteKind.player, SpriteKind.cofre3, on_on_overlap6)
+    on_overlap_tile5)
 
 def on_right_pressed():
     global disparo
@@ -1072,15 +1145,6 @@ def on_right_pressed():
         False)
     disparo = 4
 controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
-
-def on_overlap_tile10(sprite16, location10):
-    info.set_score(0)
-    tiles.place_on_tile(nena, tiles.get_tile_location(0, 11))
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile3
-        """),
-    on_overlap_tile10)
 
 def on_left_pressed():
     global disparo
@@ -1106,6 +1170,15 @@ def on_a_pressed():
     if nena.vy == 0 and esta_plataformes == 1:
         nena.vy = fuerza_salto
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
+
+def on_overlap_tile6(sprite2, location):
+    global esta_portal
+    esta_portal = 1
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile0
+        """),
+    on_overlap_tile6)
 
 def on_b_pressed():
     if esta_portal == 1:
@@ -1149,38 +1222,14 @@ def on_b_pressed():
                 removeitem("GREENKEY")
 controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
 
-def on_overlap_tile11(sprite17, location11):
-    global esta_porta_green
-    esta_porta_green = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile18
-        """),
-    on_overlap_tile11)
-
-def on_on_overlap7(sprite18, otherSprite7):
-    sprites.destroy(nena)
-    sprites.destroy(cofre4)
-    sprites.destroy(cofre22)
-    sprites.destroy(mago2)
-    sprites.destroy(portal2)
-    sprites.destroy(CofreAbierto2)
-    tiles.set_current_tilemap(tilemap("""
-        PantallaCarga
-        """))
-    pause(1000)
-    PisoEnemigos()
-sprites.on_overlap(SpriteKind.player, SpriteKind.portal, on_on_overlap7)
+def on_on_overlap11(sprite27, otherSprite13):
+    CofreBueno()
+sprites.on_overlap(SpriteKind.player, SpriteKind.cofre, on_on_overlap11)
 
 def DialogoMago():
     game.show_long_text("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...",
         DialogLayout.BOTTOM)
     pause(2000)
-
-def on_on_overlap8(sprite19, otherSprite8):
-    tiles.place_on_tile(nena, tiles.get_tile_location(36, 10))
-sprites.on_overlap(SpriteKind.player, SpriteKind.tp2, on_on_overlap8)
-
 def PisoEnemigos():
     global nena, esta_mapa_enemigos, esta_enemigos, cofre32, cofre_laberinto, puertaOjo
     tiles.set_current_tilemap(tilemap("""
@@ -1209,22 +1258,28 @@ def PisoEnemigos():
         miImagen7
         """), SpriteKind.player)
     tiles.place_on_tile(puertaOjo, tiles.get_tile_location(32, 9))
-
-def on_on_overlap9(sprite20, otherSprite9):
-    sprites.destroy(nena)
-    sprites.destroy(princesa2)
-    sprites.destroy(puerta22)
+def animacionJefe():
+    global jefe2
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
+    sprites.destroy(toolbar)
+    jefe2 = sprites.create(assets.image("""
+        miImagen1
+        """), SpriteKind.jefe)
+    jefe2.set_position(80, 16)
+    jefe2.change_scale(3, ScaleAnchor.TOP)
+    game.show_long_text("Vaya, vaya... ¿quién se atreve a entrar en mi sala?",
+        DialogLayout.BOTTOM)
+    game.show_long_text("Veo que la princesa ha traído otra mascota para entretenerme.",
+        DialogLayout.BOTTOM)
+    game.show_long_text("Si has venido por la corona... tendrás que arrebatármela tú mismo.",
+        DialogLayout.BOTTOM)
     tiles.set_current_tilemap(tilemap("""
         PantallaCarga
         """))
+    sprites.destroy(jefe2)
     pause(1000)
-    Piso1()
-sprites.on_overlap(SpriteKind.player, SpriteKind.puerta1, on_on_overlap9)
-
-def on_on_overlap10(sprite21, otherSprite10):
-    DialogoPrincesa()
-sprites.on_overlap(SpriteKind.player, SpriteKind.princesa, on_on_overlap10)
-
 def cofre_obert_laberint():
     global CofreAbierto2, greenkey2
     sprites.destroy(cofre_laberinto)
@@ -1258,43 +1313,9 @@ def cofre_obert_laberint():
         sprites.set_data_string(greenkey2, "name", "GREENKEY")
         tiles.place_on_tile(greenkey2, value12)
 
-def on_on_overlap11(sprite22, otherSprite11):
-    addItem(sprites.read_data_string(otherSprite11, "name"),
-        otherSprite11.image)
-    sprites.destroy(otherSprite11)
-sprites.on_overlap(SpriteKind.player, SpriteKind.bluekey, on_on_overlap11)
-
-def on_overlap_tile12(sprite23, location12):
-    global esta_porta_green
-    esta_porta_green = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile16
-        """),
-    on_overlap_tile12)
-
-def on_overlap_tile13(sprite24, location13):
-    global esta_porta_green
-    esta_porta_green = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile20
-        """),
-    on_overlap_tile13)
-
-def on_overlap_tile14(sprite25, location14):
-    global esta_porta_green
-    esta_porta_green = 1
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile17
-        """),
-    on_overlap_tile14)
-
-def on_on_overlap12(sprite26, otherSprite12):
-    info.change_score_by(1)
-    sprites.destroy(otherSprite12)
-sprites.on_overlap(SpriteKind.player, SpriteKind.coin, on_on_overlap12)
+def on_on_overlap12(sprite5, otherSprite2):
+    tiles.place_on_tile(nena, tiles.get_tile_location(39, 1))
+sprites.on_overlap(SpriteKind.player, SpriteKind.tp, on_on_overlap12)
 
 def CofreBueno():
     global CofreAbierto2, RedKey, portal2
@@ -1337,10 +1358,6 @@ def CofreBueno():
     game.show_long_text("Ya estas preparado, cruza el portal y derrota el mal!",
         DialogLayout.BOTTOM)
 
-def on_on_overlap13(sprite27, otherSprite13):
-    CofreBueno()
-sprites.on_overlap(SpriteKind.player, SpriteKind.cofre, on_on_overlap13)
-
 def on_menu_pressed():
     global myMinimap, mapSprite, mapa_abierto
     if mapa_abierto == 0:
@@ -1359,6 +1376,15 @@ def on_menu_pressed():
         mapa_abierto = 0
 controller.menu.on_event(ControllerButtonEvent.PRESSED, on_menu_pressed)
 
+def on_overlap_tile7(sprite9, location6):
+    global esta_porta_blue
+    esta_porta_blue = 1
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile13
+        """),
+    on_overlap_tile7)
+
 def on_up_pressed():
     global disparo
     animation.run_image_animation(nena,
@@ -1370,11 +1396,50 @@ def on_up_pressed():
     disparo = 1
 controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
+def on_overlap_tile8(sprite28, location15):
+    scene.camera_follow_sprite(nena)
+    Zoom.set_zoom_filter(1, Mode.CENTER)
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        blau_dreta
+        """),
+    on_overlap_tile8)
+
+def on_on_overlap13(sprite12, otherSprite5):
+    sprites.destroy(nena, effects.spray, 100)
+    PisoEnemigos()
+sprites.on_overlap(SpriteKind.player, SpriteKind.puerta_mine, on_on_overlap13)
+
+def on_on_overlap14(sprite22, otherSprite11):
+    addItem(sprites.read_data_string(otherSprite11, "name"),
+        otherSprite11.image)
+    sprites.destroy(otherSprite11)
+sprites.on_overlap(SpriteKind.player, SpriteKind.bluekey, on_on_overlap14)
+
 def findvalue(name: str):
     for value9 in toolbar.get_items():
         if value9.get_text(ItemTextAttribute.NAME) == name:
             return toolbar.get_items().index_of(value9)
     return -1
+
+def on_overlap_tile9(sprite14, location9):
+    global esta_porta_blue
+    esta_porta_blue = 1
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile9
+        """),
+    on_overlap_tile9)
+
+def on_overlap_tile10(sprite13, location8):
+    global esta_porta_blue
+    esta_porta_blue = 1
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile12
+        """),
+    on_overlap_tile10)
+
 def efecto_salto():
     global fuerza_salto, statusbar
     fuerza_salto = -200
@@ -1389,9 +1454,24 @@ def efecto_salto():
         statusbar.value += -5
         pause(100)
     fuerza_salto = -163
+
+def on_on_overlap15(sprite34, otherSprite18):
+    CofreTrampa()
+sprites.on_overlap(SpriteKind.player, SpriteKind.cofre2, on_on_overlap15)
+
 def addItem(name2: str, image2: Image):
     toolbar.get_items().append(Inventory.create_item(name2, image2))
     toolbar.update()
+
+def on_overlap_tile11(sprite7, location4):
+    global esta_porta_red
+    esta_porta_red = 1
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        miMosaico42
+        """),
+    on_overlap_tile11)
+
 def cofre_plataformes_mine():
     global CofreAbierto2, BlueKey
     sprites.destroy(cofre_plataformas)
@@ -1413,14 +1493,18 @@ def on_life_zero():
     PisoEnemigos()
 info.on_life_zero(on_life_zero)
 
-def on_overlap_tile15(sprite28, location15):
-    scene.camera_follow_sprite(nena)
-    Zoom.set_zoom_filter(1, Mode.CENTER)
+def on_on_overlap16(sprite36, otherSprite20):
+    DialogoCaballero()
+sprites.on_overlap(SpriteKind.player, SpriteKind.caballero, on_on_overlap16)
+
+def on_overlap_tile12(sprite25, location14):
+    global esta_porta_green
+    esta_porta_green = 1
 scene.on_overlap_tile(SpriteKind.player,
     assets.tile("""
-        blau_dreta
+        myTile17
         """),
-    on_overlap_tile15)
+    on_overlap_tile12)
 
 def Pantalla2():
     global nena, princesa2, puerta22
@@ -1443,16 +1527,21 @@ def Pantalla2():
         """), SpriteKind.puerta1)
     puerta22.set_position(154, 8)
 
-def on_on_overlap14(sprite29, otherSprite14):
-    DialogoMago()
-sprites.on_overlap(SpriteKind.player, SpriteKind.mago, on_on_overlap14)
+def on_overlap_tile13(sprite24, location13):
+    global esta_porta_green
+    esta_porta_green = 1
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile20
+        """),
+    on_overlap_tile13)
 
-def on_overlap_tile16(sprite30, location16):
+def on_overlap_tile14(sprite30, location16):
     scene.camera_follow_sprite(nena)
     Zoom.set_zoom_filter(2, Mode.CENTER)
 scene.on_overlap_tile(SpriteKind.player,
     sprites.dungeon.purple_outer_south1,
-    on_overlap_tile16)
+    on_overlap_tile14)
 
 def Cofre3_nether():
     global CofreAbierto2, mechero2
@@ -1490,147 +1579,66 @@ def removeitem(name3: str):
     toolbar.get_items().remove_at(findvalue(name3))
     toolbar.update()
 
-def on_on_overlap15(sprite31, otherSprite15):
-    addItem(sprites.read_data_string(otherSprite15, "name"),
-        otherSprite15.image)
-    sprites.destroy(otherSprite15)
-sprites.on_overlap(SpriteKind.player, SpriteKind.key, on_on_overlap15)
-
-def on_on_overlap16(sprite32, otherSprite16):
-    addItem(sprites.read_data_string(otherSprite16, "name"),
-        otherSprite16.image)
-    sprites.destroy(otherSprite16)
-sprites.on_overlap(SpriteKind.player, SpriteKind.mechero, on_on_overlap16)
-
-def on_on_overlap17(sprite33, otherSprite17):
-    sprites.destroy(puerta)
-    sprites.destroy(caballero2)
-    sprites.destroy(nena)
-    tiles.set_current_tilemap(tilemap("""
-        PantallaCarga
-        """))
-    pause(1000)
-    Pantalla2()
-sprites.on_overlap(SpriteKind.player,
-    SpriteKind.puertaCastillo,
-    on_on_overlap17)
-
-def on_on_overlap18(sprite34, otherSprite18):
-    CofreTrampa()
-sprites.on_overlap(SpriteKind.player, SpriteKind.cofre2, on_on_overlap18)
-
-def on_on_overlap19(sprite35, otherSprite19):
-    cofre_obert_laberint()
-sprites.on_overlap(SpriteKind.player,
-    SpriteKind.cofre_laberito,
-    on_on_overlap19)
-
-def PisoJefe():
-    scene.set_background_image(img("""
-        ffffffcfccfeeeeebbcfffcceeeeccecfccecfffffffffffffccccccccccccccccccccccccc444d44eefccccccccccccccccccccccccccfffffffffffceccfcecceeeeeceeecccffffffffcffffffff
-        fffffffffcfeeeeeeecfffccceeeccceeffcccfffffffffffffffffccccccccccccccccccccee4444eeccccccccccccccccccfccffffffffffffffffccccfceccceeeeeceeecccffffffffccfffffff
-        ffffffffffffceeeeefffccccceeebce4ccffccfffffffffffcccccccccccccccccccccccccceeeeeeccccccccccccccccccccccccfffffffffffffccffcceecce4eecbeeeeccfffffffffccfffffff
-        ffffffffffcccccccffffffcccceeeceeccfffcccfcccccccccccccccccccccccccccceeeeccc4eeeeccccccccccccccccccccccccccccccccccccfffffcceeceeeccee4eeeccfffffffffccfffffff
-        ffffffffffcccccbfffffffcfcccceeeccccffffcccccccccccccccccccccccccccccccceeccce4eecccccccccccccccecccccccccccccccccccccffffccceeeeeccceeeeeeccfcfffffffccfffffff
-        ffffffffcccccccbcfffffffcffccceeeccccffffccccccccccccccccccccccccccccccccccccceecccccccccccccccccccccccccccccccccffffffffcecceeeccccfeecccefcfcfffffffccfffffff
-        ffffffffffcccccbcffffffffffcccceecceccffffffffffffffffcccccccccccccccccccccccccffccccccccccccccccccccccccfffffffffffffffccecceecccffffccccccfffffffffffffffffff
-        fffffffffcceeeedbffffffffffffccceeeecccffcccffffcccccccccccccccccccecccccccccfccffcccccccccccceeececcccccccccfffffffcffccceceecccfffffbbccccccffffffcffcfffffff
-        ffffffffffccccceecffffffffffffcccceeccfccffffccffcceccccecccceececccccccccccffffffffcccccccccccecceccecccccccffccfffcccccce4ecccffffffbbcccffffffccccffcfffffff
-        ffffffffcccccccceffffffffffffffffceeccccfcccfccfcccecceccccccceeecccccccccffffcffffffcccccccccceeeeceecceccecffcccccccccccecccfffffffcbdbecffffffcccfcccfffffff
-        fffffffccccccbbbfffffffffffffffffffcccccfcccccccccecccceeeeeeeeeeccccccccfffffccffffffccccccceeeeceeececcceecccccccccfcfcecffffffffffeeecccccfffffccccccfffffff
-        fffffffccccccbbbcfffffffffffffffccceeeccccccccccccecccccceceeeeeeecccccccfffffffffffffccccccceeeeeeeeecccceccccccccccccceeecccfffffffffcccccffffffccccccfffffff
-        fffffffccccccbbbcfffffffffffffccccceeeeecccccccccccccccceeeeeeeeeeccccccffffffecfffffffcccccceeeeeeeeeeecccccccccccccceee4ecccffffffffcddbccccfffcccccccfffffff
-        fffffffccccccbbdcffffffffcccfffffcceebeeffffffffffffffcceeeeccceedcccccffcffffccffffffffcccceeeeeeceeeccccffffffffffffeeeeeccfffffffffcbbbccccfffcccccccfffffff
-        fffcfffcccccbbbdcffffffffccfffffcccceeceffffffffffffffccceeecceeebcccccffcffffeeffffcfffcccceeecceceecccccffffffffffffeee4cfcfffffffffcbbbccccffffccccccfffffff
-        fccccffcccccbbbdcfffffffcccfffcfccceeeecffffffffffffffccceeccceceecccccffcffffccffffffffccccceecccceeccccfffffffffffffcceecfcfcfffffffcbbbccccffffccccccffccccf
-        ccccfffcccccbcbdcfffffffcccfffffffccceffffffffffffffffffccecffccccccccfffcffffccffffffffccccccccccfeecccfffffffffffffffcccccffffffffffcdbbccccffffccccccfffcccf
-        ffccfffccccccbbdcffffffccccffffffccccbffffffffffffffffffccecffccccccccfffcfffffffffffffffccccccccffccccffffffffffffffffccbcccfffffffffbdbbccccffffccccccffccccf
-        cccbffffcccccbbdcffffffcccffffffcccccbffffffffffffffffffccccffccbccccffffcffffffffffffffffccceeecffccccffffffffffffffffccbcccfffffffffcdbcccccffffccccccfffcccf
-        ffccffffcccccbbdcffffffcccffffffccccebfffffffffffffffffcccccffcccccccffffcffffcbffffffffffcccccccfcccccfffffffcffffffffcecccffffffffffcdbcccccffffccccccfffffff
-        ffccfffccccccbbdcfffffccccffffffcccceeffffffffffcfffffffccccfccccfccfffffcffffe7ffffffffffccccbccffccccffffffccffffffffeeccfffffffffffcdbcccccffffccccccfffffff
-        ffccfffccccccbbdcffffcccccffffffccccccfffffffffccfffffffccccfcccbfccfffffcfffcedcfffffffffccccbcccfcccffffffccfffffffffcbbcccfffffffffcdbcccccffffccccccfffffff
-        ffccfffccccccbbdcffffccccfffffffccbccbffffffffccccffffffccccfcccbffcfffcfffcccedcfffffffffccccbcccfcccffffffccccfffffffcbbcccfffffffffbdbcccccffffccccccfffffff
-        ffccfffccccecbbdcffffccccfffffffccbccbfffffffcccccffffffccccfccccffffffbfffb4fedececffefffccccbccffcccfffffcccccccfffffcbbcccfffffffffbdcceccfffffccccccfffffff
-        ffccfffcccceccbdcffffccccfffffffccbccbffffffccccccccffffccccfccccffccffecffe4ce4eeeeffcfffcccccccffcccfffffccccccccffffcbbcccfffffffffbdceeccfffffccccccfffffff
-        ffccfffccccecbbdcffffccccfffffffccbccbfffffcccccccccffffccccfccccfccfffeecee4eeeeeeebfeffffcccbcccfcccfffffccccccccffffcbbcccfffffffffbdceeccfffffccccccfffffff
-        ffccfffccccecbbdcfffffcfcfffffffccbccbffffccccccccccffffccccfccccffcfcfeeeeeeb44eeeeefefffffccbcccfcccfffffccccccccffffcbbcccfffffffffbdc4eccfffffccccccfffffff
-        ffccfffccccecbbdcfffffffcfffffffccbccbffffccccccccccffffccccfccccfcfffecece4e4ee4e4eeecefcffccbcccfcccfffffcccccccccfffcbbcccfffffffffbdc4cccffffcccccccfffffff
-        ffccffffcceecbbdcfffffccceffffffcccccbffffcccccccfccffffccccfccccfccfffecceee4eeeeeeeebcffffccccccfcccfffffcccccccccfffcbbcccfffffffffbdceeccfffffccccccfffffff
-        ffcffffcfececbbdcfffffebceffffffcccbcbffffcccccccfccffffccccfccccffcbffcbeeeeeeeeeeeedefffffccccccfcccfffffcccccccccfffcbbcccfffffffffbdceeccfffffccccccfffffff
-        ffccfffffeceebbdcfffffecceffffffcccccbffffcccccccfccffffccccfccccccfebcfebeeeeeeeceeb4effbccccccccfcccfffffcccccccccfffcbbcccfffffffffcdc4eccffffcccccccfffffff
-        ffccfffffeeeebbdcffffffcccffffffcccccbfffcccccccccccffffccccfccccfcffbbfeeceeee2eeeee4cc4cfcccccccfcccfffffccccccccccffcbbcccfffffffffcbb4eccfffffccccccfffffff
-        ffccfffffceeeecdcfffffcbecfffcffcccccbfffcccccccccccffffccccfccccccfcc4dee4e222242eeeecdecffccccccfcccfffffccccccccccffcbccccfffffffffcdbeecffffffccccccfffffff
-        ffccfffffcceccbdcfffffcbceffffffcccccbffffccccccccccffffccccfccccfffeee4eeee2222222e4fbbeefffcccccfcccfffffccccccccccffcbccccfffffffffcbceecffffcfccccccfffffff
-        ffccfffffccecbbdcffffffeccffffffcccccbffffccccccccccffffccccfcccccffeece4ce22eeee22e4ceeeefffcccccfcccfffffccccccccccffcbccccfffffffffbbceccffffffccccccfffffff
-        ffccfffffccecbbdcfffffeeccffffffcccccbffffccccccccccffffccccfccccfffefbeefeeeeeeeeeeefcffcffccccccfcccfffffccccccccccffcbccccfffffffffbbcecfcfffffccccccfffffff
-        ffccffffcfceccbdcfffffceccffcfffcccccbccffccccccccccfcffccccfcccccfccfccfceeeeeeeeeeefcfffffccccccfcccfffffccccccccccffcbccccfffffffffbbcecfccffffccccccfffffff
-        ffccffffcfcecbbdcffffcceffffffffcccccbfcffccccccccccffffccccfccccccfecfccceeeeeeeeeeefcffefcccccccfcccfffffccccccccfcffcbccccfffffffffbbcecfccffffccccccfffffff
-        ffccffffcfceccbdcffffccecfffffffcccccbfcffccccccccccffffccccfcccccccfeefeceeeeeeeeeeefcccfffccccccfcccfffffccccccfcccffcbccccfffffffffbbcecfccffffccccccfffffff
-        ffccfffccfceccbdcfffffcecfffffffcccccbccffccccccccccffffccccfcccccccffeeecceeeeeeeeeefeeffccccccccfcccfffffccccccccfcffcbccccffcffffffbbceecccffffccccccfffffff
-        ffccfffcccfcccbdcfffffcecfffffffcccccbccffccccccccccffffccccfcccccccffefccceeeeeeeefefeeffccccccccfcccfffffccccccccfcffcbccccfffffffffcbceecccffffccccccfffffff
-        ffccfffcccceccbdcfffffcecfffffffcccccbcfffccccccccccfffcccccfccccccccfefccceeeeeeeecefeefcfffcccccfcccccfffccccccccfcfccbccccfffffffffcbceecccffffccccccfffffff
-        ffccfffcccfeccbdcfffffceccceebefcccccbcfffccccccccccffffccccfccccccfcfffccceeeeeeeefefcfffcfccccfffccccffffccccccccfcffcbccccfcc4eefcfcbccccccffffccccccfffffff
-        ffccfffcccccccbdcffffffffffceeefcccccbcffcccccccccccffffffffeffeeecccffcccceeeeeeeefefecccccccecefccccffccccccccccccfffcbccccfbbbeffffcdbcccccffffccccccfffffff
-        ffccfffcccccccbdcffffffffcccf4efccccccffffccccccccccfffcccccefeeeecccfffcccceeeeeecfefffccccceeeeeeccccffffcccccccccfffccccccfbeecfcffcdbcccccffffccccccfffffff
-        ffccfffccccccbbdcffffffffffef4cffcccccffcccbccccccccfffcccccbce22ccccfcfefcfeeeeeecfefcccccccce222efccccfffcccccccccccffcccfffe4eefcffbdbcccccffffccccccfffffff
-        ffccffffcccccbbdcffffffffffffecfccccbcfffcccccccccccfffcccccbeeeeecccceccffffceecfffcffeeccccfeeeeeccccffffcccccccccfffcbccccfeeeeffffbdbcccccffffccccccfffffff
-        ffccffffcccccbbdcfffffcccfffffcfccccccfffcccccccccccfffcccccffffffffee4effffffffffffcfce44ecffffffffccccffcccccccccccffcbccccfcccfffffbdbcccccffffccccccfffffff
-        ffccfffccccccbcbccfffccccfffceefffccccffffcfccccccccfffccccceeeeeefe4eecfffffffffffffffcee4bfceeeeecccccffccccccccccffffccccfffeeccfcfbdccccccfffcccccccfffffff
-        ffccffffcccccbbdcccffcccccffcefffffcccffffccccccccccfffcccccccccfcfeeeffffffffffffffffffeeeccccccffcccccffccccccccccfffccccfffffccffffbdbcccccfffcccccccfffffff
-        ffccfffccccccbbbcccffcccccffccffccccbcfffccccccccccccffcccccccecfffcecffffffffffffffffffcceeccf4ecfcccccffcccccccccccffcbcccffffccffffbdbcccccfffcccccccfffffff
-        ffccffffcccccccdbfcfcfccccffeeffccccccfffcccccccccccccfccccccceefccfefcfceeeeeeeeeeeeeffccceccccecccccccfcccccccccffffffcccccfffecccccbccccccffffcccccccfffffff
-        ffccfffffcccccceefccfcccccffebcccccbbbffcccfcccccccccccccccccceefcccefcffceeeeeeeeeecffffcceccceeeccccccfccccccccccccffbbbccccfcecffffeeccccccfffcccccccfffffff
-        ffccffffffccccccfccccccccffffeefcccccbcffccccccccccccfcccccccceefccbeecfceeecccceeeeeccfcccbbcceecccccccffccccccccbcfffbbccccffeecfffffffffffffffcccccccfffffff
-        ffccffffcccccccbccccccccccffcfeffccccccffcccccccccccccccccccccbefcfeeecffffceeeeeeecfffffc4bccceecccccccffccccccccbcffccccccffbeffffccbcccccccffccccccccfffffff
-        ffccffffcccccccdccccccccccffccccffcccccffccccfccccccfffccccfffbefcfeeecfffffeeeeeecffffffc4bccceeccccccfffffcccccccccfccccffffcceffcccbbccccccffccccccccfffffff
-        ffccfffffcccccbcccccccccccffeefffcccccbfffccccccccccccccccccccbefcfceccffcccfceebffcccfccc4bccceefccccccccccccccccccffcccccccffceffccfcccccccffffcccccccfffffff
-        ffccfffffffccbbddccccccccfffcbffffcccccccccccccccccccccccccccceeffefcccfffccfceeeffcffffffccccccefcccccccccccccccccccccccccffffceffffdbdbccfffffffccccccfffffff
-        ffccfffffccccccccccccccccfffceecccccceccecececcccccccccccccccfccffbceccffffeccccefecfffffecefffcccfcccccccccccccccccccccccccccceecfffcccccccccfffffcccccfffffff
-        ffffffffccccccccccfccccccfffcebeccceeececeeeeeeeeeeeeeeeccccceeccfeeffffffffeecffefffffcffcbffffccffcccccceeeeeeeeeeeeeeeeeccceeccfffcccccccccffffffccccfffffff
-        ffffffccccccccbdbcfffcccfffffcceeeeeeeeeeeeeeeeeeeeeeeeeeecfeeeecffeccffffffffeecffffffffccecffcbcecfcccecceeeeeeeeeeeeeeeeeeeeffcfcbbbbbcccccccccffccccfffffff
-        ffffffffccccccccccfffffffffffcffeeeeeeeeeeeeeeeeeeeeeeeeeeececccccfccccceeeeeeeeeeeeeecccccceeeeeeeeeeeeeeeeeeeeeeeeee4eeeeeeecfffffccccccccccffffffffccfffffff
-        fffffffffffccccfccccccfffffccceeeeeeeee4eeeeeeee4e44eeeeeee4eeeeeeeee44eee44444444444444ee444444ceee4eeeeee4e4eeeeeeeeeee4eeeee4eeeeeccccccccffffffffcfffffffff
-        cccccccccccccceeeeeeeeeeeee4eee4eeee4eeeeeeeee44eeeeeeeeee4eb4eeebceeeeeeeeeeeeeeeeeeeeeee4eeeeece44e4eeeeee4ee4eeeeeeeee4e4eeee4e4eeeeeeeeeccccccccccccccfffff
-        ccccccceeeeeeeeeeeeeee4eeeeeee4e4ee44eeeeeeee44ebeeeeeeee4ee4eeeec44eeeeeeeeeeeeeeeeeeeeeeeeeeeee4e4ee4eeee4e4e44eeeeeeeee4e4eeeeeeeeeeeeeeeeeecccccccccccccccc
-        ffffffffccccccccccdcffffffccccccccccccccfccccccffcceeeccccfccffffffffffcccccffffffffffcfffffffffffcccceeeeeeeeeccccfffffffcccccccfcfffffffcccbccfffffffffffffff
-        fffffffffffffffffffcfcccccccccccccccccccccccccccfccccceccfccccccccccccccccccccccccccccfcccccccccccccccccccccccccfcccccccfccccccffccccccccccfcffffffffffffffffff
-        fffffffffffffffffcccffcccccccccccccccffccccccccffffffffffffcccccfccccccccccccccccccfccccccccccccccccccfffffffffffcccccccccccccccccccccccccccccfffffffffffffffff
-        ffffffffffffffccccccffffffcccccfffccffcccccccffeeeeeeeeeeeccccccccccccccccccffffffcccccccffffccccffcccfeeeeeeeeeefcccfccfcffffffffffffffccccfcccfffffffffffffff
-        fffffffffffffffccffffcccccccccccccccccccccccccffceeeeeeefcccccccccccccccccccccccccccccccccccccccccccccfccccccccccffcccccccccccccccccccccccccfcfffffffffffffffff
-        fffffffffffffcccffffcccccffffcfcccccfcccffccccfffffffffffffcccccccccccccccccccccccccccccccccccccccccccffffffffffffffccccfcccccccccffffffffffffcffffffffffffffff
-        fccccccccccccffccfcccccccccccccccccccccccccccceeeeeeeeeeeccccccccccccccccccccccccccccccbcccccccccccccccfeeeeeeeeeeccccccccccccccccccfccfcfcfffccffccccccccccccc
-        fffffffffffffffcffffccccccccffccccccccccccccffcffffccccccfcccccccccccccccccccccfcccccccccccccccccccccccfccccccfffcefccccfccccfcccccccfffffffffcffffffffffffffff
-        fffffffffffffffcfffffffccfffffccccccccccffffffffffffffffffffffffffffffffffffffffffffffcfffffffffffffffffffffffffffffffffffffcffffffffffcfffffffcfffffffffffffff
-        ccccccccccccccffccccccbbccccccbbbbcbdbbbbbdcccceccceeeefccccccccccccccccccccccccccccccccccccccccccccccccfcccccccccccbbbbbbbbbbbccccccccccccccccfccccccccccccccf
-        fffffffffffffffffffffccccccccccccfcfcccccccccceeeeeeeeccccccccccccccccccccccccccccccccccccccccccccccccccfeeeeeeeeecffccfcccfccccccfffffffffffffcfffffffffffffff
-        fffffffffffffffffffffffffffffffffffffffffffffffffffffcfffffccccffcccccccffccccccfccfcccccccccccfffcccffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-        fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-        fffffffffffffffffffffffffffffcccecccccccccccccccccccceeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecceecccccccccccccccccccccccffffffffcfffffffffffffffffff
-        ffffffffffffccccceeeeeeeeeeeeeeeeeeeeeeeeeeecccccceee4cceeeeeee4444eee4444444444444e44444444eee444eeeeeeecceeecccccceeeeeeeeeeeeeeeeeeeeeeeeccccccfffcfffffffff
-        ffffffccccccfccceeeeeeeeeeeeeeeeeeeeeeeeeeececccceeebcceeee44beeeee4444eeeeee44444ee44eeeeee444ebe4eb44eeecceeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeccfccffcccffffff
-        fffccccfccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeecceeceee4cceeee4eccc44eeeeeeeee444444444444444eeeeeeee44ecce4eeecceeeeeecceeeeeeeeeeeeeeeeeeeeeeeeeeeecccfcfccccfffc
-        cffccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeceec4ecceeee44ecceeeeeeeeee44444444444444444eeeeeee44cc444eeeecceceeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccffcffff
-        ccccccfceeeeeeeeeeeeeeeeeeeeeeeeee4eeeeecceeeeeeceecceeeeeee44bcbb44eeeeee444444444444444eeeee444bcb444eeeeecccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeecfccfcccc
-        ccccfceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee444e44444beeccb444444ee44eeeb444ee4444e444ee4444444444444ebee44eeeeeeeeccbbbbbbb4bb44eeeeeeeeeeeeeeeeeeeeeeeeeeeeccfccccc
-        fcccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeecceeeeeeeeeeee44eeee4444e4ee4444444444ee4e44eeeeeee4eeeeeeeeeceeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccff
-        cfcccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecececeeeee4ccceeeeeeeeeee44eeeeeeeeee4444eeeee44444eeeeeeeeeeeee4eeeeeeeeccbeeeecccceceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecfcc
-        ccccccceeeeeeeeeeeeeeeeeeeeeeeeeee4eccccccceee4ccceeeeeeeeeeee4eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee44eeeeeeeecceeeecccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccf
-        eeeeceeeeeeeeeeeeeeeeeeeeeeeeeeee4eeeeeeeeeeeeecceeeeeeeeeeee44eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4eeeeeeeeecc4eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeec
-        cccccccceeeeeeeeeeeeeeeeeeeeeeeeeeecceceeeee4ecceeeeeeeeeeeee4eeeeeee44eeeeeeee44444eeeeeeeeeeeeeeeeeee4eeeeeeeeccc4eeeceeeccceeeeeeeeeeeeeeeeeeeeeeeeecccccccc
-        """))
-
-def on_on_overlap20(sprite36, otherSprite20):
-    DialogoCaballero()
-sprites.on_overlap(SpriteKind.player, SpriteKind.caballero, on_on_overlap20)
-
-def on_overlap_tile17(sprite37, location17):
+def on_overlap_tile15(sprite37, location17):
     global esta_porta_blue
     esta_porta_blue = 1
 scene.on_overlap_tile(SpriteKind.player,
     assets.tile("""
         myTile14
         """),
+    on_overlap_tile15)
+
+def on_on_overlap17(sprite21, otherSprite10):
+    DialogoPrincesa()
+sprites.on_overlap(SpriteKind.player, SpriteKind.princesa, on_on_overlap17)
+
+def on_on_overlap18(sprite6, otherSprite3):
+    addItem(sprites.read_data_string(otherSprite3, "name"),
+        otherSprite3.image)
+    sprites.destroy(otherSprite3)
+sprites.on_overlap(SpriteKind.player, SpriteKind.greenkey, on_on_overlap18)
+
+def PisoJefe():
+    global nena
+    animacionJefe()
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
+    tiles.set_current_tilemap(tilemap("""
+        nivel15
+        """))
+    nena = sprites.create(assets.image("""
+        nena-front
+        """), SpriteKind.player)
+    nena.set_position(10, 104)
+    controller.move_sprite(nena)
+    sprites.destroy(toolbar)
+
+def on_overlap_tile16(sprite23, location12):
+    global esta_porta_green
+    esta_porta_green = 1
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile16
+        """),
+    on_overlap_tile16)
+
+def on_overlap_tile17(sprite17, location11):
+    global esta_porta_green
+    esta_porta_green = 1
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile18
+        """),
     on_overlap_tile17)
+
+def on_on_overlap19(sprite19, otherSprite8):
+    tiles.place_on_tile(nena, tiles.get_tile_location(36, 10))
+sprites.on_overlap(SpriteKind.player, SpriteKind.tp2, on_on_overlap19)
+
+def on_on_overlap20(sprite29, otherSprite14):
+    DialogoMago()
+sprites.on_overlap(SpriteKind.player, SpriteKind.mago, on_on_overlap20)
 
 mechero2: Sprite = None
 BlueKey: Sprite = None
@@ -1638,23 +1646,24 @@ mapSprite: Sprite = None
 myMinimap: minimap.Minimap = None
 RedKey: Sprite = None
 greenkey2: Sprite = None
+jefe2: Sprite = None
 puertaOjo: Sprite = None
 cofre_laberinto: Sprite = None
 cofre32: Sprite = None
 toolbar: Inventory.Toolbar = None
-statusbar: StatusBarSprite = None
 projectile: Sprite = None
 caballero2: Sprite = None
 puerta: Sprite = None
-portal2: Sprite = None
-CofreAbierto2: Sprite = None
 agujero2: Sprite = None
+statusbar: StatusBarSprite = None
 porta_mine: Sprite = None
 cofre_plataformas: Sprite = None
 tp_plataformas2: Sprite = None
 tp_plataformas: Sprite = None
 pluma: Sprite = None
 moneda: Sprite = None
+CofreAbierto2: Sprite = None
+portal2: Sprite = None
 mago2: Sprite = None
 cofre22: Sprite = None
 cofre4: Sprite = None
@@ -1672,7 +1681,7 @@ esta_mapa_enemigos = 0
 mapa_abierto = 0
 nena: Sprite = None
 createtoolbar()
-PantallaPrincipal()
+PisoJefe()
 nena = sprites.create(assets.image("""
     nena-front
     """), SpriteKind.player)
