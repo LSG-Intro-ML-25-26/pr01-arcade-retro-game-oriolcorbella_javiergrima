@@ -8,7 +8,8 @@
         "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
         "pxt-zoom": "github:kiwiphoenix364/pxt-zoom#v3.0.3",
         "arcade-minimap": "github:microsoft/arcade-minimap#v0.6.1",
-        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3"
+        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
+        "arcade-background-scroll": "github:microsoft/arcade-background-scroll#v0.1.2"
     },
     "files": [
         "main.blocks",
