@@ -28,6 +28,8 @@ namespace SpriteKind {
     export const greenkey = SpriteKind.create()
     export const Map = SpriteKind.create()
     export const jefe = SpriteKind.create()
+    export const JefeDerrotado = SpriteKind.create()
+    export const corona = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const salto_pluma = StatusBarKind.create()
@@ -87,7 +89,7 @@ function JefeFinal () {
     jefe = sprites.create(assets.image`miImagen1`, SpriteKind.jefe)
     vidaJefe = statusbars.create(115, 5, StatusBarKind.EnemyHealth)
     vidaJefe.setColor(7, 2, 5)
-    vidaJefe.setPosition(101, 4)
+    vidaJefe.attachToSprite(jefe)
     vidaJefe.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
     vidaJefe.max = 200
 }
@@ -1027,9 +1029,6 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre, function (sprite27, otherSprite13) {
     CofreBueno()
 })
-statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
-    sprites.destroy(statusbar.spriteAttachedTo(), effects.fire, 2000)
-})
 function DialogoMago () {
     game.showLongText("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...", DialogLayout.Bottom)
     pause(2000)
@@ -1068,7 +1067,7 @@ function SaludPersonaje () {
     vidaPersonaje = statusbars.create(50, 4, StatusBarKind.Health)
     vidaPersonaje.max = 5
     vidaPersonaje.setColor(7, 2, 5)
-    vidaPersonaje.setPosition(29, 117)
+    vidaPersonaje.attachToSprite(nena)
     vidaPersonaje.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
 }
 function cofre_obert_laberint () {
@@ -1098,6 +1097,23 @@ function cofre_obert_laberint () {
         tiles.placeOnTile(greenkey2, value12)
     }
 }
+function AnimacionFinal () {
+    sprites.destroy(nena)
+    sprites.destroy(jefe)
+    sprites.destroy(vidaPersonaje)
+    sprites.destroy(vidaJefe)
+    JefeDerrotado = sprites.create(assets.image`miImagen13`, SpriteKind.JefeDerrotado)
+    JefeDerrotado.setPosition(80, 16)
+    JefeDerrotado.changeScale(3, ScaleAnchor.Top)
+    sprites.destroy(JefeDerrotado, effects.fire, 500)
+    game.showLongText("Has luchado bien. Y aun así, esto no era el final. Yo solo fui el aviso. Prepárate... el verdadero enemigo viene ahora.", DialogLayout.Bottom)
+    corona = sprites.create(assets.image`miImagen14`, SpriteKind.corona)
+    corona.setPosition(80, 16)
+    corona.changeScale(1, ScaleAnchor.Top)
+}
+statusbars.onZero(StatusBarKind.EnemyHealth, function () {
+    AnimacionFinal()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.tp, function (sprite5, otherSprite2) {
     tiles.placeOnTile(nena, tiles.getTileLocation(39, 1))
 })
@@ -1222,7 +1238,7 @@ function cofre_plataformes_mine () {
         tiles.placeOnTile(BlueKey, tiles.getTileLocation(59, 6))
     }
 }
-info.onLifeZero(function () {
+statusbars.onZero(StatusBarKind.Health, function () {
     PisoEnemigos()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.caballero, function (sprite36, otherSprite20) {
@@ -1323,6 +1339,8 @@ let BlueKey: Sprite = null
 let mapSprite: Sprite = null
 let myMinimap: minimap.Minimap = null
 let RedKey: Sprite = null
+let corona: Sprite = null
+let JefeDerrotado: Sprite = null
 let greenkey2: Sprite = null
 let vidaPersonaje: StatusBarSprite = null
 let puertaOjo: Sprite = null
