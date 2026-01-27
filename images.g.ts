@@ -1293,6 +1293,44 @@ f b f b f f f f f f b f b f b f
 .............................................
 .............................................
 `;
+            case "image44":
+            case "nena-front1":return img`
+. . . . . . . . . . . . . . 
+. 2 5 . . 5 2 2 5 . . 5 2 . 
+. 5 5 5 5 5 5 5 5 5 5 5 5 . 
+. 5 5 9 5 5 9 9 5 5 9 5 5 . 
+. 5 5 5 5 5 5 5 5 5 5 5 5 . 
+. f c c c c 4 4 c c c c f . 
+. f f c c 4 4 4 4 c c f f . 
+. f f f b f 4 4 f b f f f . 
+. f f 4 1 f d d f 1 4 f f . 
+. . f f d d d d d d f f . . 
+. . e f e 4 4 4 4 e f e . . 
+. e 4 f b 3 3 3 3 b f 4 e . 
+. 4 d f 3 3 3 3 3 3 c d 4 . 
+. 4 4 f 6 6 6 6 6 6 f 4 4 . 
+. . . . f f f f f f . . . . 
+. . . . f f . . f f . . . . 
+`;
+            case "image45":
+            case "miImagen15":return img`
+. . . . . . . . . . . . . . . . 
+. . . 2 5 . 5 2 2 5 . 5 2 . . . 
+. . . 5 5 5 5 5 5 5 5 5 5 . . . 
+. . . 5 5 9 5 9 9 5 9 5 5 . . . 
+. . . 5 5 5 5 5 5 5 5 5 5 . . . 
+. . . f 6 f f d d f f 6 f . . . 
+. . f 6 f d f d d f d f 6 f . . 
+. . f 6 f d 3 d d 3 d f 6 f . . 
+. . f 6 6 f d d d d f 6 6 f . . 
+. f 6 6 f 3 f f f f 3 f 6 6 f . 
+. . f f d 3 5 3 3 5 3 3 f f . . 
+. . f d f f 3 5 5 3 f d f . . . 
+. . . f f 3 3 3 3 3 f d f . . . 
+. . . f 3 3 5 3 3 5 3 f f . . . 
+. . . f f f f f f f f f . . . . 
+. . . . . . . . . . . . . . . . 
+`;
         }
         return null;
     })

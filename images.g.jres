@@ -219,6 +219,16 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "miImagen14"
     },
+    "image44": {
+        "data": "hwQOABAAAAAAAAAAAAAAACBV9f8P4EQAUFXF//9OTQAAlcX89P//AABVxbzRvmP/UFXF9N80Y/8glUVE3TRjDyCVRUTdNGMPUFXF9N80Y/8AVcW80b5j/wCVxfz0//wAUFXF//9OTQAgVfX/D+BEAAAAAAAAAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "nena-front1"
+    },
+    "image45": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAADwAAAAAAAA/2//AAAgVfVmZt//D1BVZf/2/T8PAJX13T/zMw9QVfU//TVTDyCV1d39UzMPIJXV3f1TMw9QVfU//TVTDwCV9d0/8z8PUFVl//bT/Q8gVfVmZv//AAAAAP9vDwAAAAAAAPAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "miImagen15"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
