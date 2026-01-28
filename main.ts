@@ -31,6 +31,7 @@ namespace SpriteKind {
     export const JefeDerrotado = SpriteKind.create()
     export const corona = SpriteKind.create()
     export const playerCorona = SpriteKind.create()
+    export const AtaqueJefe = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const salto_pluma = StatusBarKind.create()
@@ -47,6 +48,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre_mine, function (sprite, ot
 })
 function Piso1 () {
     tiles.setCurrentTilemap(tilemap`piso2`)
+    createtoolbar()
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
     nena.setPosition(142, 10)
     controller.moveSprite(nena)
@@ -78,9 +80,22 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function (sprite18, othe
     pause(1000)
     PisoEnemigos()
 })
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-up`,
+    500,
+    false
+    )
+    disparo = 1
+})
 function DialogoCaballero () {
+    caballeroGrande = sprites.create(assets.image`miImagen17`, SpriteKind.npc)
+    caballeroGrande.setPosition(76, 10)
+    caballeroGrande.setScale(4, ScaleAnchor.Top)
     story.printCharacterText("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!", "Caballero")
-    pause(2000)
+    sprites.destroy(caballeroGrande)
+    pause(1000)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function (sprite20, otherSprite9) {
     sprites.destroy(nena)
@@ -92,7 +107,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function (sprite20, oth
 })
 function JefeFinal () {
     jefe2 = sprites.create(assets.image`miImagen1`, SpriteKind.jefe)
-    vidaJefe = statusbars.create(115, 5, StatusBarKind.EnemyHealth)
+    vidaJefe = statusbars.create(50, 5, StatusBarKind.EnemyHealth)
     vidaJefe.setColor(7, 2, 5)
     vidaJefe.attachToSprite(jefe2)
     vidaJefe.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
@@ -872,6 +887,43 @@ function mine_plataformas () {
         `, SpriteKind.puerta_mine)
     tiles.placeOnTile(porta_mine, tiles.getTileLocation(59, 8))
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (esta_portal == 1) {
+        if (findvalue("MECHERO") != -1) {
+            for (let value5 of tiles.getTilesByType(assets.tile`bloques_portal`)) {
+                tiles.setTileAt(value5, assets.tile`myTile1`)
+                removeitem("MECHERO")
+            }
+        }
+    }
+    if (esta_porta_red == 1) {
+        if (findvalue("REDKEY") != -1) {
+            for (let value6 of tiles.getTilesByType(assets.tile`puertaCandadoRED`)) {
+                tiles.setTileAt(value6, assets.tile`puertaSinCandadoRED`)
+                tiles.setWallAt(value6, false)
+                removeitem("REDKEY")
+            }
+        }
+    }
+    if (esta_porta_red == 1) {
+        if (findvalue("BLUEKEY") != -1) {
+            for (let value7 of tiles.getTilesByType(assets.tile`puertaCandadoBLUE`)) {
+                tiles.setTileAt(value7, assets.tile`puertaSinCandadoBLUE`)
+                tiles.setWallAt(value7, false)
+                removeitem("BLUEKEY")
+            }
+        }
+    }
+    if (esta_porta_green == 1) {
+        if (findvalue("GREENKEY") != -1) {
+            for (let value72 of tiles.getTilesByType(assets.tile`puertaCandadoGREEN`)) {
+                tiles.setTileAt(value72, assets.tile`puertaSinCandadoGREEN`)
+                tiles.setWallAt(value72, false)
+                removeitem("GREENKEY")
+            }
+        }
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite31, otherSprite15) {
     addItem(sprites.readDataString(otherSprite15, "name"), otherSprite15.image)
     sprites.destroy(otherSprite15)
@@ -884,8 +936,22 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.feather, function (sprite10, oth
     efecto_salto()
     sprites.destroy(statusbar)
 })
+function MovimientoJefeIzquieda () {
+    animation.runImageAnimation(
+    jefe2,
+    assets.animation`skellyAttackRight`,
+    200,
+    true
+    )
+    jefe2.setScale(2, ScaleAnchor.BottomLeft)
+    MovimientoJefe = 5
+}
 function DialogoPrincesa () {
+    princesaGrande = sprites.create(assets.image`miImagen16`, SpriteKind.npc)
+    princesaGrande.setPosition(76, 10)
+    princesaGrande.setScale(4, ScaleAnchor.Top)
     story.printCharacterText("Bienvenido a mi castillo, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la han robado y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare todo el oro que quieras, ahora puedes pasar por la puerta y avanzar al siguiente piso.", "Princesa")
+    sprites.destroy(princesaGrande)
     pause(2000)
 }
 function CofreTrampa () {
@@ -911,14 +977,20 @@ function PantallaPrincipal () {
     caballero2.setPosition(112, 88)
     puerta.setPosition(66, 80)
 }
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+function MovimientoJefeArriba () {
     animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-down`,
-    500,
-    false
+    jefe2,
+    assets.animation`skellyAttackFront`,
+    200,
+    true
     )
-    disparo = 2
+    jefe2.setScale(2, ScaleAnchor.Top)
+    MovimientoJefe = 1
+}
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (nena.vy == 0 && esta_plataformes == 1) {
+        nena.vy = fuerza_salto
+    }
 })
 controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     if (disparo == 1) {
@@ -960,15 +1032,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.mechero, function (sprite32, oth
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite4, location3) {
     esta_porta_green = 1
 })
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-right`,
-    500,
-    false
-    )
-    disparo = 4
-})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     nena,
@@ -986,60 +1049,96 @@ function createtoolbar () {
     toolbar.z = 100
     toolbar.setFlag(SpriteFlag.RelativeToCamera, true)
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (nena.vy == 0 && esta_plataformes == 1) {
-        nena.vy = fuerza_salto
-    }
-})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite2, location) {
     esta_portal = 1
-})
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (esta_portal == 1) {
-        if (findvalue("MECHERO") != -1) {
-            for (let value5 of tiles.getTilesByType(assets.tile`bloques_portal`)) {
-                tiles.setTileAt(value5, assets.tile`myTile1`)
-                removeitem("MECHERO")
-            }
-        }
-    }
-    if (esta_porta_red == 1) {
-        if (findvalue("REDKEY") != -1) {
-            for (let value6 of tiles.getTilesByType(assets.tile`puertaCandadoRED`)) {
-                tiles.setTileAt(value6, assets.tile`puertaSinCandadoRED`)
-                tiles.setWallAt(value6, false)
-                removeitem("REDKEY")
-            }
-        }
-    }
-    if (esta_porta_red == 1) {
-        if (findvalue("BLUEKEY") != -1) {
-            for (let value7 of tiles.getTilesByType(assets.tile`puertaCandadoBLUE`)) {
-                tiles.setTileAt(value7, assets.tile`puertaSinCandadoBLUE`)
-                tiles.setWallAt(value7, false)
-                removeitem("BLUEKEY")
-            }
-        }
-    }
-    if (esta_porta_green == 1) {
-        if (findvalue("GREENKEY") != -1) {
-            for (let value72 of tiles.getTilesByType(assets.tile`puertaCandadoGREEN`)) {
-                tiles.setTileAt(value72, assets.tile`puertaSinCandadoGREEN`)
-                tiles.setWallAt(value72, false)
-                removeitem("GREENKEY")
-            }
-        }
-    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre, function (sprite27, otherSprite13) {
     CofreBueno()
 })
+function DevolverLaCorona () {
+    sprites.destroy(corona2)
+    scene.setBackgroundImage(assets.image`castillo_trono`)
+    princesaCorona = sprites.create(assets.image`miImagen15`, SpriteKind.Player)
+    princesaCorona.setPosition(78, 40)
+    nena = sprites.create(assets.image`nena-front`, SpriteKind.npc)
+    npc1 = sprites.create(assets.image`princesa`, SpriteKind.npc)
+    npc2 = sprites.create(assets.image`miImagen22`, SpriteKind.npc)
+    npc3 = sprites.create(assets.image`miImagen19`, SpriteKind.npc)
+    npc4 = sprites.create(assets.image`miImagen20`, SpriteKind.npc)
+    npc5 = sprites.create(assets.image`miImagen21`, SpriteKind.npc)
+    npc6 = sprites.create(assets.image`caballero`, SpriteKind.npc)
+    nena.setPosition(95, 52)
+    npc1.setPosition(125, 80)
+    npc2.setPosition(135, 95)
+    npc3.setPosition(145, 110)
+    npc4.setPosition(35, 80)
+    npc5.setPosition(25, 95)
+    npc6.setPosition(15, 110)
+    pause(1000)
+    story.spriteSayText(princesaCorona, "Gracias por devolverme la corona. Siempre estaré en deuda contigo, y en reconocimiento a tu lealtad, te nombro mi caballero personal.")
+    pause(1000)
+    story.printCharacterText("¡La corona ha regresado! ¡El reino celebra!", "Pueblo")
+    pause(1000)
+    sprites.destroyAllSpritesOfKind(SpriteKind.npc)
+    sprites.destroy(nena)
+    sprites.destroy(princesaCorona)
+    tiles.setCurrentTilemap(tilemap`nivel12`)
+    story.printText("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...", 80, 60, 1, 15, story.TextSpeed.Slow)
+    music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
+    ojos = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    ojos.setPosition(8, 40)
+    ojos.setScale(2, ScaleAnchor.Middle)
+    animation.runImageAnimation(
+    ojos,
+    assets.animation`myAnim`,
+    500,
+    true
+    )
+    pause(5000)
+    animation.stopAnimation(animation.AnimationTypes.All, ojos)
+    music.stopAllSounds()
+    sprites.destroy(ojos)
+    pause(2000)
+}
+function MovimientoJefeArriba3 () {
+    animation.runImageAnimation(
+    jefe2,
+    assets.animation`skellyAttackFront`,
+    200,
+    true
+    )
+    jefe2.setScale(2, ScaleAnchor.TopLeft)
+    MovimientoJefe = 3
+}
 statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
     AnimacionFinal()
 })
 function DialogoMago () {
-    story.printCharacterText("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...", "Mago")
-    pause(2000)
+    if (dialogo_mago == 1) {
+        MagoGrande = sprites.create(assets.image`mago`, SpriteKind.npc)
+        MagoGrande.setPosition(76, 10)
+        MagoGrande.setScale(4, ScaleAnchor.Top)
+        story.printCharacterText("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...", "Mago")
+        sprites.destroy(MagoGrande)
+        pause(2000)
+    }
 }
 function PisoEnemigos () {
     tiles.setCurrentTilemap(tilemap`nivel`)
@@ -1072,7 +1171,7 @@ function animacionJefe () {
     pause(1000)
 }
 function SaludPersonaje () {
-    vidaPersonaje = statusbars.create(50, 4, StatusBarKind.Health)
+    vidaPersonaje = statusbars.create(20, 4, StatusBarKind.Health)
     vidaPersonaje.max = 5
     vidaPersonaje.setColor(7, 2, 5)
     vidaPersonaje.attachToSprite(nena)
@@ -1108,6 +1207,15 @@ function cofre_obert_laberint () {
 statusbars.onZero(StatusBarKind.Health, function (status) {
     PisoEnemigos()
 })
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-right`,
+    500,
+    false
+    )
+    disparo = 4
+})
 function AnimacionFinal () {
     scene.setBackgroundImage(assets.image`castillo_trono`)
     sprites.destroy(nena)
@@ -1121,24 +1229,21 @@ function AnimacionFinal () {
     sprites.destroy(JefeDerrotado2, effects.fire, 1000)
     pause(2000)
     corona2 = sprites.create(assets.image`miImagen14`, SpriteKind.corona)
-    corona2.startEffect(effects.rings, 500)
-    corona2.setPosition(83, 16)
+    corona2.setPosition(83, 12)
     corona2.changeScale(1, ScaleAnchor.Top)
     music.play(music.melodyPlayable(music.magicWand), music.PlaybackMode.UntilDone)
     story.printCharacterText("La corona es tuya. Sientes su poder recorrer tu cuerpo. Puedes devolverla y restaurar el orden... o tomarla y gobernar por tu cuenta. ¿Qué eliges?")
     pause(500)
-    story.showPlayerChoices("Tomar el poder", "Devolver la corona")
-    if (story.checkLastAnswer("Toma el poder")) {
-        personajeCorona = sprites.create(assets.image`nena-front1`, SpriteKind.playerCorona)
-        personajeCorona.setPosition(74, 37)
-    } else {
-        princesaCorona = sprites.create(assets.image`miImagen15`, SpriteKind.playerCorona)
-        princesaCorona.setPosition(74, 37)
+    while (!(eleccion == 1 || eleccion == 2)) {
+        eleccion = game.askForNumber("1.Tomar el poder 2.Devolver la corona", 1)
+        if (eleccion == 1) {
+            TomarElPoder()
+        } else if (eleccion == 2) {
+            DevolverLaCorona()
+        }
     }
+    game.gameOver(true)
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.tp, function (sprite5, otherSprite2) {
-    tiles.placeOnTile(nena, tiles.getTileLocation(39, 1))
-})
 function CofreBueno () {
     sprites.destroy(cofre4)
     CofreAbierto2 = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
@@ -1171,33 +1276,18 @@ function CofreBueno () {
     portal2.setPosition(81, 79)
     game.showLongText("Ya estas preparado, cruza el portal y derrota el mal!", DialogLayout.Bottom)
 }
-controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mapa_abierto == 0) {
-        myMinimap = minimap.minimap(MinimapScale.Quarter, 2, 0)
-        mapSprite = sprites.create(minimap.getImage(minimap.minimap()), SpriteKind.Map)
-        mapSprite.setPosition(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
-        controller.moveSprite(nena, 0, 0)
-        minimap.includeSprite(myMinimap, nena, MinimapSpriteScale.MinimapScale)
-        mapa_abierto = 1
-    } else if (mapa_abierto == 0 && esta_mapa_enemigos == 1) {
-        myMinimap = minimap.minimap(MinimapScale.Half, 2, 0)
-    } else {
-        sprites.destroy(mapSprite)
-        controller.moveSprite(nena)
-        mapa_abierto = 0
-    }
-})
+function MovimientoJefeDerecha () {
+    animation.runImageAnimation(
+    jefe2,
+    assets.animation`skellyAttackLeft`,
+    200,
+    true
+    )
+    jefe2.setScale(2, ScaleAnchor.BottomRight)
+    MovimientoJefe = 4
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite9, location6) {
     esta_porta_blue = 1
-})
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-up`,
-    500,
-    false
-    )
-    disparo = 1
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`blau_dreta`, function (sprite28, location15) {
     scene.cameraFollowSprite(nena)
@@ -1240,6 +1330,15 @@ function efecto_salto () {
     }
     fuerza_salto = -163
 }
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    nena,
+    assets.animation`nena-animation-down`,
+    500,
+    false
+    )
+    disparo = 2
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre2, function (sprite34, otherSprite18) {
     CofreTrampa()
 })
@@ -1260,6 +1359,22 @@ function cofre_plataformes_mine () {
         tiles.placeOnTile(BlueKey, tiles.getTileLocation(59, 6))
     }
 }
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (mapa_abierto == 0) {
+        myMinimap = minimap.minimap(MinimapScale.Quarter, 2, 0)
+        mapSprite = sprites.create(minimap.getImage(minimap.minimap()), SpriteKind.Map)
+        mapSprite.setPosition(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
+        controller.moveSprite(nena, 0, 0)
+        minimap.includeSprite(myMinimap, nena, MinimapSpriteScale.MinimapScale)
+        mapa_abierto = 1
+    } else if (mapa_abierto == 0 && esta_mapa_enemigos == 1) {
+        myMinimap = minimap.minimap(MinimapScale.Half, 2, 0)
+    } else {
+        sprites.destroy(mapSprite)
+        controller.moveSprite(nena)
+        mapa_abierto = 0
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.caballero, function (sprite36, otherSprite20) {
     DialogoCaballero()
 })
@@ -1312,6 +1427,43 @@ function Cofre3_nether () {
         tiles.placeOnTile(mechero2, value11)
     }
 }
+function PeleaJefeFinal () {
+    MovimientoJefe = 0
+    MovimientoJefe = randint(1, 5)
+    while (vidaJefe.value > 0) {
+        if (MovimientoJefe == 1) {
+            MovimientoJefeArriba()
+            jefe2.setPosition(73, 22)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
+        } else if (MovimientoJefe == 2) {
+            MovimientoJefeArriba2()
+            jefe2.setPosition(18, 22)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
+        } else if (MovimientoJefe == 3) {
+            MovimientoJefeArriba3()
+            jefe2.setPosition(130, 22)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
+        } else if (MovimientoJefe == 4) {
+            MovimientoJefeDerecha()
+            jefe2.setPosition(133, 85)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image`miImagen10`, SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.createProjectileFromSprite(assets.image`miImagen10`, jefe2, -100, 0)
+        } else if (MovimientoJefe == 5) {
+            MovimientoJefeIzquieda()
+            jefe2.setPosition(15, 85)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image`miImagen11`, SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.createProjectileFromSprite(assets.image`miImagen11`, jefe2, 100, 0)
+        }
+    }
+}
 function removeitem (name3: string) {
     toolbar.get_items().removeAt(findvalue(name3))
     toolbar.update()
@@ -1322,6 +1474,16 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile14`, function (sprite37
 sprites.onOverlap(SpriteKind.Player, SpriteKind.princesa, function (sprite21, otherSprite10) {
     DialogoPrincesa()
 })
+function MovimientoJefeArriba2 () {
+    animation.runImageAnimation(
+    jefe2,
+    assets.animation`skellyAttackFront`,
+    200,
+    true
+    )
+    jefe2.setScale(2, ScaleAnchor.TopRight)
+    MovimientoJefe = 2
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.greenkey, function (sprite6, otherSprite3) {
     addItem(sprites.readDataString(otherSprite3, "name"), otherSprite3.image)
     sprites.destroy(otherSprite3)
@@ -1331,11 +1493,16 @@ function PisoJefe () {
     scene.setBackgroundImage(assets.image`castillo_trono`)
     tiles.setCurrentTilemap(tilemap`nivel15`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+    esta_plataformes = 1
     nena.setPosition(10, 104)
-    controller.moveSprite(nena)
+    nena.ay = 350
+    controller.moveSprite(nena, 100, 0)
     sprites.destroy(toolbar)
+    efecto_salto()
+    sprites.destroy(statusbar)
     JefeFinal()
     SaludPersonaje()
+    PeleaJefeFinal()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite23, location12) {
     esta_porta_green = 1
@@ -1346,27 +1513,99 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite17
 sprites.onOverlap(SpriteKind.Player, SpriteKind.tp2, function (sprite19, otherSprite8) {
     tiles.placeOnTile(nena, tiles.getTileLocation(36, 10))
 })
+function TomarElPoder () {
+    sprites.destroy(corona2)
+    scene.setBackgroundImage(assets.image`castillo_trono`)
+    personajeCorona = sprites.create(assets.image`nena-front1`, SpriteKind.Player)
+    personajeCorona.setPosition(78, 40)
+    npc1 = sprites.create(assets.image`princesa`, SpriteKind.npc)
+    npc2 = sprites.create(assets.image`miImagen22`, SpriteKind.npc)
+    npc3 = sprites.create(assets.image`miImagen19`, SpriteKind.npc)
+    npc4 = sprites.create(assets.image`miImagen20`, SpriteKind.npc)
+    npc5 = sprites.create(assets.image`miImagen21`, SpriteKind.npc)
+    npc6 = sprites.create(assets.image`caballero`, SpriteKind.npc)
+    npc1.setPosition(125, 80)
+    npc2.setPosition(135, 95)
+    npc3.setPosition(145, 110)
+    npc4.setPosition(35, 80)
+    npc5.setPosition(25, 95)
+    npc6.setPosition(15, 110)
+    pause(1000)
+    story.spriteSayText(personajeCorona, "Desde hoy, el reino tendrá un solo destino. Y yo seré quien lo decida.")
+    pause(1000)
+    story.printCharacterText("El trono decide por nosotros, y nosotros cumplimos sin cuestionar.", "Pueblo")
+    pause(1000)
+    sprites.destroyAllSpritesOfKind(SpriteKind.npc)
+    sprites.destroy(personajeCorona)
+    tiles.setCurrentTilemap(tilemap`nivel10`)
+    story.printText("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...", 80, 60, 1, 15, story.TextSpeed.Slow)
+    music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
+    ojos = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    ojos.setPosition(8, 40)
+    ojos.setScale(2, ScaleAnchor.Middle)
+    animation.runImageAnimation(
+    ojos,
+    assets.animation`myAnim`,
+    500,
+    true
+    )
+    pause(5000)
+    animation.stopAnimation(animation.AnimationTypes.All, ojos)
+    music.stopAllSounds()
+    sprites.destroy(ojos)
+    pause(2000)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.mago, function (sprite29, otherSprite14) {
-    DialogoMago()
+    if (dialogo_mago == 0) {
+        dialogo_mago = 1
+        DialogoMago()
+    }
 })
+let personajeCorona: Sprite = null
+let AtaqueJefe2: Sprite = null
 let mechero2: Sprite = null
 let BlueKey: Sprite = null
-let mapSprite: Sprite = null
-let myMinimap: minimap.Minimap = null
 let RedKey: Sprite = null
-let princesaCorona: Sprite = null
-let personajeCorona: Sprite = null
-let corona2: Sprite = null
+let eleccion = 0
 let JefeDerrotado2: Sprite = null
 let greenkey2: Sprite = null
 let vidaPersonaje: StatusBarSprite = null
 let puertaOjo: Sprite = null
 let cofre_laberinto: Sprite = null
 let cofre32: Sprite = null
+let MagoGrande: Sprite = null
+let ojos: Sprite = null
+let npc6: Sprite = null
+let npc5: Sprite = null
+let npc4: Sprite = null
+let npc3: Sprite = null
+let npc2: Sprite = null
+let npc1: Sprite = null
+let princesaCorona: Sprite = null
+let corona2: Sprite = null
 let toolbar: Inventory.Toolbar = null
 let caballero2: Sprite = null
 let puerta: Sprite = null
 let agujero2: Sprite = null
+let princesaGrande: Sprite = null
+let MovimientoJefe = 0
 let statusbar: StatusBarSprite = null
 let porta_mine: Sprite = null
 let cofre_plataformas: Sprite = null
@@ -1375,6 +1614,7 @@ let tp_plataformas: Sprite = null
 let pluma: Sprite = null
 let moneda: Sprite = null
 let vidaJefe: StatusBarSprite = null
+let caballeroGrande: Sprite = null
 let CofreAbierto2: Sprite = null
 let portal2: Sprite = null
 let jefe2: Sprite = null
@@ -1386,16 +1626,18 @@ let puerta22: Sprite = null
 let princesa2: Sprite = null
 let disparo = 0
 let fuerza_salto = 0
+let dialogo_mago = 0
 let esta_porta_green = 0
 let esta_plataformes = 0
 let esta_porta_blue = 0
 let esta_porta_red = 0
 let esta_portal = 0
 let esta_enemigos = 0
-let esta_mapa_enemigos = 0
-let mapa_abierto = 0
 let nena: Sprite = null
-createtoolbar()
+let mapa_abierto = 0
+let esta_mapa_enemigos = 0
+let myMinimap: minimap.Minimap = null
+let mapSprite: Sprite = null
 PantallaPrincipal()
 nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
 mapa_abierto = 0
@@ -1406,6 +1648,7 @@ esta_porta_red = 0
 esta_porta_blue = 0
 esta_plataformes = 0
 esta_porta_green = 0
+dialogo_mago = 0
 fuerza_salto = -163
 disparo = 0
 nena.setPosition(145, 88)

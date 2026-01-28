@@ -31,6 +31,8 @@ class SpriteKind:
     jefe = SpriteKind.create()
     JefeDerrotado = SpriteKind.create()
     corona = SpriteKind.create()
+    playerCorona = SpriteKind.create()
+    AtaqueJefe = SpriteKind.create()
 @namespace
 class StatusBarKind:
     salto_pluma = StatusBarKind.create()
@@ -62,6 +64,7 @@ def Piso1():
     tiles.set_current_tilemap(tilemap("""
         piso2
         """))
+    createtoolbar()
     nena = sprites.create(assets.image("""
         nena-front
         """), SpriteKind.player)
@@ -110,10 +113,28 @@ def on_on_overlap3(sprite18, otherSprite7):
     PisoEnemigos()
 sprites.on_overlap(SpriteKind.player, SpriteKind.portal, on_on_overlap3)
 
+def on_up_pressed():
+    global disparo
+    animation.run_image_animation(nena,
+        assets.animation("""
+            nena-animation-up
+            """),
+        500,
+        False)
+    disparo = 1
+controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
+
 def DialogoCaballero():
-    game.show_long_text("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!",
-        DialogLayout.BOTTOM)
-    pause(2000)
+    global caballeroGrande
+    caballeroGrande = sprites.create(assets.image("""
+        miImagen17
+        """), SpriteKind.npc)
+    caballeroGrande.set_position(76, 10)
+    caballeroGrande.set_scale(4, ScaleAnchor.TOP)
+    story.print_character_text("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!",
+        "Caballero")
+    sprites.destroy(caballeroGrande)
+    pause(1000)
 
 def on_on_overlap4(sprite20, otherSprite9):
     sprites.destroy(nena)
@@ -131,7 +152,7 @@ def JefeFinal():
     jefe2 = sprites.create(assets.image("""
         miImagen1
         """), SpriteKind.jefe)
-    vidaJefe = statusbars.create(115, 5, StatusBarKind.enemy_health)
+    vidaJefe = statusbars.create(50, 5, StatusBarKind.enemy_health)
     vidaJefe.set_color(7, 2, 5)
     vidaJefe.attach_to_sprite(jefe2)
     vidaJefe.set_status_bar_flag(StatusBarFlag.SMOOTH_TRANSITION, True)
@@ -946,6 +967,48 @@ def mine_plataformas():
         SpriteKind.puerta_mine)
     tiles.place_on_tile(porta_mine, tiles.get_tile_location(59, 8))
 
+def on_b_pressed():
+    if esta_portal == 1:
+        if findvalue("MECHERO") != -1:
+            for value5 in tiles.get_tiles_by_type(assets.tile("""
+                bloques_portal
+                """)):
+                tiles.set_tile_at(value5, assets.tile("""
+                    myTile1
+                    """))
+                removeitem("MECHERO")
+    if esta_porta_red == 1:
+        if findvalue("REDKEY") != -1:
+            for value6 in tiles.get_tiles_by_type(assets.tile("""
+                puertaCandadoRED
+                """)):
+                tiles.set_tile_at(value6, assets.tile("""
+                    puertaSinCandadoRED
+                    """))
+                tiles.set_wall_at(value6, False)
+                removeitem("REDKEY")
+    if esta_porta_red == 1:
+        if findvalue("BLUEKEY") != -1:
+            for value7 in tiles.get_tiles_by_type(assets.tile("""
+                puertaCandadoBLUE
+                """)):
+                tiles.set_tile_at(value7, assets.tile("""
+                    puertaSinCandadoBLUE
+                    """))
+                tiles.set_wall_at(value7, False)
+                removeitem("BLUEKEY")
+    if esta_porta_green == 1:
+        if findvalue("GREENKEY") != -1:
+            for value72 in tiles.get_tiles_by_type(assets.tile("""
+                puertaCandadoGREEN
+                """)):
+                tiles.set_tile_at(value72, assets.tile("""
+                    puertaSinCandadoGREEN
+                    """))
+                tiles.set_wall_at(value72, False)
+                removeitem("GREENKEY")
+controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
+
 def on_on_overlap5(sprite31, otherSprite15):
     addItem(sprites.read_data_string(otherSprite15, "name"),
         otherSprite15.image)
@@ -962,9 +1025,26 @@ def on_on_overlap7(sprite10, otherSprite4):
     sprites.destroy(statusbar)
 sprites.on_overlap(SpriteKind.player, SpriteKind.feather, on_on_overlap7)
 
+def MovimientoJefeIzquieda():
+    global MovimientoJefe
+    animation.run_image_animation(jefe2,
+        assets.animation("""
+            skellyAttackRight
+            """),
+        200,
+        True)
+    jefe2.set_scale(2, ScaleAnchor.BOTTOM_LEFT)
+    MovimientoJefe = 5
 def DialogoPrincesa():
-    game.show_long_text("Bienvenido a mi castillo, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la han robado y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare todo el oro que quieras, ahora puedes pasar por la puerta y avanzar al siguiente piso.",
-        DialogLayout.BOTTOM)
+    global princesaGrande
+    princesaGrande = sprites.create(assets.image("""
+        miImagen16
+        """), SpriteKind.npc)
+    princesaGrande.set_position(76, 10)
+    princesaGrande.set_scale(4, ScaleAnchor.TOP)
+    story.print_character_text("Bienvenido a mi castillo, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la han robado y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare todo el oro que quieras, ahora puedes pasar por la puerta y avanzar al siguiente piso.",
+        "Princesa")
+    sprites.destroy(princesaGrande)
     pause(2000)
 def CofreTrampa():
     global agujero2
@@ -1003,16 +1083,21 @@ def PantallaPrincipal():
     caballero2.set_position(112, 88)
     puerta.set_position(66, 80)
 
-def on_down_pressed():
-    global disparo
-    animation.run_image_animation(nena,
+def on_a_pressed():
+    if nena.vy == 0 and esta_plataformes == 1:
+        nena.vy = fuerza_salto
+controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
+
+def MovimientoJefeArriba():
+    global MovimientoJefe
+    animation.run_image_animation(jefe2,
         assets.animation("""
-            nena-animation-down
+            skellyAttackFront
             """),
-        500,
-        False)
-    disparo = 2
-controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
+        200,
+        True)
+    jefe2.set_scale(2, ScaleAnchor.TOP)
+    MovimientoJefe = 1
 
 def on_player2_button_a_pressed():
     global projectile
@@ -1087,17 +1172,6 @@ scene.on_overlap_tile(SpriteKind.player,
         """),
     on_overlap_tile5)
 
-def on_right_pressed():
-    global disparo
-    animation.run_image_animation(nena,
-        assets.animation("""
-            nena-animation-right
-            """),
-        500,
-        False)
-    disparo = 4
-controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
-
 def on_left_pressed():
     global disparo
     animation.run_image_animation(nena,
@@ -1118,11 +1192,6 @@ def createtoolbar():
     toolbar.z = 100
     toolbar.set_flag(SpriteFlag.RELATIVE_TO_CAMERA, True)
 
-def on_a_pressed():
-    if nena.vy == 0 and esta_plataformes == 1:
-        nena.vy = fuerza_salto
-controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
-
 def on_overlap_tile6(sprite22, location):
     global esta_portal
     esta_portal = 1
@@ -1132,59 +1201,122 @@ scene.on_overlap_tile(SpriteKind.player,
         """),
     on_overlap_tile6)
 
-def on_b_pressed():
-    if esta_portal == 1:
-        if findvalue("MECHERO") != -1:
-            for value5 in tiles.get_tiles_by_type(assets.tile("""
-                bloques_portal
-                """)):
-                tiles.set_tile_at(value5, assets.tile("""
-                    myTile1
-                    """))
-                removeitem("MECHERO")
-    if esta_porta_red == 1:
-        if findvalue("REDKEY") != -1:
-            for value6 in tiles.get_tiles_by_type(assets.tile("""
-                puertaCandadoRED
-                """)):
-                tiles.set_tile_at(value6, assets.tile("""
-                    puertaSinCandadoRED
-                    """))
-                tiles.set_wall_at(value6, False)
-                removeitem("REDKEY")
-    if esta_porta_red == 1:
-        if findvalue("BLUEKEY") != -1:
-            for value7 in tiles.get_tiles_by_type(assets.tile("""
-                puertaCandadoBLUE
-                """)):
-                tiles.set_tile_at(value7, assets.tile("""
-                    puertaSinCandadoBLUE
-                    """))
-                tiles.set_wall_at(value7, False)
-                removeitem("BLUEKEY")
-    if esta_porta_green == 1:
-        if findvalue("GREENKEY") != -1:
-            for value72 in tiles.get_tiles_by_type(assets.tile("""
-                puertaCandadoGREEN
-                """)):
-                tiles.set_tile_at(value72, assets.tile("""
-                    puertaSinCandadoGREEN
-                    """))
-                tiles.set_wall_at(value72, False)
-                removeitem("GREENKEY")
-controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
-
 def on_on_overlap12(sprite27, otherSprite13):
     CofreBueno()
 sprites.on_overlap(SpriteKind.player, SpriteKind.cofre, on_on_overlap12)
+
+def DevolverLaCorona():
+    global princesaCorona, nena, npc1, npc2, npc3, npc4, npc5, npc6, ojos
+    sprites.destroy(corona2)
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
+    princesaCorona = sprites.create(assets.image("""
+        miImagen15
+        """), SpriteKind.player)
+    princesaCorona.set_position(78, 40)
+    nena = sprites.create(assets.image("""
+        nena-front
+        """), SpriteKind.npc)
+    npc1 = sprites.create(assets.image("""
+        princesa
+        """), SpriteKind.npc)
+    npc2 = sprites.create(assets.image("""
+        miImagen22
+        """), SpriteKind.npc)
+    npc3 = sprites.create(assets.image("""
+        miImagen19
+        """), SpriteKind.npc)
+    npc4 = sprites.create(assets.image("""
+        miImagen20
+        """), SpriteKind.npc)
+    npc5 = sprites.create(assets.image("""
+        miImagen21
+        """), SpriteKind.npc)
+    npc6 = sprites.create(assets.image("""
+        caballero
+        """), SpriteKind.npc)
+    nena.set_position(95, 52)
+    npc1.set_position(125, 80)
+    npc2.set_position(135, 95)
+    npc3.set_position(145, 110)
+    npc4.set_position(35, 80)
+    npc5.set_position(25, 95)
+    npc6.set_position(15, 110)
+    pause(1000)
+    story.sprite_say_text(princesaCorona,
+        "Gracias por devolverme la corona. Siempre estaré en deuda contigo, y en reconocimiento a tu lealtad, te nombro mi caballero personal.")
+    pause(1000)
+    story.print_character_text("¡La corona ha regresado! ¡El reino celebra!", "Pueblo")
+    pause(1000)
+    sprites.destroy_all_sprites_of_kind(SpriteKind.npc)
+    sprites.destroy(nena)
+    sprites.destroy(princesaCorona)
+    tiles.set_current_tilemap(tilemap("""
+        nivel12
+        """))
+    story.print_text("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...",
+        80,
+        60,
+        1,
+        15,
+        story.TextSpeed.SLOW)
+    music.play(music.melody_playable(music.spooky),
+        music.PlaybackMode.LOOPING_IN_BACKGROUND)
+    ojos = sprites.create(img("""
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            """),
+        SpriteKind.player)
+    ojos.set_position(8, 40)
+    ojos.set_scale(2, ScaleAnchor.MIDDLE)
+    animation.run_image_animation(ojos, assets.animation("""
+        myAnim
+        """), 500, True)
+    pause(5000)
+    animation.stop_animation(animation.AnimationTypes.ALL, ojos)
+    music.stop_all_sounds()
+    sprites.destroy(ojos)
+    pause(2000)
+def MovimientoJefeArriba3():
+    global MovimientoJefe
+    animation.run_image_animation(jefe2,
+        assets.animation("""
+            skellyAttackFront
+            """),
+        200,
+        True)
+    jefe2.set_scale(2, ScaleAnchor.TOP_LEFT)
+    MovimientoJefe = 3
 
 def on_on_zero(status):
     AnimacionFinal()
 statusbars.on_zero(StatusBarKind.enemy_health, on_on_zero)
 
 def DialogoMago():
-    game.show_long_text("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...",
-        DialogLayout.BOTTOM)
+    global MagoGrande
+    MagoGrande = sprites.create(assets.image("""
+        mago
+        """), SpriteKind.npc)
+    MagoGrande.set_position(76, 10)
+    MagoGrande.set_scale(4, ScaleAnchor.TOP)
+    story.print_character_text("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...",
+        "Mago")
+    sprites.destroy(MagoGrande)
     pause(2000)
 def PisoEnemigos():
     global nena, esta_mapa_enemigos, esta_enemigos, cofre32, cofre_laberinto, puertaOjo
@@ -1223,14 +1355,14 @@ def animacionJefe():
     jefe2 = sprites.create(assets.image("""
         miImagen1
         """), SpriteKind.jefe)
-    jefe2.set_position(80, 16)
+    jefe2.set_position(80, 10)
     jefe2.change_scale(3, ScaleAnchor.TOP)
-    game.show_long_text("Vaya, vaya... ¿quién se atreve a entrar en mi sala?",
-        DialogLayout.BOTTOM)
-    game.show_long_text("Veo que la princesa ha traído otra mascota para entretenerme.",
-        DialogLayout.BOTTOM)
-    game.show_long_text("Si has venido por la corona... tendrás que arrebatármela tú mismo.",
-        DialogLayout.BOTTOM)
+    story.print_character_text("Vaya, vaya... ¿quién se atreve a entrar en mi sala?",
+        "Calavera")
+    story.print_character_text("Veo que la princesa ha traído otra mascota para entretenerme.",
+        "Calavera")
+    story.print_character_text("Si has venido por la corona... tendrás que arrebatármela tú mismo.",
+        "Calavera")
     tiles.set_current_tilemap(tilemap("""
         PantallaCarga
         """))
@@ -1238,7 +1370,7 @@ def animacionJefe():
     pause(1000)
 def SaludPersonaje():
     global vidaPersonaje
-    vidaPersonaje = statusbars.create(50, 4, StatusBarKind.health)
+    vidaPersonaje = statusbars.create(20, 4, StatusBarKind.health)
     vidaPersonaje.max = 5
     vidaPersonaje.set_color(7, 2, 5)
     vidaPersonaje.attach_to_sprite(nena)
@@ -1280,8 +1412,22 @@ def on_on_zero2(status2):
     PisoEnemigos()
 statusbars.on_zero(StatusBarKind.health, on_on_zero2)
 
+def on_right_pressed():
+    global disparo
+    animation.run_image_animation(nena,
+        assets.animation("""
+            nena-animation-right
+            """),
+        500,
+        False)
+    disparo = 4
+controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
+
 def AnimacionFinal():
-    global JefeDerrotado2, corona2
+    global JefeDerrotado2, corona2, eleccion
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
     sprites.destroy(nena)
     sprites.destroy(jefe2)
     sprites.destroy(vidaPersonaje)
@@ -1290,18 +1436,28 @@ def AnimacionFinal():
             miImagen13
             """),
         SpriteKind.JefeDerrotado)
-    JefeDerrotado2.set_position(80, 16)
+    JefeDerrotado2.set_position(80, 10)
     JefeDerrotado2.change_scale(3, ScaleAnchor.TOP)
-    sprites.destroy(JefeDerrotado2, effects.fire, 500)
-    game.show_long_text("Has luchado bien. Y aun así, esto no era el final. Yo solo fui el aviso. Prepárate... el verdadero enemigo viene ahora.",
-        DialogLayout.BOTTOM)
+    story.print_character_text("Has luchado bien. Y aun así, esto no era el final. Yo solo fui el aviso. Prepárate... el verdadero enemigo viene ahora.",
+        "Calavera")
+    sprites.destroy(JefeDerrotado2, effects.fire, 1000)
+    pause(2000)
     corona2 = sprites.create(assets.image("""
         miImagen14
         """), SpriteKind.corona)
-    corona2.set_position(80, 16)
+    corona2.set_position(83, 12)
     corona2.change_scale(1, ScaleAnchor.TOP)
-    game.show_long_text("La corona es tuya. Sientes su poder recorrer tu cuerpo. Puedes devolverla y restaurar el orden... o tomarla y gobernar por tu cuenta. ¿Qué eliges?",
-        DialogLayout.BOTTOM)
+    music.play(music.melody_playable(music.magic_wand),
+        music.PlaybackMode.UNTIL_DONE)
+    story.print_character_text("La corona es tuya. Sientes su poder recorrer tu cuerpo. Puedes devolverla y restaurar el orden... o tomarla y gobernar por tu cuenta. ¿Qué eliges?")
+    pause(500)
+    while not (eleccion == 1 or eleccion == 2):
+        eleccion = game.ask_for_number("1.Tomar el poder 2.Devolver la corona", 1)
+        if eleccion == 1:
+            TomarElPoder()
+        elif eleccion == 2:
+            DevolverLaCorona()
+    game.game_over(True)
 
 def on_on_overlap13(sprite5, otherSprite22):
     tiles.place_on_tile(nena, tiles.get_tile_location(39, 1))
@@ -1348,24 +1504,6 @@ def CofreBueno():
     game.show_long_text("Ya estas preparado, cruza el portal y derrota el mal!",
         DialogLayout.BOTTOM)
 
-def on_menu_pressed():
-    global myMinimap, mapSprite, mapa_abierto
-    if mapa_abierto == 0:
-        myMinimap = minimap.minimap(MinimapScale.QUARTER, 2, 0)
-        mapSprite = sprites.create(minimap.get_image(minimap.minimap()), SpriteKind.Map)
-        mapSprite.set_position(scene.camera_property(CameraProperty.X),
-            scene.camera_property(CameraProperty.Y))
-        controller.move_sprite(nena, 0, 0)
-        minimap.include_sprite(myMinimap, nena, MinimapSpriteScale.MINIMAP_SCALE)
-        mapa_abierto = 1
-    elif mapa_abierto == 0 and esta_mapa_enemigos == 1:
-        myMinimap = minimap.minimap(MinimapScale.HALF, 2, 0)
-    else:
-        sprites.destroy(mapSprite)
-        controller.move_sprite(nena)
-        mapa_abierto = 0
-controller.menu.on_event(ControllerButtonEvent.PRESSED, on_menu_pressed)
-
 def on_overlap_tile7(sprite9, location6):
     global esta_porta_blue
     esta_porta_blue = 1
@@ -1374,17 +1512,6 @@ scene.on_overlap_tile(SpriteKind.player,
         myTile13
         """),
     on_overlap_tile7)
-
-def on_up_pressed():
-    global disparo
-    animation.run_image_animation(nena,
-        assets.animation("""
-            nena-animation-up
-            """),
-        500,
-        False)
-    disparo = 1
-controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
 def on_overlap_tile8(sprite28, location15):
     scene.camera_follow_sprite(nena)
@@ -1445,6 +1572,17 @@ def efecto_salto():
         pause(100)
     fuerza_salto = -163
 
+def on_down_pressed():
+    global disparo
+    animation.run_image_animation(nena,
+        assets.animation("""
+            nena-animation-down
+            """),
+        500,
+        False)
+    disparo = 2
+controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
+
 def on_on_overlap16(sprite34, otherSprite18):
     CofreTrampa()
 sprites.on_overlap(SpriteKind.player, SpriteKind.cofre2, on_on_overlap16)
@@ -1478,6 +1616,24 @@ def cofre_plataformes_mine():
             """), SpriteKind.bluekey)
         sprites.set_data_string(BlueKey, "name", "BLUEKEY")
         tiles.place_on_tile(BlueKey, tiles.get_tile_location(59, 6))
+
+def on_menu_pressed():
+    global myMinimap, mapSprite, mapa_abierto
+    if mapa_abierto == 0:
+        myMinimap = minimap.minimap(MinimapScale.QUARTER, 2, 0)
+        mapSprite = sprites.create(minimap.get_image(minimap.minimap()), SpriteKind.Map)
+        mapSprite.set_position(scene.camera_property(CameraProperty.X),
+            scene.camera_property(CameraProperty.Y))
+        controller.move_sprite(nena, 0, 0)
+        minimap.include_sprite(myMinimap, nena, MinimapSpriteScale.MINIMAP_SCALE)
+        mapa_abierto = 1
+    elif mapa_abierto == 0 and esta_mapa_enemigos == 1:
+        myMinimap = minimap.minimap(MinimapScale.HALF, 2, 0)
+    else:
+        sprites.destroy(mapSprite)
+        controller.move_sprite(nena)
+        mapa_abierto = 0
+controller.menu.on_event(ControllerButtonEvent.PRESSED, on_menu_pressed)
 
 def on_on_overlap17(sprite36, otherSprite20):
     DialogoCaballero()
@@ -1561,6 +1717,66 @@ def Cofre3_nether():
             SpriteKind.mechero)
         sprites.set_data_string(mechero2, "name", "MECHERO")
         tiles.place_on_tile(mechero2, value11)
+def PeleaJefeFinal():
+    global MovimientoJefe, AtaqueJefe2
+    MovimientoJefe = 0
+    MovimientoJefe = randint(1, 5)
+    while vidaJefe.value > 0:
+        if MovimientoJefe == 1:
+            MovimientoJefeArriba()
+            jefe2.set_position(73, 22)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image("""
+                    miImagen9
+                    """),
+                SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.create_projectile_from_sprite(assets.image("""
+                miImagen9
+                """), jefe2, 0, 50)
+        elif MovimientoJefe == 2:
+            MovimientoJefeArriba2()
+            jefe2.set_position(18, 22)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image("""
+                    miImagen9
+                    """),
+                SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.create_projectile_from_sprite(assets.image("""
+                miImagen9
+                """), jefe2, 0, 50)
+        elif MovimientoJefe == 3:
+            MovimientoJefeArriba3()
+            jefe2.set_position(130, 22)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image("""
+                    miImagen9
+                    """),
+                SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.create_projectile_from_sprite(assets.image("""
+                miImagen9
+                """), jefe2, 0, 50)
+        elif MovimientoJefe == 4:
+            MovimientoJefeDerecha()
+            jefe2.set_position(133, 85)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image("""
+                    miImagen10
+                    """),
+                SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.create_projectile_from_sprite(assets.image("""
+                miImagen10
+                """), jefe2, -100, 0)
+        elif MovimientoJefe == 5:
+            MovimientoJefeIzquieda()
+            jefe2.set_position(15, 85)
+            pause(500)
+            AtaqueJefe2 = sprites.create(assets.image("""
+                    miImagen11
+                    """),
+                SpriteKind.AtaqueJefe)
+            AtaqueJefe2 = sprites.create_projectile_from_sprite(assets.image("""
+                miImagen11
+                """), jefe2, 100, 0)
 def removeitem(name3: str):
     toolbar.get_items().remove_at(findvalue(name3))
     toolbar.update()
@@ -1578,6 +1794,17 @@ def on_on_overlap18(sprite21, otherSprite10):
     DialogoPrincesa()
 sprites.on_overlap(SpriteKind.player, SpriteKind.princesa, on_on_overlap18)
 
+def MovimientoJefeArriba2():
+    global MovimientoJefe
+    animation.run_image_animation(jefe2,
+        assets.animation("""
+            skellyAttackFront
+            """),
+        200,
+        True)
+    jefe2.set_scale(2, ScaleAnchor.TOP_RIGHT)
+    MovimientoJefe = 2
+
 def on_on_overlap19(sprite6, otherSprite3):
     addItem(sprites.read_data_string(otherSprite3, "name"),
         otherSprite3.image)
@@ -1585,7 +1812,7 @@ def on_on_overlap19(sprite6, otherSprite3):
 sprites.on_overlap(SpriteKind.player, SpriteKind.greenkey, on_on_overlap19)
 
 def PisoJefe():
-    global nena
+    global nena, esta_plataformes
     animacionJefe()
     scene.set_background_image(assets.image("""
         castillo_trono
@@ -1596,11 +1823,16 @@ def PisoJefe():
     nena = sprites.create(assets.image("""
         nena-front
         """), SpriteKind.player)
+    esta_plataformes = 1
     nena.set_position(10, 104)
-    controller.move_sprite(nena)
+    nena.ay = 350
+    controller.move_sprite(nena, 100, 0)
     sprites.destroy(toolbar)
+    efecto_salto()
+    sprites.destroy(statusbar)
     JefeFinal()
     SaludPersonaje()
+    PeleaJefeFinal()
 
 def on_overlap_tile16(sprite23, location12):
     global esta_porta_green
@@ -1624,26 +1856,124 @@ def on_on_overlap20(sprite19, otherSprite8):
     tiles.place_on_tile(nena, tiles.get_tile_location(36, 10))
 sprites.on_overlap(SpriteKind.player, SpriteKind.tp2, on_on_overlap20)
 
+def TomarElPoder():
+    global personajeCorona, npc1, npc2, npc3, npc4, npc5, npc6, ojos
+    sprites.destroy(corona2)
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
+    personajeCorona = sprites.create(assets.image("""
+        nena-front1
+        """), SpriteKind.player)
+    personajeCorona.set_position(78, 40)
+    npc1 = sprites.create(assets.image("""
+        princesa
+        """), SpriteKind.npc)
+    npc2 = sprites.create(assets.image("""
+        miImagen22
+        """), SpriteKind.npc)
+    npc3 = sprites.create(assets.image("""
+        miImagen19
+        """), SpriteKind.npc)
+    npc4 = sprites.create(assets.image("""
+        miImagen20
+        """), SpriteKind.npc)
+    npc5 = sprites.create(assets.image("""
+        miImagen21
+        """), SpriteKind.npc)
+    npc6 = sprites.create(assets.image("""
+        caballero
+        """), SpriteKind.npc)
+    npc1.set_position(125, 80)
+    npc2.set_position(135, 95)
+    npc3.set_position(145, 110)
+    npc4.set_position(35, 80)
+    npc5.set_position(25, 95)
+    npc6.set_position(15, 110)
+    pause(1000)
+    story.sprite_say_text(personajeCorona,
+        "Desde hoy, el reino tendrá un solo destino. Y yo seré quien lo decida.")
+    pause(1000)
+    story.print_character_text("El trono decide por nosotros, y nosotros cumplimos sin cuestionar.",
+        "Pueblo")
+    pause(1000)
+    sprites.destroy_all_sprites_of_kind(SpriteKind.npc)
+    sprites.destroy(personajeCorona)
+    tiles.set_current_tilemap(tilemap("""
+        nivel10
+        """))
+    story.print_text("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...",
+        80,
+        60,
+        1,
+        15,
+        story.TextSpeed.SLOW)
+    music.play(music.melody_playable(music.spooky),
+        music.PlaybackMode.LOOPING_IN_BACKGROUND)
+    ojos = sprites.create(img("""
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            """),
+        SpriteKind.player)
+    ojos.set_position(8, 40)
+    ojos.set_scale(2, ScaleAnchor.MIDDLE)
+    animation.run_image_animation(ojos, assets.animation("""
+        myAnim
+        """), 500, True)
+    pause(5000)
+    animation.stop_animation(animation.AnimationTypes.ALL, ojos)
+    music.stop_all_sounds()
+    sprites.destroy(ojos)
+    pause(2000)
+
 def on_on_overlap21(sprite29, otherSprite14):
     DialogoMago()
 sprites.on_overlap(SpriteKind.player, SpriteKind.mago, on_on_overlap21)
 
+personajeCorona: Sprite = None
+AtaqueJefe2: Sprite = None
 mechero2: Sprite = None
-BlueKey: Sprite = None
 mapSprite: Sprite = None
 myMinimap: minimap.Minimap = None
+BlueKey: Sprite = None
 RedKey: Sprite = None
-corona2: Sprite = None
+eleccion = 0
 JefeDerrotado2: Sprite = None
 greenkey2: Sprite = None
 vidaPersonaje: StatusBarSprite = None
 puertaOjo: Sprite = None
 cofre_laberinto: Sprite = None
 cofre32: Sprite = None
+MagoGrande: Sprite = None
+ojos: Sprite = None
+npc6: Sprite = None
+npc5: Sprite = None
+npc4: Sprite = None
+npc3: Sprite = None
+npc2: Sprite = None
+npc1: Sprite = None
+princesaCorona: Sprite = None
+corona2: Sprite = None
 toolbar: Inventory.Toolbar = None
 caballero2: Sprite = None
 puerta: Sprite = None
 agujero2: Sprite = None
+princesaGrande: Sprite = None
+MovimientoJefe = 0
 statusbar: StatusBarSprite = None
 porta_mine: Sprite = None
 cofre_plataformas: Sprite = None
@@ -1652,6 +1982,7 @@ tp_plataformas: Sprite = None
 pluma: Sprite = None
 moneda: Sprite = None
 vidaJefe: StatusBarSprite = None
+caballeroGrande: Sprite = None
 CofreAbierto2: Sprite = None
 portal2: Sprite = None
 jefe2: Sprite = None
@@ -1672,7 +2003,6 @@ esta_enemigos = 0
 esta_mapa_enemigos = 0
 mapa_abierto = 0
 nena: Sprite = None
-createtoolbar()
 PantallaPrincipal()
 nena = sprites.create(assets.image("""
     nena-front
