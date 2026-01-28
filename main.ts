@@ -1,125 +1,160 @@
-namespace SpriteKind {
-    export const objeto = SpriteKind.create()
-    export const npc = SpriteKind.create()
-    export const escalera = SpriteKind.create()
-    export const corazon = SpriteKind.create()
-    export const puerta2 = SpriteKind.create()
-    export const puertaCastillo = SpriteKind.create()
-    export const puerta1 = SpriteKind.create()
-    export const cofre = SpriteKind.create()
-    export const princesa = SpriteKind.create()
-    export const caballero = SpriteKind.create()
-    export const cofre2 = SpriteKind.create()
-    export const mago = SpriteKind.create()
-    export const CofreAbierto = SpriteKind.create()
-    export const agujero = SpriteKind.create()
-    export const portal = SpriteKind.create()
-    export const key = SpriteKind.create()
-    export const cofre3 = SpriteKind.create()
-    export const mechero = SpriteKind.create()
-    export const coin = SpriteKind.create()
-    export const feather = SpriteKind.create()
-    export const tp = SpriteKind.create()
-    export const tp2 = SpriteKind.create()
-    export const cofre_mine = SpriteKind.create()
-    export const bluekey = SpriteKind.create()
-    export const puerta_mine = SpriteKind.create()
-    export const cofre_laberito = SpriteKind.create()
-    export const greenkey = SpriteKind.create()
-    export const Map = SpriteKind.create()
-    export const jefe = SpriteKind.create()
-    export const JefeDerrotado = SpriteKind.create()
-    export const corona = SpriteKind.create()
-    export const playerCorona = SpriteKind.create()
-    export const AtaqueJefe = SpriteKind.create()
-    export const portal_espacio = SpriteKind.create()
-    export const GapKind = SpriteKind.create()
-    export const astronauta = SpriteKind.create()
-    export const nave = SpriteKind.create()
-}
-namespace StatusBarKind {
-    export const salto_pluma = StatusBarKind.create()
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite16, location10) {
-    info.setScore(0)
-    tiles.placeOnTile(nena, tiles.getTileLocation(0, 11))
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile15`, function (sprite8, location5) {
+@namespace
+class SpriteKind:
+    objeto = SpriteKind.create()
+    npc = SpriteKind.create()
+    escalera = SpriteKind.create()
+    corazon = SpriteKind.create()
+    puerta2 = SpriteKind.create()
+    puertaCastillo = SpriteKind.create()
+    puerta1 = SpriteKind.create()
+    cofre = SpriteKind.create()
+    princesa = SpriteKind.create()
+    caballero = SpriteKind.create()
+    cofre2 = SpriteKind.create()
+    mago = SpriteKind.create()
+    CofreAbierto = SpriteKind.create()
+    agujero = SpriteKind.create()
+    portal = SpriteKind.create()
+    key = SpriteKind.create()
+    cofre3 = SpriteKind.create()
+    mechero = SpriteKind.create()
+    coin = SpriteKind.create()
+    feather = SpriteKind.create()
+    tp = SpriteKind.create()
+    tp2 = SpriteKind.create()
+    cofre_mine = SpriteKind.create()
+    bluekey = SpriteKind.create()
+    puerta_mine = SpriteKind.create()
+    cofre_laberito = SpriteKind.create()
+    greenkey = SpriteKind.create()
+    Map = SpriteKind.create()
+    jefe = SpriteKind.create()
+    JefeDerrotado = SpriteKind.create()
+    corona = SpriteKind.create()
+    playerCorona = SpriteKind.create()
+    AtaqueJefe = SpriteKind.create()
+    portal_espacio = SpriteKind.create()
+    GapKind = SpriteKind.create()
+    astronauta = SpriteKind.create()
+    nave = SpriteKind.create()
+    pinkkey = SpriteKind.create()
+@namespace
+class StatusBarKind:
+    salto_pluma = StatusBarKind.create()
+
+def on_overlap_tile(sprite16, location10):
+    info.set_score(0)
+    tiles.place_on_tile(nena, tiles.get_tile_location(0, 11))
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile3
+        """),
+    on_overlap_tile)
+
+def on_overlap_tile2(sprite8, location5):
+    global esta_porta_blue
     esta_porta_blue = 1
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre_mine, function (sprite, otherSprite) {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile15
+        """),
+    on_overlap_tile2)
+
+def on_on_overlap(sprite, otherSprite):
     cofre_plataformes_mine()
-})
-function Piso1 () {
-    tiles.setCurrentTilemap(tilemap`piso2`)
+sprites.on_overlap(SpriteKind.player, SpriteKind.cofre_mine, on_on_overlap)
+
+def Piso1():
+    global nena, cofre4, cofre22, mago2
+    tiles.set_current_tilemap(tilemap("""
+        piso2
+        """))
     createtoolbar()
-    nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
-    nena.setPosition(142, 10)
-    controller.moveSprite(nena)
+    nena = sprites.create(assets.image("""
+        nena-front
+        """), SpriteKind.player)
+    nena.set_position(142, 10)
+    controller.move_sprite(nena)
     sprites.destroy(princesa2)
     sprites.destroy(puerta22)
-    cofre4 = sprites.create(assets.image`cofre`, SpriteKind.cofre)
-    cofre4.setPosition(23, 55)
-    cofre22 = sprites.create(assets.image`cofre`, SpriteKind.cofre2)
-    cofre22.setPosition(136, 55)
-    mago2 = sprites.create(assets.image`mago`, SpriteKind.mago)
-    mago2.setPosition(81, 42)
-}
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.jefe, function (sprite, otherSprite) {
+    cofre4 = sprites.create(assets.image("""
+        cofre
+        """), SpriteKind.cofre)
+    cofre4.set_position(23, 55)
+    cofre22 = sprites.create(assets.image("""
+        cofre
+        """), SpriteKind.cofre2)
+    cofre22.set_position(136, 55)
+    mago2 = sprites.create(assets.image("""
+        mago
+        """), SpriteKind.mago)
+    mago2.set_position(81, 42)
+
+def on_on_overlap2(sprite2, otherSprite2):
     sprites.destroy(projectile)
-    statusbars.getStatusBarAttachedTo(StatusBarKind.EnemyHealth, jefe2).value += -20
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`blau_esq`, function (sprite11, location7) {
-    scene.cameraFollowSprite(nena)
-    Zoom.SetZoomFilter(1, Mode.Center)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function (sprite18, otherSprite7) {
+    statusbars.get_status_bar_attached_to(StatusBarKind.enemy_health, jefe2).value += -10
+sprites.on_overlap(SpriteKind.projectile, SpriteKind.jefe, on_on_overlap2)
+
+def on_overlap_tile3(sprite11, location7):
+    scene.camera_follow_sprite(nena)
+    Zoom.set_zoom_filter(1, Mode.CENTER)
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        blau_esq
+        """),
+    on_overlap_tile3)
+
+def on_on_overlap3(sprite18, otherSprite7):
     sprites.destroy(nena)
     sprites.destroy(cofre4)
     sprites.destroy(cofre22)
     sprites.destroy(mago2)
     sprites.destroy(portal2)
     sprites.destroy(CofreAbierto2)
-    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
+    tiles.set_current_tilemap(tilemap("""
+        PantallaCarga
+        """))
     pause(1000)
     PisoEnemigos()
-})
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-up`,
-    500,
-    false
-    )
-    disparo = 1
-})
-function DialogoCaballero () {
-    caballeroGrande = sprites.create(assets.image`miImagen17`, SpriteKind.npc)
-    caballeroGrande.setPosition(76, 10)
-    caballeroGrande.setScale(4, ScaleAnchor.Top)
-    story.printCharacterText("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!", "Caballero")
+sprites.on_overlap(SpriteKind.player, SpriteKind.portal, on_on_overlap3)
+
+def DialogoCaballero():
+    global caballeroGrande
+    caballeroGrande = sprites.create(assets.image("""
+        miImagen17
+        """), SpriteKind.npc)
+    caballeroGrande.set_position(76, 10)
+    caballeroGrande.set_scale(4, ScaleAnchor.TOP)
+    story.print_character_text("Socorro!!! Auxilio!!! Gracias a dios que has llegado, la princesa esta en apuros, entra al castillo y habla con ella para tener mas detalles!",
+        "Caballero")
     sprites.destroy(caballeroGrande)
     pause(1000)
-}
-sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function (sprite20, otherSprite9) {
+
+def on_on_overlap4(sprite20, otherSprite9):
     sprites.destroy(nena)
     sprites.destroy(princesa2)
     sprites.destroy(puerta22)
-    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
+    tiles.set_current_tilemap(tilemap("""
+        PantallaCarga
+        """))
     pause(1000)
     Piso1()
-})
-function JefeFinal () {
-    jefe2 = sprites.create(assets.image`miImagen1`, SpriteKind.jefe)
-    vidaJefe = statusbars.create(50, 5, StatusBarKind.EnemyHealth)
-    vidaJefe.setColor(7, 2, 5)
-    vidaJefe.attachToSprite(jefe2)
-    vidaJefe.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
-    vidaJefe.max = 200
-}
-function mine_plataformas () {
+sprites.on_overlap(SpriteKind.player, SpriteKind.puerta1, on_on_overlap4)
+
+def JefeFinal():
+    global jefe2, vidaJefe
+    jefe2 = sprites.create(assets.image("""
+        miImagen1
+        """), SpriteKind.jefe)
+    vidaJefe = statusbars.create(50, 5, StatusBarKind.enemy_health)
+    vidaJefe.set_color(7, 2, 5)
+    vidaJefe.attach_to_sprite(jefe2)
+    vidaJefe.set_status_bar_flag(StatusBarFlag.SMOOTH_TRANSITION, True)
+    vidaJefe.max = 100
+def mine_plataformas():
+    global esta_plataformes, nena, moneda, pluma, cofre_plataformas, porta_mine
     esta_plataformes = 1
-    scene.setBackgroundImage(img`
+    scene.set_background_image(img("""
         99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -632,336 +667,323 @@ function mine_plataformas () {
         99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
-        `)
-    nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
-    controller.moveSprite(nena, 100, 0)
+        """))
+    nena = sprites.create(assets.image("""
+        nena-front
+        """), SpriteKind.player)
+    controller.move_sprite(nena, 100, 0)
     nena.ay = 350
-    tiles.setCurrentTilemap(tilemap`level4`)
-    scene.cameraFollowSprite(nena)
-    tiles.placeOnTile(nena, tiles.getTileLocation(0, 11))
-    for (let value of tiles.getTilesByType(assets.tile`myTile4`)) {
-        moneda = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.coin)
-        animation.runImageAnimation(
-        moneda,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . f f f f f f f . . . . . 
-            . . . f 5 5 5 5 5 5 5 f . . . . 
-            . . f 5 5 4 4 4 4 4 5 5 f . . . 
-            . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . . f 5 5 4 4 4 5 5 5 5 f . . . 
-            . . . f 5 5 5 5 5 5 5 f . . . . 
-            . . . . f f f f f f f . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . f f f f f . . . . . . 
-            . . . . f 5 5 5 5 5 f . . . . . 
-            . . . f 5 5 4 4 4 5 5 f . . . . 
-            . . f 5 5 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . . f 5 5 4 5 5 5 5 f . . . . 
-            . . . . f 5 5 5 5 5 f . . . . . 
-            . . . . . f f f f f . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . f f f . . . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . f 5 5 4 5 5 f . . . . . 
-            . . . f 5 5 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . . f 5 5 5 5 5 f . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . . . f f f . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . f 5 5 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . f 5 4 5 f . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . f 5 5 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . f 5 4 5 5 5 f . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . . . f 5 f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . f f f . . . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . f 5 5 4 5 5 f . . . . . 
-            . . . f 5 5 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . f 5 4 5 5 5 5 5 f . . . . 
-            . . . . f 5 5 5 5 5 f . . . . . 
-            . . . . . f 5 5 5 f . . . . . . 
-            . . . . . . f f f . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . f f f f f . . . . . . 
-            . . . . f 5 5 5 5 5 f . . . . . 
-            . . . f 5 5 4 4 4 5 5 f . . . . 
-            . . f 5 5 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . f 5 4 5 5 5 5 5 5 5 f . . . 
-            . . . f 5 5 4 5 5 5 5 f . . . . 
-            . . . . f 5 5 5 5 5 f . . . . . 
-            . . . . . f f f f f . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . f f f f f f f . . . . . 
-            . . . f 5 5 5 5 5 5 5 f . . . . 
-            . . f 5 5 4 4 4 4 4 5 5 f . . . 
-            . f 5 5 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . f 5 4 5 5 5 5 5 5 5 5 5 f . . 
-            . . f 5 5 4 4 4 5 5 5 5 f . . . 
-            . . . f 5 5 5 5 5 5 5 f . . . . 
-            . . . . f f f f f f f . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `],
-        200,
-        true
-        )
-        tiles.placeOnTile(moneda, value)
-        tiles.setTileAt(value, assets.tile`transparency16`)
-    }
-    for (let value2 of tiles.getTilesByType(assets.tile`myTile5`)) {
-        pluma = sprites.create(assets.image`myImage0`, SpriteKind.feather)
-        tiles.placeOnTile(pluma, value2)
-        tiles.setTileAt(value2, assets.tile`transparency16`)
-    }
-    for (let value3 of tiles.getTilesByType(assets.tile`myTile6`)) {
-        tp_plataformas = sprites.create(assets.image`tpplat_vertical`, SpriteKind.tp)
-        tiles.placeOnTile(tp_plataformas, value3)
-        tiles.setTileAt(value3, assets.tile`transparency16`)
-    }
-    for (let value4 of tiles.getTilesByType(assets.tile`myTile7`)) {
-        tp_plataformas2 = sprites.create(assets.image`tpplat_horizontal`, SpriteKind.tp2)
-        tiles.placeOnTile(tp_plataformas2, value4)
-        tiles.setTileAt(value4, assets.tile`transparency16`)
-    }
-    cofre_plataformas = sprites.create(assets.image`cofre`, SpriteKind.cofre_mine)
-    tiles.placeOnTile(cofre_plataformas, tiles.getTileLocation(59, 6))
-    porta_mine = sprites.create(img`
-        c d c d c d c d c 
-        c c c c c c c c c 
-        c a b b c a b b c 
-        c a . b c a . b c 
-        c a a a c a a a c 
-        c a b b c a b b c 
-        c a . b c a . b c 
-        c a a a c a a a c 
-        c c c c c c c c c 
-        c c c c c c c c c 
-        c a a a a a a a c 
-        c a b b b b b b c 
-        c a b c c c c c c 
-        c a b c c c c c c 
-        c a c c c c c c c 
-        c c c c c c c c c 
-        `, SpriteKind.puerta_mine)
-    tiles.placeOnTile(porta_mine, tiles.getTileLocation(59, 8))
-}
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (esta_portal == 1) {
-        if (findvalue("MECHERO") != -1) {
-            for (let value5 of tiles.getTilesByType(assets.tile`bloques_portal`)) {
-                tiles.setTileAt(value5, assets.tile`myTile1`)
-                removeitem("MECHERO")
-            }
-        }
-    }
-    if (esta_porta_red == 1) {
-        if (findvalue("REDKEY") != -1) {
-            for (let value6 of tiles.getTilesByType(assets.tile`puertaCandadoRED`)) {
-                tiles.setTileAt(value6, assets.tile`puertaSinCandadoRED`)
-                tiles.setWallAt(value6, false)
-                removeitem("REDKEY")
-            }
-        }
-    }
-    if (esta_porta_red == 1) {
-        if (findvalue("BLUEKEY") != -1) {
-            for (let value7 of tiles.getTilesByType(assets.tile`puertaCandadoBLUE`)) {
-                tiles.setTileAt(value7, assets.tile`puertaSinCandadoBLUE`)
-                tiles.setWallAt(value7, false)
-                removeitem("BLUEKEY")
-            }
-        }
-    }
-    if (esta_porta_green == 1) {
-        if (findvalue("GREENKEY") != -1) {
-            for (let value72 of tiles.getTilesByType(assets.tile`puertaCandadoGREEN`)) {
-                tiles.setTileAt(value72, assets.tile`puertaSinCandadoGREEN`)
-                tiles.setWallAt(value72, false)
-                removeitem("GREENKEY")
-            }
-        }
-    }
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite31, otherSprite15) {
-    addItem(sprites.readDataString(otherSprite15, "name"), otherSprite15.image)
+    tiles.set_current_tilemap(tilemap("""
+        level4
+        """))
+    scene.camera_follow_sprite(nena)
+    tiles.place_on_tile(nena, tiles.get_tile_location(0, 11))
+    for value in tiles.get_tiles_by_type(assets.tile("""
+        myTile4
+        """)):
+        moneda = sprites.create(img("""
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                """),
+            SpriteKind.coin)
+        animation.run_image_animation(moneda,
+            [img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . f f f f f f f . . . . .
+                    . . . f 5 5 5 5 5 5 5 f . . . .
+                    . . f 5 5 4 4 4 4 4 5 5 f . . .
+                    . f 5 5 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . . f 5 5 4 4 4 5 5 5 5 f . . .
+                    . . . f 5 5 5 5 5 5 5 f . . . .
+                    . . . . f f f f f f f . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . f f f f f . . . . . .
+                    . . . . f 5 5 5 5 5 f . . . . .
+                    . . . f 5 5 4 4 4 5 5 f . . . .
+                    . . f 5 5 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . . f 5 5 4 5 5 5 5 f . . . .
+                    . . . . f 5 5 5 5 5 f . . . . .
+                    . . . . . f f f f f . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . f f f . . . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . f 5 5 4 5 5 f . . . . .
+                    . . . f 5 5 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . . f 5 5 5 5 5 f . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . . . f f f . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . f 5 5 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . f 5 4 5 f . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . f 5 5 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . f 5 4 5 5 5 f . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . . . f 5 f . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . f f f . . . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . f 5 5 4 5 5 f . . . . .
+                    . . . f 5 5 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . f 5 4 5 5 5 5 5 f . . . .
+                    . . . . f 5 5 5 5 5 f . . . . .
+                    . . . . . f 5 5 5 f . . . . . .
+                    . . . . . . f f f . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . . f f f f f . . . . . .
+                    . . . . f 5 5 5 5 5 f . . . . .
+                    . . . f 5 5 4 4 4 5 5 f . . . .
+                    . . f 5 5 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . f 5 4 5 5 5 5 5 5 5 f . . .
+                    . . . f 5 5 4 5 5 5 5 f . . . .
+                    . . . . f 5 5 5 5 5 f . . . . .
+                    . . . . . f f f f f . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """),
+                img("""
+                    . . . . . . . . . . . . . . . .
+                    . . . . f f f f f f f . . . . .
+                    . . . f 5 5 5 5 5 5 5 f . . . .
+                    . . f 5 5 4 4 4 4 4 5 5 f . . .
+                    . f 5 5 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . f 5 4 5 5 5 5 5 5 5 5 5 f . .
+                    . . f 5 5 4 4 4 5 5 5 5 f . . .
+                    . . . f 5 5 5 5 5 5 5 f . . . .
+                    . . . . f f f f f f f . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    """)],
+            200,
+            True)
+        tiles.place_on_tile(moneda, value)
+        tiles.set_tile_at(value, assets.tile("""
+            transparency16
+            """))
+    for value2 in tiles.get_tiles_by_type(assets.tile("""
+        myTile5
+        """)):
+        pluma = sprites.create(assets.image("""
+            myImage0
+            """), SpriteKind.feather)
+        tiles.place_on_tile(pluma, value2)
+        tiles.set_tile_at(value2, assets.tile("""
+            transparency16
+            """))
+    cofre_plataformas = sprites.create(assets.image("""
+        cofre
+        """), SpriteKind.cofre_mine)
+    tiles.place_on_tile(cofre_plataformas, tiles.get_tile_location(59, 6))
+    porta_mine = sprites.create(img("""
+            c d c d c d c d c
+            c c c c c c c c c
+            c a b b c a b b c
+            c a . b c a . b c
+            c a a a c a a a c
+            c a b b c a b b c
+            c a . b c a . b c
+            c a a a c a a a c
+            c c c c c c c c c
+            c c c c c c c c c
+            c a a a a a a a c
+            c a b b b b b b c
+            c a b c c c c c c
+            c a b c c c c c c
+            c a c c c c c c c
+            c c c c c c c c c
+            """),
+        SpriteKind.puerta_mine)
+    tiles.place_on_tile(porta_mine, tiles.get_tile_location(59, 8))
+
+def on_on_overlap5(sprite31, otherSprite15):
+    addItem(sprites.read_data_string(otherSprite15, "name"),
+        otherSprite15.image)
     sprites.destroy(otherSprite15)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre3, function (sprite15, otherSprite6) {
+sprites.on_overlap(SpriteKind.player, SpriteKind.key, on_on_overlap5)
+
+def on_on_overlap6(sprite15, otherSprite6):
     Cofre3_nether()
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.feather, function (sprite10, otherSprite4) {
+sprites.on_overlap(SpriteKind.player, SpriteKind.cofre3, on_on_overlap6)
+
+def on_on_overlap7(sprite10, otherSprite4):
     sprites.destroy(otherSprite4)
     efecto_salto()
     sprites.destroy(statusbar)
-})
-function MovimientoJefeIzquieda () {
-    animation.runImageAnimation(
-    jefe2,
-    assets.animation`skellyAttackRight`,
-    200,
-    true
-    )
-    jefe2.setScale(2, ScaleAnchor.BottomLeft)
-    MovimientoJefe = 5
-}
-function DialogoPrincesa () {
-    princesaGrande = sprites.create(assets.image`miImagen16`, SpriteKind.npc)
-    princesaGrande.setPosition(76, 10)
-    princesaGrande.setScale(4, ScaleAnchor.Top)
-    story.printCharacterText("Bienvenido a mi castillo, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la han robado y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare todo el oro que quieras, ahora puedes pasar por la puerta y avanzar al siguiente piso.", "Princesa")
+sprites.on_overlap(SpriteKind.player, SpriteKind.feather, on_on_overlap7)
+
+def MovimientoJefeIzquieda():
+    global MovimientoJefe
+    animation.run_image_animation(jefe2,
+        assets.animation("""
+            skellyAttackRight
+            """),
+        200,
+        True)
+    jefe2.set_scale(2, ScaleAnchor.BOTTOM_LEFT)
+    MovimientoJefe = 2
+def DialogoPrincesa():
+    global princesaGrande
+    princesaGrande = sprites.create(assets.image("""
+        miImagen16
+        """), SpriteKind.npc)
+    princesaGrande.set_position(76, 10)
+    princesaGrande.set_scale(4, ScaleAnchor.TOP)
+    story.print_character_text("Bienvenido a mi castillo, necesito tu ayuda urgentemente!! Necesito que encuentres mi corona, me la han robado y sin ella nadie se cree que soy la princesa. Si consigues devolvermela te dare todo el oro que quieras, ahora puedes pasar por la puerta y avanzar al siguiente piso.",
+        "Princesa")
     sprites.destroy(princesaGrande)
     pause(2000)
-}
-function CofreTrampa () {
+def CofreTrampa():
+    global agujero2
     sprites.destroy(cofre22)
-    agujero2 = sprites.create(assets.image`agujero`, SpriteKind.agujero)
-    agujero2.setPosition(136, 55)
+    agujero2 = sprites.create(assets.image("""
+        agujero
+        """), SpriteKind.agujero)
+    agujero2.set_position(136, 55)
     pause(200)
     sprites.destroy(CofreAbierto2)
     sprites.destroy(mago2)
@@ -969,766 +991,1092 @@ function CofreTrampa () {
     sprites.destroy(agujero2)
     sprites.destroy(nena)
     sprites.destroy(portal2)
-    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
+    tiles.set_current_tilemap(tilemap("""
+        PantallaCarga
+        """))
     pause(1000)
     Pantalla2()
-    game.showLongText("Parece que has escogido el cofre equivocado y te has caido por el agujero al piso anterior, sube e intentalo de nuevo!", DialogLayout.Bottom)
-}
-function PantallaPrincipal () {
-    tiles.setCurrentTilemap(tilemap`castillo1`)
-    puerta = sprites.create(assets.image`puerta`, SpriteKind.puertaCastillo)
-    caballero2 = sprites.create(assets.image`caballero`, SpriteKind.caballero)
-    caballero2.setPosition(112, 88)
-    puerta.setPosition(66, 80)
-}
-sprites.onOverlap(SpriteKind.Player, SpriteKind.portal_espacio, function (sprite, otherSprite) {
+    game.show_long_text("Parece que has escogido el cofre equivocado y te has caido por el agujero al piso anterior, sube e intentalo de nuevo!",
+        DialogLayout.BOTTOM)
+def PantallaPrincipal():
+    global puerta, caballero2
+    tiles.set_current_tilemap(tilemap("""
+        castillo1
+        """))
+    puerta = sprites.create(assets.image("""
+            puerta
+            """),
+        SpriteKind.puertaCastillo)
+    caballero2 = sprites.create(assets.image("""
+            caballero
+            """),
+        SpriteKind.caballero)
+    caballero2.set_position(112, 88)
+    puerta.set_position(66, 80)
+
+def on_on_overlap8(sprite3, otherSprite3):
     sala3()
-})
-function MovimientoJefeArriba () {
-    animation.runImageAnimation(
-    jefe2,
-    assets.animation`skellyAttackFront`,
-    200,
-    true
-    )
-    jefe2.setScale(2, ScaleAnchor.Top)
+sprites.on_overlap(SpriteKind.player, SpriteKind.portal_espacio, on_on_overlap8)
+
+def on_down_pressed():
+    global disparo
+    animation.run_image_animation(nena,
+        assets.animation("""
+            nena-animation-down
+            """),
+        500,
+        False)
+    disparo = 2
+controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
+
+def MovimientoJefeArriba():
+    global MovimientoJefe
+    animation.run_image_animation(jefe2,
+        assets.animation("""
+            skellyAttackFront
+            """),
+        200,
+        True)
+    jefe2.set_scale(2, ScaleAnchor.TOP)
     MovimientoJefe = 1
-}
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (nena.vy == 0 && esta_plataformes == 1) {
-        nena.vy = fuerza_salto
-    }
-    if (esta_sala3 == 1) {
-        nave.vy = -150
-        nave.startEffect(effects.fire)
-    }
-})
-controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
-    if (disparo == 1) {
-        projectile = sprites.createProjectileFromSprite(assets.image`bala_arriba`, nena, 0, -50)
-        music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
-    } else if (disparo == 2) {
-        projectile = sprites.createProjectileFromSprite(assets.image`bala_abajo`, nena, 0, 50)
-        music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
-    } else if (disparo == 3) {
-        projectile = sprites.createProjectileFromSprite(assets.image`bala_izquierda`, nena, -100, 0)
-        music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
-    } else if (disparo == 4) {
-        projectile = sprites.createProjectileFromSprite(assets.image`bala_derecha`, nena, 100, 0)
-        music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite3, location2) {
+
+def on_player2_button_a_pressed():
+    global projectile
+    if disparo == 1:
+        projectile = sprites.create_projectile_from_sprite(assets.image("""
+            bala_arriba
+            """), nena, 0, -50)
+        projectile.y += -15
+        music.play(music.melody_playable(music.pew_pew),
+            music.PlaybackMode.UNTIL_DONE)
+    elif disparo == 2:
+        projectile = sprites.create_projectile_from_sprite(assets.image("""
+            bala_abajo
+            """), nena, 0, 50)
+        projectile.y += -15
+        music.play(music.melody_playable(music.pew_pew),
+            music.PlaybackMode.UNTIL_DONE)
+    elif disparo == 3:
+        projectile = sprites.create_projectile_from_sprite(assets.image("""
+            bala_izquierda
+            """), nena, -100, 0)
+        projectile.x += -15
+        music.play(music.melody_playable(music.pew_pew),
+            music.PlaybackMode.UNTIL_DONE)
+    elif disparo == 4:
+        projectile = sprites.create_projectile_from_sprite(assets.image("""
+            bala_derecha
+            """), nena, 100, 0)
+        projectile.x += 15
+        music.play(music.melody_playable(music.pew_pew),
+            music.PlaybackMode.UNTIL_DONE)
+controller.player2.on_button_event(ControllerButton.A,
+    ControllerButtonEvent.PRESSED,
+    on_player2_button_a_pressed)
+
+def on_overlap_tile4(sprite32, location2):
     mine_plataformas()
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.puertaCastillo, function (sprite33, otherSprite17) {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile1
+        """),
+    on_overlap_tile4)
+
+def on_on_overlap9(sprite33, otherSprite17):
     sprites.destroy(puerta)
     sprites.destroy(caballero2)
     sprites.destroy(nena)
-    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
+    tiles.set_current_tilemap(tilemap("""
+        PantallaCarga
+        """))
     pause(1000)
     Pantalla2()
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre_laberito, function (sprite35, otherSprite19) {
+sprites.on_overlap(SpriteKind.player, SpriteKind.puertaCastillo, on_on_overlap9)
+
+def on_on_overlap10(sprite35, otherSprite19):
     cofre_obert_laberint()
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.coin, function (sprite26, otherSprite12) {
-    info.changeScoreBy(1)
+sprites.on_overlap(SpriteKind.player,
+    SpriteKind.cofre_laberito,
+    on_on_overlap10)
+
+def on_hit_wall(sprite4, location):
+    global esta_sala3
+    if esta_sala3 == 1:
+        scene.camera_shake(4, 500)
+        sprites.destroy(nave2, effects.disintegrate, 1000)
+        pause(1400)
+        esta_sala3 = 0
+        sala3()
+scene.on_hit_wall(SpriteKind.nave, on_hit_wall)
+
+def on_on_overlap11(sprite26, otherSprite12):
+    info.change_score_by(1)
     sprites.destroy(otherSprite12)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.mechero, function (sprite32, otherSprite16) {
-    addItem(sprites.readDataString(otherSprite16, "name"), otherSprite16.image)
+sprites.on_overlap(SpriteKind.player, SpriteKind.coin, on_on_overlap11)
+
+def on_on_overlap12(sprite322, otherSprite16):
+    addItem(sprites.read_data_string(otherSprite16, "name"),
+        otherSprite16.image)
     sprites.destroy(otherSprite16)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite4, location3) {
+sprites.on_overlap(SpriteKind.player, SpriteKind.mechero, on_on_overlap12)
+
+def on_overlap_tile5(sprite42, location3):
+    global esta_porta_green
     esta_porta_green = 1
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-left`,
-    500,
-    false
-    )
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile19
+        """),
+    on_overlap_tile5)
+
+def on_right_pressed():
+    global disparo
+    animation.run_image_animation(nena,
+        assets.animation("""
+            nena-animation-right
+            """),
+        500,
+        False)
+    disparo = 4
+controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
+
+def on_left_pressed():
+    global disparo
+    animation.run_image_animation(nena,
+        assets.animation("""
+            nena-animation-left
+            """),
+        500,
+        False)
     disparo = 3
-})
-function createtoolbar () {
+controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
+
+def createtoolbar():
+    global toolbar
     toolbar = Inventory.create_toolbar([], 4)
-    toolbar.set_number(ToolbarNumberAttribute.SelectedIndex, 0)
+    toolbar.set_number(ToolbarNumberAttribute.SELECTED_INDEX, 0)
     toolbar.left = 4
     toolbar.bottom = 116
     toolbar.z = 100
-    toolbar.setFlag(SpriteFlag.RelativeToCamera, true)
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite2, location) {
+    toolbar.set_flag(SpriteFlag.RELATIVE_TO_CAMERA, True)
+
+def on_a_pressed():
+    if nena.vy == 0 and esta_plataformes == 1:
+        nena.vy = fuerza_salto
+    if esta_sala3 == 1:
+        nave2.vy = -150
+        nave2.start_effect(effects.fire)
+controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
+
+def on_overlap_tile6(sprite22, location4):
+    global esta_portal
     esta_portal = 1
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre, function (sprite27, otherSprite13) {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile0
+        """),
+    on_overlap_tile6)
+
+def on_b_pressed():
+    if esta_portal == 1:
+        if findvalue("MECHERO") != -1:
+            for value5 in tiles.get_tiles_by_type(assets.tile("""
+                bloques_portal
+                """)):
+                tiles.set_tile_at(value5, assets.tile("""
+                    myTile1
+                    """))
+                removeitem("MECHERO")
+    if esta_porta_red == 1:
+        if findvalue("REDKEY") != -1:
+            for value6 in tiles.get_tiles_by_type(assets.tile("""
+                puertaCandadoRED
+                """)):
+                tiles.set_tile_at(value6, assets.tile("""
+                    puertaSinCandadoRED
+                    """))
+                tiles.set_wall_at(value6, False)
+                removeitem("REDKEY")
+    if esta_porta_red == 1:
+        if findvalue("BLUEKEY") != -1:
+            for value7 in tiles.get_tiles_by_type(assets.tile("""
+                puertaCandadoBLUE
+                """)):
+                tiles.set_tile_at(value7, assets.tile("""
+                    puertaSinCandadoBLUE
+                    """))
+                tiles.set_wall_at(value7, False)
+                removeitem("BLUEKEY")
+    if esta_porta_green == 1:
+        if findvalue("GREENKEY") != -1:
+            for value72 in tiles.get_tiles_by_type(assets.tile("""
+                puertaCandadoGREEN
+                """)):
+                tiles.set_tile_at(value72, assets.tile("""
+                    puertaSinCandadoGREEN
+                    """))
+                tiles.set_wall_at(value72, False)
+                removeitem("GREENKEY")
+controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
+
+def on_on_overlap13(sprite27, otherSprite13):
     CofreBueno()
-})
-function DevolverLaCorona () {
+sprites.on_overlap(SpriteKind.player, SpriteKind.cofre, on_on_overlap13)
+
+def DevolverLaCorona():
+    global princesaCorona, nena, npc1, npc2, npc3, npc4, npc5, npc6, ojos
     sprites.destroy(corona2)
-    scene.setBackgroundImage(assets.image`castillo_trono`)
-    princesaCorona = sprites.create(assets.image`miImagen15`, SpriteKind.Player)
-    princesaCorona.setPosition(78, 40)
-    nena = sprites.create(assets.image`nena-front`, SpriteKind.npc)
-    npc1 = sprites.create(assets.image`princesa`, SpriteKind.npc)
-    npc2 = sprites.create(assets.image`miImagen22`, SpriteKind.npc)
-    npc3 = sprites.create(assets.image`miImagen19`, SpriteKind.npc)
-    npc4 = sprites.create(assets.image`miImagen20`, SpriteKind.npc)
-    npc5 = sprites.create(assets.image`miImagen21`, SpriteKind.npc)
-    npc6 = sprites.create(assets.image`caballero`, SpriteKind.npc)
-    nena.setPosition(95, 52)
-    npc1.setPosition(125, 80)
-    npc2.setPosition(135, 95)
-    npc3.setPosition(145, 110)
-    npc4.setPosition(35, 80)
-    npc5.setPosition(25, 95)
-    npc6.setPosition(15, 110)
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
+    princesaCorona = sprites.create(assets.image("""
+        miImagen15
+        """), SpriteKind.player)
+    princesaCorona.set_position(78, 40)
+    nena = sprites.create(assets.image("""
+        nena-front
+        """), SpriteKind.npc)
+    npc1 = sprites.create(assets.image("""
+        princesa
+        """), SpriteKind.npc)
+    npc2 = sprites.create(assets.image("""
+        miImagen22
+        """), SpriteKind.npc)
+    npc3 = sprites.create(assets.image("""
+        miImagen19
+        """), SpriteKind.npc)
+    npc4 = sprites.create(assets.image("""
+        miImagen20
+        """), SpriteKind.npc)
+    npc5 = sprites.create(assets.image("""
+        miImagen21
+        """), SpriteKind.npc)
+    npc6 = sprites.create(assets.image("""
+        caballero
+        """), SpriteKind.npc)
+    nena.set_position(95, 52)
+    npc1.set_position(125, 80)
+    npc2.set_position(135, 95)
+    npc3.set_position(145, 110)
+    npc4.set_position(35, 80)
+    npc5.set_position(25, 95)
+    npc6.set_position(15, 110)
     pause(1000)
-    story.spriteSayText(princesaCorona, "Gracias por devolverme la corona. Siempre estaré en deuda contigo, y en reconocimiento a tu lealtad, te nombro mi caballero personal.")
+    story.sprite_say_text(princesaCorona,
+        "Gracias por devolverme la corona. Siempre estaré en deuda contigo, y en reconocimiento a tu lealtad, te nombro mi caballero personal.")
     pause(1000)
-    story.printCharacterText("¡La corona ha regresado! ¡El reino celebra!", "Pueblo")
+    story.print_character_text("¡La corona ha regresado! ¡El reino celebra!", "Pueblo")
     pause(1000)
-    sprites.destroyAllSpritesOfKind(SpriteKind.npc)
+    sprites.destroy_all_sprites_of_kind(SpriteKind.npc)
     sprites.destroy(nena)
     sprites.destroy(princesaCorona)
-    tiles.setCurrentTilemap(tilemap`nivel12`)
-    story.printText("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...", 80, 60, 1, 15, story.TextSpeed.Slow)
-    music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
-    ojos = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Player)
-    ojos.setPosition(8, 40)
-    ojos.setScale(2, ScaleAnchor.Middle)
-    animation.runImageAnimation(
-    ojos,
-    assets.animation`myAnim`,
-    500,
-    true
-    )
+    tiles.set_current_tilemap(tilemap("""
+        nivel12
+        """))
+    story.print_text("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...",
+        80,
+        60,
+        1,
+        15,
+        story.TextSpeed.SLOW)
+    music.play(music.melody_playable(music.spooky),
+        music.PlaybackMode.LOOPING_IN_BACKGROUND)
+    ojos = sprites.create(img("""
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            """),
+        SpriteKind.player)
+    ojos.set_position(8, 40)
+    ojos.set_scale(2, ScaleAnchor.MIDDLE)
+    animation.run_image_animation(ojos, assets.animation("""
+        myAnim
+        """), 500, True)
     pause(5000)
-    animation.stopAnimation(animation.AnimationTypes.All, ojos)
-    music.stopAllSounds()
+    animation.stop_animation(animation.AnimationTypes.ALL, ojos)
+    music.stop_all_sounds()
     sprites.destroy(ojos)
     pause(2000)
-}
-function MovimientoJefeArriba3 () {
-    animation.runImageAnimation(
-    jefe2,
-    assets.animation`skellyAttackFront`,
-    200,
-    true
-    )
-    jefe2.setScale(2, ScaleAnchor.TopLeft)
-    MovimientoJefe = 3
-}
-statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
+
+def on_on_zero(status):
+    pause(1000)
+    music.play(music.string_playable("F F E E D D C C ", 200),
+        music.PlaybackMode.UNTIL_DONE)
     AnimacionFinal()
-})
-function DialogoMago () {
-    MagoGrande = sprites.create(assets.image`mago`, SpriteKind.npc)
-    MagoGrande.setPosition(76, 10)
-    MagoGrande.setScale(4, ScaleAnchor.Top)
-    story.printCharacterText("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...", "Mago")
+statusbars.on_zero(StatusBarKind.enemy_health, on_on_zero)
+
+def DialogoMago():
+    global MagoGrande
+    MagoGrande = sprites.create(assets.image("""
+        mago
+        """), SpriteKind.npc)
+    MagoGrande.set_position(76, 10)
+    MagoGrande.set_scale(4, ScaleAnchor.TOP)
+    story.print_character_text("Buenas viajero, he oido que tienes que conseguirle la corona a la princesa y derrotar al mal, pero antes vas a necesitar una llave para poder llegar hacia el. Aqui delante tienes 2 cofres, pero solo 1 contiene una llave, sabrás elegir bien...",
+        "Mago")
     sprites.destroy(MagoGrande)
     pause(2000)
-}
-function PisoEnemigos () {
-    tiles.setCurrentTilemap(tilemap`nivel`)
-    nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
-    tiles.placeOnTile(cofre32, tiles.getTileLocation(9, 48))
-    persona_espacio = sprites.create(img`
-        . . . . f f f f f f . . . . . . 
-        . . . f d d d d d d f f . . . . 
-        . . f d d d d d d d d f f . . . 
-        . . f d d d d d d d d d f . . . 
-        . f d d d d d d d d d d f . . . 
-        . f d d f f f f d d d d f . . . 
-        . f f f e e e f f f f f f f . . 
-        . f e e 4 4 f b e 4 4 e f f . . 
-        . . f e d d f 1 4 d 4 e e f . . 
-        . . . f d d d d 4 e e e f . . . 
-        . . . f e 4 4 4 e e f f . . . . 
-        . . . f 2 2 2 e 2 2 2 . . . . . 
-        . . . f 2 2 2 e 2 2 e . . . . . 
-        . . . f 5 5 2 f e e f . . . . . 
-        . . . . f f f f f f . . . . . . 
-        . . . . . . f f f . . . . . . . 
-        `, SpriteKind.astronauta)
-    tiles.placeOnTile(persona_espacio, tiles.getTileLocation(56, 29))
+def PisoEnemigos():
+    global nena, persona_espacio, esta_mapa_enemigos, esta_enemigos, cofre32, cofre_laberinto, puertaOjo, portal_espacio2
+    tiles.set_current_tilemap(tilemap("""
+        nivel
+        """))
+    nena = sprites.create(assets.image("""
+        nena-front
+        """), SpriteKind.player)
+    tiles.place_on_tile(cofre32, tiles.get_tile_location(9, 48))
+    persona_espacio = sprites.create(img("""
+            . . . . f f f f f f . . . . . .
+            . . . f d d d d d d f f . . . .
+            . . f d d d d d d d d f f . . .
+            . . f d d d d d d d d d f . . .
+            . f d d d d d d d d d d f . . .
+            . f d d f f f f d d d d f . . .
+            . f f f e e e f f f f f f f . .
+            . f e e 4 4 f b e 4 4 e f f . .
+            . . f e d d f 1 4 d 4 e e f . .
+            . . . f d d d d 4 e e e f . . .
+            . . . f e 4 4 4 e e f f . . . .
+            . . . f 2 2 2 e 2 2 2 . . . . .
+            . . . f 2 2 2 e 2 2 e . . . . .
+            . . . f 5 5 2 f e e f . . . . .
+            . . . . f f f f f f . . . . . .
+            . . . . . . f f f . . . . . . .
+            """),
+        SpriteKind.astronauta)
+    tiles.place_on_tile(persona_espacio, tiles.get_tile_location(56, 29))
     esta_mapa_enemigos = 1
     esta_enemigos = 1
-    nena.setPosition(70, 72)
-    controller.moveSprite(nena)
-    cofre32 = sprites.create(assets.image`cofre`, SpriteKind.cofre3)
-    tiles.placeOnTile(cofre32, tiles.getTileLocation(13, 27))
-    cofre_laberinto = sprites.create(assets.image`cofre`, SpriteKind.cofre_laberito)
-    tiles.placeOnTile(cofre_laberinto, tiles.getTileLocation(2, 6))
-    scene.cameraFollowSprite(nena)
-    tiles.placeOnTile(nena, tiles.getTileLocation(31, 39))
-    puertaOjo = sprites.create(assets.image`miImagen7`, SpriteKind.Player)
-    tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 9))
-    portal_espacio = sprites.create(assets.image`portal al espacio`, SpriteKind.portal_espacio)
-    tiles.placeOnTile(portal_espacio, tiles.getTileLocation(54, 31))
-}
-function animacionJefe () {
-    scene.setBackgroundImage(assets.image`castillo_trono`)
+    nena.set_position(70, 72)
+    controller.move_sprite(nena)
+    cofre32 = sprites.create(assets.image("""
+        cofre
+        """), SpriteKind.cofre3)
+    tiles.place_on_tile(cofre32, tiles.get_tile_location(13, 27))
+    cofre_laberinto = sprites.create(assets.image("""
+            cofre
+            """),
+        SpriteKind.cofre_laberito)
+    tiles.place_on_tile(cofre_laberinto, tiles.get_tile_location(2, 6))
+    scene.camera_follow_sprite(nena)
+    tiles.place_on_tile(nena, tiles.get_tile_location(31, 39))
+    puertaOjo = sprites.create(assets.image("""
+        miImagen7
+        """), SpriteKind.player)
+    tiles.place_on_tile(puertaOjo, tiles.get_tile_location(32, 9))
+    portal_espacio2 = sprites.create(assets.image("""
+            portal al espacio
+            """),
+        SpriteKind.portal_espacio)
+    tiles.place_on_tile(portal_espacio2, tiles.get_tile_location(54, 31))
+def animacionJefe():
+    global jefe2
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
     sprites.destroy(toolbar)
-    jefe2 = sprites.create(assets.image`miImagen1`, SpriteKind.jefe)
-    jefe2.setPosition(80, 10)
-    jefe2.changeScale(3, ScaleAnchor.Top)
-    story.printCharacterText("Vaya, vaya... ¿quién se atreve a entrar en mi sala?", "Calavera")
-    story.printCharacterText("Veo que la princesa ha traído otra mascota para entretenerme.", "Calavera")
-    story.printCharacterText("Si has venido por la corona... tendrás que arrebatármela tú mismo.", "Calavera")
-    tiles.setCurrentTilemap(tilemap`PantallaCarga`)
+    jefe2 = sprites.create(assets.image("""
+        miImagen1
+        """), SpriteKind.jefe)
+    jefe2.set_position(80, 10)
+    jefe2.change_scale(3, ScaleAnchor.TOP)
+    story.print_character_text("Vaya, vaya... ¿quién se atreve a entrar en mi sala?",
+        "Calavera")
+    story.print_character_text("Veo que la princesa ha traído otra mascota para entretenerme.",
+        "Calavera")
+    story.print_character_text("Si has venido por la corona... tendrás que arrebatármela tú mismo.",
+        "Calavera")
+    tiles.set_current_tilemap(tilemap("""
+        PantallaCarga
+        """))
     sprites.destroy(jefe2)
     pause(1000)
-}
-function SaludPersonaje () {
-    vidaPersonaje = statusbars.create(20, 4, StatusBarKind.Health)
-    vidaPersonaje.max = 5
-    vidaPersonaje.setColor(7, 2, 5)
-    vidaPersonaje.attachToSprite(nena)
-    vidaPersonaje.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
-}
-function cofre_obert_laberint () {
+def SaludPersonaje():
+    global vidaPersonaje
+    vidaPersonaje = statusbars.create(20, 4, StatusBarKind.health)
+    vidaPersonaje.max = 10
+    vidaPersonaje.set_color(7, 2, 5)
+    vidaPersonaje.attach_to_sprite(nena)
+    vidaPersonaje.set_status_bar_flag(StatusBarFlag.SMOOTH_TRANSITION, True)
+def cofre_obert_laberint():
+    global CofreAbierto2, greenkey2
     sprites.destroy(cofre_laberinto)
-    CofreAbierto2 = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
-    tiles.placeOnTile(CofreAbierto2, tiles.getTileLocation(2, 30))
-    for (let value12 of tiles.getTilesByType(assets.tile`cofre_laberinto_tile`)) {
-        greenkey2 = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . 7 7 7 7 . . . . . . . . . 
-            . . 7 7 7 7 7 7 . . . . . . . . 
-            . . 7 7 . . 7 7 7 7 7 7 7 7 7 . 
-            . . 7 7 . . 7 7 7 7 7 7 7 7 7 . 
-            . . 7 7 7 7 7 7 6 6 6 7 6 7 7 . 
-            . . 6 7 7 7 7 6 . . 6 7 6 7 7 . 
-            . . . 6 6 6 6 . . . . 6 . 7 7 . 
-            . . . . . . . . . . . . . 6 6 . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.greenkey)
-        sprites.setDataString(greenkey2, "name", "GREENKEY")
-        tiles.placeOnTile(greenkey2, value12)
-    }
-}
-statusbars.onZero(StatusBarKind.Health, function (status) {
-    PisoEnemigos()
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile21`, function (sprite, location) {
-    scene.cameraShake(4, 500)
-    sprites.destroy(nave, effects.disintegrate, 1000)
-    pause(1400)
-    esta_sala3 = 0
-    sala3()
-})
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-right`,
-    500,
-    false
-    )
+    CofreAbierto2 = sprites.create(assets.image("""
+            CofreAbierto
+            """),
+        SpriteKind.CofreAbierto)
+    tiles.place_on_tile(CofreAbierto2, tiles.get_tile_location(2, 30))
+    for value12 in tiles.get_tiles_by_type(assets.tile("""
+        cofre_laberinto_tile
+        """)):
+        greenkey2 = sprites.create(img("""
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . 7 7 7 7 . . . . . . . . .
+                . . 7 7 7 7 7 7 . . . . . . . .
+                . . 7 7 . . 7 7 7 7 7 7 7 7 7 .
+                . . 7 7 . . 7 7 7 7 7 7 7 7 7 .
+                . . 7 7 7 7 7 7 6 6 6 7 6 7 7 .
+                . . 6 7 7 7 7 6 . . 6 7 6 7 7 .
+                . . . 6 6 6 6 . . . . 6 . 7 7 .
+                . . . . . . . . . . . . . 6 6 .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                """),
+            SpriteKind.greenkey)
+        sprites.set_data_string(greenkey2, "name", "GREENKEY")
+        tiles.place_on_tile(greenkey2, value12)
+
+def on_on_zero2(status2):
+    game.game_over(False)
+statusbars.on_zero(StatusBarKind.health, on_on_zero2)
+
+def on_right_pressed2():
+    global disparo
+    animation.run_image_animation(nena,
+        assets.animation("""
+            nena-animation-right
+            """),
+        500,
+        False)
     disparo = 4
-})
-function AnimacionFinal () {
-    scene.setBackgroundImage(assets.image`castillo_trono`)
+controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed2)
+
+def AnimacionFinal():
+    global JefeDerrotado2, corona2, eleccion
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
     sprites.destroy(nena)
     sprites.destroy(jefe2)
     sprites.destroy(vidaPersonaje)
     sprites.destroy(vidaJefe)
-    JefeDerrotado2 = sprites.create(assets.image`miImagen13`, SpriteKind.JefeDerrotado)
-    JefeDerrotado2.setPosition(80, 10)
-    JefeDerrotado2.changeScale(3, ScaleAnchor.Top)
-    story.printCharacterText("Has luchado bien. Y aun así, esto no era el final. Yo solo fui el aviso. Prepárate... el verdadero enemigo viene ahora.", "Calavera")
+    JefeDerrotado2 = sprites.create(assets.image("""
+            miImagen13
+            """),
+        SpriteKind.JefeDerrotado)
+    JefeDerrotado2.set_position(80, 10)
+    JefeDerrotado2.change_scale(3, ScaleAnchor.TOP)
+    story.print_character_text("Has luchado bien. Y aun así, esto no era el final. Yo solo fui el aviso. Prepárate... el verdadero enemigo viene ahora.",
+        "Calavera")
     sprites.destroy(JefeDerrotado2, effects.fire, 1000)
     pause(2000)
-    corona2 = sprites.create(assets.image`miImagen14`, SpriteKind.corona)
-    corona2.setPosition(83, 12)
-    corona2.changeScale(1, ScaleAnchor.Top)
-    music.play(music.melodyPlayable(music.magicWand), music.PlaybackMode.UntilDone)
-    story.printCharacterText("La corona es tuya. Sientes su poder recorrer tu cuerpo. Puedes devolverla y restaurar el orden... o tomarla y gobernar por tu cuenta. ¿Qué eliges?")
+    corona2 = sprites.create(assets.image("""
+        miImagen14
+        """), SpriteKind.corona)
+    corona2.set_position(83, 12)
+    corona2.change_scale(1, ScaleAnchor.TOP)
+    music.play(music.melody_playable(music.magic_wand),
+        music.PlaybackMode.UNTIL_DONE)
+    story.print_character_text("La corona es tuya. Sientes su poder recorrer tu cuerpo. Puedes devolverla y restaurar el orden... o tomarla y gobernar por tu cuenta. ¿Qué eliges?")
     pause(500)
-    while (!(eleccion == 1 || eleccion == 2)) {
-        eleccion = game.askForNumber("1.Tomar el poder 2.Devolver la corona", 1)
-        if (eleccion == 1) {
+    while not (eleccion == 1 or eleccion == 2):
+        eleccion = game.ask_for_number("1.Tomar el poder 2.Devolver la corona", 1)
+        if eleccion == 1:
             TomarElPoder()
-        } else if (eleccion == 2) {
+        elif eleccion == 2:
             DevolverLaCorona()
-        }
-    }
-    game.gameOver(true)
-}
-function sala3 () {
-    if (esta_sala3 == 0) {
+    game.game_over(True)
+def sala3():
+    global esta_sala3, nave2, pinkkey2
+    if esta_sala3 == 0:
+        sprites.destroy(puertaOjo)
+        sprites.destroy(cofre_plataformas)
+        sprites.destroy(cofre_plataformas)
+        sprites.destroy(porta_mine)
+        sprites.destroy(cofre32)
         esta_sala3 = 1
-        scene.setBackgroundColor(15)
-        tiles.setCurrentTilemap(tilemap`level1`)
-        nave = sprites.create(assets.image`nave_sala3`, SpriteKind.nave)
-        nave.setScale(0.5, ScaleAnchor.Middle)
-        tiles.placeOnTile(nave, tiles.getTileLocation(2, 2))
-        nave.vx = 100
-        nave.ay = 400
-        scene.cameraFollowSprite(nave)
-        info.setScore(0)
-        effects.starField.startScreenEffect()
-    }
-}
-sprites.onOverlap(SpriteKind.Player, SpriteKind.astronauta, function (sprite29, otherSprite14) {
+        scene.set_background_color(15)
+        tiles.set_current_tilemap(tilemap("""
+            level1
+            """))
+        nave2 = sprites.create(assets.image("""
+            nave_sala3
+            """), SpriteKind.nave)
+        nave2.set_scale(0.5, ScaleAnchor.MIDDLE)
+        tiles.place_on_tile(nave2, tiles.get_tile_location(2, 2))
+        nave2.vx = 100
+        nave2.ay = 400
+        scene.camera_follow_sprite(nave2)
+        info.set_score(0)
+        effects.star_field.start_screen_effect()
+        for value99 in tiles.get_tiles_by_type(assets.tile("""
+            myTile23
+            """)):
+            pinkkey2 = sprites.create(assets.image("""
+                pinkkey
+                """), SpriteKind.pinkkey)
+            sprites.set_data_string(pinkkey2, "name", "PINKKEY")
+            tiles.place_on_tile(pinkkey2, value99)
+
+def on_on_overlap14(sprite29, otherSprite14):
     DialogoAstronauta()
-})
-function CofreBueno () {
+sprites.on_overlap(SpriteKind.player, SpriteKind.astronauta, on_on_overlap14)
+
+def CofreBueno():
+    global CofreAbierto2, RedKey, portal2
     sprites.destroy(cofre4)
-    CofreAbierto2 = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
-    CofreAbierto2.setPosition(23, 55)
-    game.showLongText("¡Has conseguido una llave roja!", DialogLayout.Bottom)
-    for (let value8 of tiles.getTilesByType(assets.tile`tile_key1`)) {
-        RedKey = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . 2 2 2 2 . . . . . . . . . 
-            . . 2 2 2 2 2 2 . . . . . . . . 
-            . . 2 2 . . 2 2 2 2 2 2 2 2 2 . 
-            . . 2 2 . . 2 2 2 2 2 2 2 2 2 . 
-            . . 2 2 2 2 2 2 e e e 2 e 2 2 . 
-            . . e 2 2 2 2 e . . e 2 e 2 2 . 
-            . . . e e e e . . . . e . 2 2 . 
-            . . . . . . . . . . . . . e e . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.key)
-        sprites.setDataString(RedKey, "name", "REDKEY")
-        tiles.placeOnTile(RedKey, value8)
-    }
+    CofreAbierto2 = sprites.create(assets.image("""
+            CofreAbierto
+            """),
+        SpriteKind.CofreAbierto)
+    CofreAbierto2.set_position(23, 55)
+    game.show_long_text("¡Has conseguido una llave roja!", DialogLayout.BOTTOM)
+    for value8 in tiles.get_tiles_by_type(assets.tile("""
+        tile_key1
+        """)):
+        RedKey = sprites.create(img("""
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . 2 2 2 2 . . . . . . . . .
+                . . 2 2 2 2 2 2 . . . . . . . .
+                . . 2 2 . . 2 2 2 2 2 2 2 2 2 .
+                . . 2 2 . . 2 2 2 2 2 2 2 2 2 .
+                . . 2 2 2 2 2 2 e e e 2 e 2 2 .
+                . . e 2 2 2 2 e . . e 2 e 2 2 .
+                . . . e e e e . . . . e . 2 2 .
+                . . . . . . . . . . . . . e e .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                """),
+            SpriteKind.key)
+        sprites.set_data_string(RedKey, "name", "REDKEY")
+        tiles.place_on_tile(RedKey, value8)
     pause(500)
-    portal2 = sprites.create(assets.image`miImagen6`, SpriteKind.portal)
-    portal2.setPosition(81, 79)
-    game.showLongText("Ya estas preparado, cruza el portal y derrota el mal!", DialogLayout.Bottom)
-}
-function MovimientoJefeDerecha () {
-    animation.runImageAnimation(
-    jefe2,
-    assets.animation`skellyAttackLeft`,
-    200,
-    true
-    )
-    jefe2.setScale(2, ScaleAnchor.BottomRight)
-    MovimientoJefe = 4
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite9, location6) {
+    portal2 = sprites.create(assets.image("""
+        miImagen6
+        """), SpriteKind.portal)
+    portal2.set_position(81, 79)
+    game.show_long_text("Ya estas preparado, cruza el portal y derrota el mal!",
+        DialogLayout.BOTTOM)
+def MovimientoJefeDerecha():
+    global MovimientoJefe
+    animation.run_image_animation(jefe2,
+        assets.animation("""
+            skellyAttackLeft
+            """),
+        200,
+        True)
+    jefe2.set_scale(2, ScaleAnchor.BOTTOM_RIGHT)
+    MovimientoJefe = 3
+
+def on_menu_pressed():
+    global myMinimap, mapSprite, mapa_abierto
+    if mapa_abierto == 0:
+        myMinimap = minimap.minimap(MinimapScale.QUARTER, 2, 0)
+        mapSprite = sprites.create(minimap.get_image(minimap.minimap()), SpriteKind.Map)
+        mapSprite.set_position(scene.camera_property(CameraProperty.X),
+            scene.camera_property(CameraProperty.Y))
+        controller.move_sprite(nena, 0, 0)
+        minimap.include_sprite(myMinimap, nena, MinimapSpriteScale.MINIMAP_SCALE)
+        mapa_abierto = 1
+    elif mapa_abierto == 0 and esta_mapa_enemigos == 1:
+        myMinimap = minimap.minimap(MinimapScale.HALF, 2, 0)
+    else:
+        sprites.destroy(mapSprite)
+        controller.move_sprite(nena)
+        mapa_abierto = 0
+controller.menu.on_event(ControllerButtonEvent.PRESSED, on_menu_pressed)
+
+def on_overlap_tile7(sprite9, location6):
+    global esta_porta_blue
     esta_porta_blue = 1
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`blau_dreta`, function (sprite28, location15) {
-    scene.cameraFollowSprite(nena)
-    Zoom.SetZoomFilter(1, Mode.Center)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta_mine, function (sprite12, otherSprite5) {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile13
+        """),
+    on_overlap_tile7)
+
+def on_up_pressed():
+    global disparo
+    animation.run_image_animation(nena,
+        assets.animation("""
+            nena-animation-up
+            """),
+        500,
+        False)
+    disparo = 1
+controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
+
+def on_overlap_tile8(sprite28, location15):
+    scene.camera_follow_sprite(nena)
+    Zoom.set_zoom_filter(1, Mode.CENTER)
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        blau_dreta
+        """),
+    on_overlap_tile8)
+
+def on_on_overlap15(sprite12, otherSprite5):
     sprites.destroy(nena, effects.spray, 100)
     PisoEnemigos()
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.bluekey, function (sprite22, otherSprite11) {
-    addItem(sprites.readDataString(otherSprite11, "name"), otherSprite11.image)
+sprites.on_overlap(SpriteKind.player, SpriteKind.puerta_mine, on_on_overlap15)
+
+def on_on_overlap16(sprite222, otherSprite11):
+    addItem(sprites.read_data_string(otherSprite11, "name"),
+        otherSprite11.image)
     sprites.destroy(otherSprite11)
-})
-function findvalue (name: string) {
-    for (let value9 of toolbar.get_items()) {
-        if (value9.get_text(ItemTextAttribute.Name) == name) {
-            return toolbar.get_items().indexOf(value9)
-        }
-    }
+sprites.on_overlap(SpriteKind.player, SpriteKind.bluekey, on_on_overlap16)
+
+def findvalue(name: str):
+    for value9 in toolbar.get_items():
+        if value9.get_text(ItemTextAttribute.NAME) == name:
+            return toolbar.get_items().index_of(value9)
     return -1
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite14, location9) {
+
+def on_overlap_tile9(sprite14, location9):
+    global esta_porta_blue
     esta_porta_blue = 1
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile12`, function (sprite13, location8) {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile9
+        """),
+    on_overlap_tile9)
+
+def on_overlap_tile10(sprite13, location8):
+    global esta_porta_blue
     esta_porta_blue = 1
-})
-function efecto_salto () {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile12
+        """),
+    on_overlap_tile10)
+
+def efecto_salto():
+    global fuerza_salto, statusbar
     fuerza_salto = -200
     statusbar = statusbars.create(40, 6, StatusBarKind.salto_pluma)
-    statusbar.positionDirection(CollisionDirection.Top)
-    statusbar.setColor(0, 1)
-    statusbar.setBarBorder(1, 15)
+    statusbar.position_direction(CollisionDirection.TOP)
+    statusbar.set_color(0, 1)
+    statusbar.set_bar_border(1, 15)
     statusbar.max = 100
     statusbar.value = 100
-    statusbar.setStatusBarFlag(StatusBarFlag.LabelAtEnd, true)
-    for (let index = 0; index < 20; index++) {
+    statusbar.set_status_bar_flag(StatusBarFlag.LABEL_AT_END, True)
+    for index in range(20):
         statusbar.value += -5
         pause(100)
-    }
     fuerza_salto = -163
-}
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    animation.runImageAnimation(
-    nena,
-    assets.animation`nena-animation-down`,
-    500,
-    false
-    )
-    disparo = 2
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre2, function (sprite34, otherSprite18) {
+
+def on_on_overlap17(sprite34, otherSprite18):
     CofreTrampa()
-})
-function addItem (name2: string, image2: Image) {
-    toolbar.get_items().push(Inventory.create_item(name2, image2))
+sprites.on_overlap(SpriteKind.player, SpriteKind.cofre2, on_on_overlap17)
+
+def on_on_overlap18(sprite5, otherSprite8):
+    global esta_sala3
+    esta_sala3 = 0
+    addItem(sprites.read_data_string(otherSprite8, "name"),
+        otherSprite8.image)
+    sprites.destroy(otherSprite8)
+    PisoEnemigos()
+sprites.on_overlap(SpriteKind.nave, SpriteKind.pinkkey, on_on_overlap18)
+
+def addItem(name2: str, image2: Image):
+    toolbar.get_items().append(Inventory.create_item(name2, image2))
     toolbar.update()
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`miMosaico42`, function (sprite7, location4) {
+
+def on_overlap_tile11(sprite7, location42):
+    global esta_porta_red
     esta_porta_red = 1
-})
-function cofre_plataformes_mine () {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        miMosaico42
+        """),
+    on_overlap_tile11)
+
+def cofre_plataformes_mine():
+    global CofreAbierto2, BlueKey
     sprites.destroy(cofre_plataformas)
-    CofreAbierto2 = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
-    tiles.placeOnTile(CofreAbierto2, tiles.getTileLocation(59, 6))
-    for (let value10 of tiles.getTilesByType(assets.tile`tile_mine`)) {
-        BlueKey = sprites.create(assets.image`redkey`, SpriteKind.bluekey)
-        sprites.setDataString(BlueKey, "name", "BLUEKEY")
-        tiles.placeOnTile(BlueKey, tiles.getTileLocation(59, 6))
-    }
-}
-controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mapa_abierto == 0) {
-        myMinimap = minimap.minimap(MinimapScale.Quarter, 2, 0)
-        mapSprite = sprites.create(minimap.getImage(minimap.minimap()), SpriteKind.Map)
-        mapSprite.setPosition(scene.cameraProperty(CameraProperty.X), scene.cameraProperty(CameraProperty.Y))
-        controller.moveSprite(nena, 0, 0)
-        minimap.includeSprite(myMinimap, nena, MinimapSpriteScale.MinimapScale)
-        mapa_abierto = 1
-    } else if (mapa_abierto == 0 && esta_mapa_enemigos == 1) {
-        myMinimap = minimap.minimap(MinimapScale.Half, 2, 0)
-    } else {
-        sprites.destroy(mapSprite)
-        controller.moveSprite(nena)
-        mapa_abierto = 0
-    }
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.caballero, function (sprite36, otherSprite20) {
+    CofreAbierto2 = sprites.create(assets.image("""
+            CofreAbierto
+            """),
+        SpriteKind.CofreAbierto)
+    tiles.place_on_tile(CofreAbierto2, tiles.get_tile_location(59, 6))
+    for value10 in tiles.get_tiles_by_type(assets.tile("""
+        tile_mine
+        """)):
+        BlueKey = sprites.create(assets.image("""
+            redkey
+            """), SpriteKind.bluekey)
+        sprites.set_data_string(BlueKey, "name", "BLUEKEY")
+        tiles.place_on_tile(BlueKey, tiles.get_tile_location(59, 6))
+
+def on_on_overlap19(sprite36, otherSprite20):
     DialogoCaballero()
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite25, location14) {
+sprites.on_overlap(SpriteKind.player, SpriteKind.caballero, on_on_overlap19)
+
+def on_overlap_tile12(sprite25, location14):
+    global esta_porta_green
     esta_porta_green = 1
-})
-function Pantalla2 () {
-    tiles.setCurrentTilemap(tilemap`nivel6`)
-    nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
-    nena.setPosition(14, 60)
-    controller.moveSprite(nena)
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile17
+        """),
+    on_overlap_tile12)
+
+def Pantalla2():
+    global nena, princesa2, puerta22
+    tiles.set_current_tilemap(tilemap("""
+        nivel6
+        """))
+    nena = sprites.create(assets.image("""
+        nena-front
+        """), SpriteKind.player)
+    nena.set_position(14, 60)
+    controller.move_sprite(nena)
     sprites.destroy(puerta)
     sprites.destroy(caballero2)
-    princesa2 = sprites.create(assets.image`princesa`, SpriteKind.princesa)
-    princesa2.setPosition(139, 60)
-    puerta22 = sprites.create(assets.image`escaleras`, SpriteKind.puerta1)
-    puerta22.setPosition(154, 8)
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite24, location13) {
+    princesa2 = sprites.create(assets.image("""
+        princesa
+        """), SpriteKind.princesa)
+    princesa2.set_position(139, 60)
+    puerta22 = sprites.create(assets.image("""
+        escaleras
+        """), SpriteKind.puerta1)
+    puerta22.set_position(154, 8)
+
+def on_overlap_tile13(sprite24, location13):
+    global esta_porta_green
     esta_porta_green = 1
-})
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.purpleOuterSouth1, function (sprite30, location16) {
-    scene.cameraFollowSprite(nena)
-    Zoom.SetZoomFilter(2, Mode.Center)
-})
-function Cofre3_nether () {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile20
+        """),
+    on_overlap_tile13)
+
+def on_overlap_tile14(sprite30, location16):
+    scene.camera_follow_sprite(nena)
+    Zoom.set_zoom_filter(2, Mode.CENTER)
+scene.on_overlap_tile(SpriteKind.player,
+    sprites.dungeon.purple_outer_south1,
+    on_overlap_tile14)
+
+def Cofre3_nether():
+    global CofreAbierto2, mechero2
     sprites.destroy(cofre32)
-    CofreAbierto2 = sprites.create(assets.image`CofreAbierto`, SpriteKind.CofreAbierto)
-    tiles.placeOnTile(CofreAbierto2, tiles.getTileLocation(13, 51))
-    for (let value11 of tiles.getTilesByType(assets.tile`mecheroDrop`)) {
-        mechero2 = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . f f f . . . . . . . . . . 
-            . . f f f f f . . . . . . . . . 
-            . . f f . . . . . . . . . . . . 
-            . . f f . . . . . . . . . . . . 
-            . . f f 1 . . . . . . . . . . . 
-            . . . f f f . . . . . f f . . . 
-            . . . f f f . . . . f f f f . . 
-            . . . . . . . . . f f f f f f . 
-            . . . . . . . . f f f f f f f . 
-            . . . . . . . . f f f 1 f f f . 
-            . . . . . . . f f f 1 1 f f f . 
-            . . . . . . . f f f f f f f f . 
-            . . . . . . . . f f f f f f f . 
-            . . . . . . . . . . f f f . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.mechero)
-        sprites.setDataString(mechero2, "name", "MECHERO")
-        tiles.placeOnTile(mechero2, value11)
-    }
-}
-function PeleaJefeFinal () {
-    MovimientoJefe = 0
-    MovimientoJefe = randint(1, 5)
-    while (vidaJefe.value > 0) {
-        if (MovimientoJefe == 1) {
+    CofreAbierto2 = sprites.create(assets.image("""
+            CofreAbierto
+            """),
+        SpriteKind.CofreAbierto)
+    tiles.place_on_tile(CofreAbierto2, tiles.get_tile_location(13, 51))
+    for value11 in tiles.get_tiles_by_type(assets.tile("""
+        mecheroDrop
+        """)):
+        mechero2 = sprites.create(img("""
+                . . . . . . . . . . . . . . . .
+                . . . f f f . . . . . . . . . .
+                . . f f f f f . . . . . . . . .
+                . . f f . . . . . . . . . . . .
+                . . f f . . . . . . . . . . . .
+                . . f f 1 . . . . . . . . . . .
+                . . . f f f . . . . . f f . . .
+                . . . f f f . . . . f f f f . .
+                . . . . . . . . . f f f f f f .
+                . . . . . . . . f f f f f f f .
+                . . . . . . . . f f f 1 f f f .
+                . . . . . . . f f f 1 1 f f f .
+                . . . . . . . f f f f f f f f .
+                . . . . . . . . f f f f f f f .
+                . . . . . . . . . . f f f . . .
+                . . . . . . . . . . . . . . . .
+                """),
+            SpriteKind.mechero)
+        sprites.set_data_string(mechero2, "name", "MECHERO")
+        tiles.place_on_tile(mechero2, value11)
+def PeleaJefeFinal():
+    global MovimientoJefe, AtaqueJefe2
+    if vidaJefe.value > 0:
+        MovimientoJefe = randint(1, 3)
+        if MovimientoJefe == 1:
             MovimientoJefeArriba()
-            jefe2.setPosition(73, 22)
-            pause(500)
-            AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
-            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
-        } else if (MovimientoJefe == 2) {
-            MovimientoJefeArriba2()
-            jefe2.setPosition(18, 22)
-            pause(500)
-            AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
-            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
-        } else if (MovimientoJefe == 3) {
-            MovimientoJefeArriba3()
-            jefe2.setPosition(130, 22)
-            pause(500)
-            AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
-            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
-        } else if (MovimientoJefe == 4) {
-            MovimientoJefeDerecha()
-            jefe2.setPosition(133, 85)
-            pause(500)
-            AtaqueJefe = sprites.create(assets.image`miImagen10`, SpriteKind.AtaqueJefe)
-            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen10`, jefe2, -100, 0)
-        } else if (MovimientoJefe == 5) {
+            jefe2.set_position(73, 22)
+            AtaqueJefe2 = sprites.create_projectile_from_sprite(assets.image("""
+                miImagen9
+                """), jefe2, 0, 50)
+            AtaqueJefe2.y += 35
+            AtaqueJefe2.set_scale(2, ScaleAnchor.MIDDLE)
+        elif MovimientoJefe == 2:
             MovimientoJefeIzquieda()
-            jefe2.setPosition(15, 85)
-            pause(500)
-            AtaqueJefe = sprites.create(assets.image`miImagen11`, SpriteKind.AtaqueJefe)
-            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen11`, jefe2, 100, 0)
-        }
-    }
-}
-function removeitem (name3: string) {
-    toolbar.get_items().removeAt(findvalue(name3))
+            jefe2.set_position(16, 95)
+            AtaqueJefe2 = sprites.create_projectile_from_sprite(assets.image("""
+                miImagen11
+                """), jefe2, 100, 0)
+            AtaqueJefe2.x += 35
+        elif MovimientoJefe == 3:
+            MovimientoJefeDerecha()
+            jefe2.set_position(134, 94)
+            AtaqueJefe2 = sprites.create_projectile_from_sprite(assets.image("""
+                miImagen10
+                """), jefe2, -100, 0)
+            AtaqueJefe2.x += -35
+def removeitem(name3: str):
+    toolbar.get_items().remove_at(findvalue(name3))
     toolbar.update()
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile14`, function (sprite37, location17) {
+
+def on_overlap_tile15(sprite37, location17):
+    global esta_porta_blue
     esta_porta_blue = 1
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.princesa, function (sprite21, otherSprite10) {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile14
+        """),
+    on_overlap_tile15)
+
+def on_on_overlap20(sprite21, otherSprite10):
     DialogoPrincesa()
-})
-function MovimientoJefeArriba2 () {
-    animation.runImageAnimation(
-    jefe2,
-    assets.animation`skellyAttackFront`,
-    200,
-    true
-    )
-    jefe2.setScale(2, ScaleAnchor.TopRight)
-    MovimientoJefe = 2
-}
-sprites.onOverlap(SpriteKind.Player, SpriteKind.greenkey, function (sprite6, otherSprite3) {
-    addItem(sprites.readDataString(otherSprite3, "name"), otherSprite3.image)
-    sprites.destroy(otherSprite3)
-})
-function PisoJefe () {
+sprites.on_overlap(SpriteKind.player, SpriteKind.princesa, on_on_overlap20)
+
+def on_on_overlap21(sprite6, otherSprite32):
+    addItem(sprites.read_data_string(otherSprite32, "name"),
+        otherSprite32.image)
+    sprites.destroy(otherSprite32)
+sprites.on_overlap(SpriteKind.player, SpriteKind.greenkey, on_on_overlap21)
+
+def PisoJefe():
+    global nena, esta_plataformes, pelea
     animacionJefe()
-    scene.setBackgroundImage(assets.image`castillo_trono`)
-    tiles.setCurrentTilemap(tilemap`nivel15`)
-    nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
+    tiles.set_current_tilemap(tilemap("""
+        nivel15
+        """))
+    nena = sprites.create(assets.image("""
+        nena-front
+        """), SpriteKind.player)
     esta_plataformes = 1
-    nena.setPosition(10, 104)
+    nena.set_position(10, 104)
     nena.ay = 350
-    controller.moveSprite(nena, 100, 0)
+    controller.move_sprite(nena, 100, 0)
     sprites.destroy(toolbar)
     efecto_salto()
     sprites.destroy(statusbar)
+    pelea = 1
     JefeFinal()
     SaludPersonaje()
     PeleaJefeFinal()
-}
-function DialogoAstronauta () {
-    astronauta_grande = sprites.create(img`
-        . . . . . . f f f f . . . . . . 
-        . . . . f f f d d f f f . . . . 
-        . . . f f d d d d d d f f . . . 
-        . . f f d d d d d d d d f f . . 
-        . . f d d d d d d d d d d f . . 
-        . . f d d f f f f f f d d f . . 
-        . . f f f f e e e e f f f f . . 
-        . f f e f b f 4 4 f b f e f f . 
-        . f e e 4 1 f d d f 1 4 e e f . 
-        . . f e e d d d d d d e e f . . 
-        . . . f e e 4 4 4 4 e e f . . . 
-        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
-        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
-        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
-        . . . . . f f f f f f . . . . . 
-        . . . . . f f . . f f . . . . . 
-        `, SpriteKind.Player)
-    astronauta_grande.setPosition(76, 10)
-    astronauta_grande.setScale(4, ScaleAnchor.Top)
-    story.printCharacterText("Puedo ayudar-te, metete en el portal. Apareceras dentro de una nave, esquiva los obstaculos para llegar al final i conseguir la llave", "Astronauta")
+def DialogoAstronauta():
+    global astronauta_grande
+    astronauta_grande = sprites.create(img("""
+            . . . . . . f f f f . . . . . .
+            . . . . f f f d d f f f . . . .
+            . . . f f d d d d d d f f . . .
+            . . f f d d d d d d d d f f . .
+            . . f d d d d d d d d d d f . .
+            . . f d d f f f f f f d d f . .
+            . . f f f f e e e e f f f f . .
+            . f f e f b f 4 4 f b f e f f .
+            . f e e 4 1 f d d f 1 4 e e f .
+            . . f e e d d d d d d e e f . .
+            . . . f e e 4 4 4 4 e e f . . .
+            . . e 4 f 2 2 2 2 2 2 f 4 e . .
+            . . 4 d f 2 2 2 2 2 2 f d 4 . .
+            . . 4 4 f 4 4 5 5 4 4 f 4 4 . .
+            . . . . . f f f f f f . . . . .
+            . . . . . f f . . f f . . . . .
+            """),
+        SpriteKind.player)
+    astronauta_grande.set_position(76, 10)
+    astronauta_grande.set_scale(4, ScaleAnchor.TOP)
+    story.print_character_text("Puedo ayudar-te, metete en el portal. Apareceras dentro de una nave, esquiva los obstaculos para llegar al final i conseguir la llave",
+        "Astronauta")
     sprites.destroy(astronauta_grande)
     pause(2000)
-}
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite23, location12) {
+
+def on_overlap_tile16(sprite23, location12):
+    global esta_porta_green
     esta_porta_green = 1
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite17, location11) {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile16
+        """),
+    on_overlap_tile16)
+
+def on_overlap_tile17(sprite17, location11):
+    global esta_porta_green
     esta_porta_green = 1
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.tp2, function (sprite19, otherSprite8) {
-    tiles.placeOnTile(nena, tiles.getTileLocation(36, 10))
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile23`, function (sprite, location) {
-    scene.cameraShake(4, 500)
-    sprites.destroy(nave, effects.confetti, 500)
-    pause(500)
-    esta_sala3 = 0
-    nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
-    controller.moveSprite(nena, 100, 0)
-})
-function TomarElPoder () {
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile18
+        """),
+    on_overlap_tile17)
+
+def TomarElPoder():
+    global personajeCorona, npc1, npc2, npc3, npc4, npc5, npc6, ojos
     sprites.destroy(corona2)
-    scene.setBackgroundImage(assets.image`castillo_trono`)
-    personajeCorona = sprites.create(assets.image`nena-front1`, SpriteKind.Player)
-    personajeCorona.setPosition(78, 40)
-    npc1 = sprites.create(assets.image`princesa`, SpriteKind.npc)
-    npc2 = sprites.create(assets.image`miImagen22`, SpriteKind.npc)
-    npc3 = sprites.create(assets.image`miImagen19`, SpriteKind.npc)
-    npc4 = sprites.create(assets.image`miImagen20`, SpriteKind.npc)
-    npc5 = sprites.create(assets.image`miImagen21`, SpriteKind.npc)
-    npc6 = sprites.create(assets.image`caballero`, SpriteKind.npc)
-    npc1.setPosition(125, 80)
-    npc2.setPosition(135, 95)
-    npc3.setPosition(145, 110)
-    npc4.setPosition(35, 80)
-    npc5.setPosition(25, 95)
-    npc6.setPosition(15, 110)
+    scene.set_background_image(assets.image("""
+        castillo_trono
+        """))
+    personajeCorona = sprites.create(assets.image("""
+        nena-front1
+        """), SpriteKind.player)
+    personajeCorona.set_position(78, 40)
+    npc1 = sprites.create(assets.image("""
+        princesa
+        """), SpriteKind.npc)
+    npc2 = sprites.create(assets.image("""
+        miImagen22
+        """), SpriteKind.npc)
+    npc3 = sprites.create(assets.image("""
+        miImagen19
+        """), SpriteKind.npc)
+    npc4 = sprites.create(assets.image("""
+        miImagen20
+        """), SpriteKind.npc)
+    npc5 = sprites.create(assets.image("""
+        miImagen21
+        """), SpriteKind.npc)
+    npc6 = sprites.create(assets.image("""
+        caballero
+        """), SpriteKind.npc)
+    npc1.set_position(125, 80)
+    npc2.set_position(135, 95)
+    npc3.set_position(145, 110)
+    npc4.set_position(35, 80)
+    npc5.set_position(25, 95)
+    npc6.set_position(15, 110)
     pause(1000)
-    story.spriteSayText(personajeCorona, "Desde hoy, el reino tendrá un solo destino. Y yo seré quien lo decida.")
+    story.sprite_say_text(personajeCorona,
+        "Desde hoy, el reino tendrá un solo destino. Y yo seré quien lo decida.")
     pause(1000)
-    story.printCharacterText("El trono decide por nosotros, y nosotros cumplimos sin cuestionar.", "Pueblo")
+    story.print_character_text("El trono decide por nosotros, y nosotros cumplimos sin cuestionar.",
+        "Pueblo")
     pause(1000)
-    sprites.destroyAllSpritesOfKind(SpriteKind.npc)
+    sprites.destroy_all_sprites_of_kind(SpriteKind.npc)
     sprites.destroy(personajeCorona)
-    tiles.setCurrentTilemap(tilemap`nivel10`)
-    story.printText("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...", 80, 60, 1, 15, story.TextSpeed.Slow)
-    music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
-    ojos = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Player)
-    ojos.setPosition(8, 40)
-    ojos.setScale(2, ScaleAnchor.Middle)
-    animation.runImageAnimation(
-    ojos,
-    assets.animation`myAnim`,
-    500,
-    true
-    )
+    tiles.set_current_tilemap(tilemap("""
+        nivel10
+        """))
+    story.print_text("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...",
+        80,
+        60,
+        1,
+        15,
+        story.TextSpeed.SLOW)
+    music.play(music.melody_playable(music.spooky),
+        music.PlaybackMode.LOOPING_IN_BACKGROUND)
+    ojos = sprites.create(img("""
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            """),
+        SpriteKind.player)
+    ojos.set_position(8, 40)
+    ojos.set_scale(2, ScaleAnchor.MIDDLE)
+    animation.run_image_animation(ojos, assets.animation("""
+        myAnim
+        """), 500, True)
     pause(5000)
-    animation.stopAnimation(animation.AnimationTypes.All, ojos)
-    music.stopAllSounds()
+    animation.stop_animation(animation.AnimationTypes.ALL, ojos)
+    music.stop_all_sounds()
     sprites.destroy(ojos)
     pause(2000)
-}
-sprites.onOverlap(SpriteKind.Player, SpriteKind.mago, function (sprite29, otherSprite14) {
+
+def on_on_overlap22(sprite292, otherSprite142):
     DialogoMago()
-})
-let personajeCorona: Sprite = null
-let astronauta_grande: Sprite = null
-let AtaqueJefe: Sprite = null
-let mechero2: Sprite = null
-let mapSprite: Sprite = null
-let myMinimap: minimap.Minimap = null
-let BlueKey: Sprite = null
-let RedKey: Sprite = null
-let eleccion = 0
-let JefeDerrotado2: Sprite = null
-let greenkey2: Sprite = null
-let vidaPersonaje: StatusBarSprite = null
-let portal_espacio: Sprite = null
-let puertaOjo: Sprite = null
-let cofre_laberinto: Sprite = null
-let persona_espacio: Sprite = null
-let cofre32: Sprite = null
-let MagoGrande: Sprite = null
-let ojos: Sprite = null
-let npc6: Sprite = null
-let npc5: Sprite = null
-let npc4: Sprite = null
-let npc3: Sprite = null
-let npc2: Sprite = null
-let npc1: Sprite = null
-let princesaCorona: Sprite = null
-let corona2: Sprite = null
-let toolbar: Inventory.Toolbar = null
-let nave: Sprite = null
-let caballero2: Sprite = null
-let puerta: Sprite = null
-let agujero2: Sprite = null
-let princesaGrande: Sprite = null
-let MovimientoJefe = 0
-let statusbar: StatusBarSprite = null
-let porta_mine: Sprite = null
-let cofre_plataformas: Sprite = null
-let tp_plataformas2: Sprite = null
-let tp_plataformas: Sprite = null
-let pluma: Sprite = null
-let moneda: Sprite = null
-let vidaJefe: StatusBarSprite = null
-let caballeroGrande: Sprite = null
-let CofreAbierto2: Sprite = null
-let portal2: Sprite = null
-let jefe2: Sprite = null
-let projectile: Sprite = null
-let mago2: Sprite = null
-let cofre22: Sprite = null
-let cofre4: Sprite = null
-let puerta22: Sprite = null
-let princesa2: Sprite = null
-let disparo = 0
-let fuerza_salto = 0
-let esta_sala3 = 0
-let esta_porta_green = 0
-let esta_plataformes = 0
-let esta_porta_blue = 0
-let esta_porta_red = 0
-let esta_portal = 0
-let esta_enemigos = 0
-let esta_mapa_enemigos = 0
-let mapa_abierto = 0
-let nena: Sprite = null
+sprites.on_overlap(SpriteKind.player, SpriteKind.mago, on_on_overlap22)
+
+personajeCorona: Sprite = None
+astronauta_grande: Sprite = None
+mechero2: Sprite = None
+BlueKey: Sprite = None
+mapSprite: Sprite = None
+myMinimap: minimap.Minimap = None
+RedKey: Sprite = None
+pinkkey2: Sprite = None
+eleccion = 0
+JefeDerrotado2: Sprite = None
+greenkey2: Sprite = None
+vidaPersonaje: StatusBarSprite = None
+portal_espacio2: Sprite = None
+puertaOjo: Sprite = None
+cofre_laberinto: Sprite = None
+persona_espacio: Sprite = None
+cofre32: Sprite = None
+MagoGrande: Sprite = None
+ojos: Sprite = None
+npc6: Sprite = None
+npc5: Sprite = None
+npc4: Sprite = None
+npc3: Sprite = None
+npc2: Sprite = None
+npc1: Sprite = None
+princesaCorona: Sprite = None
+corona2: Sprite = None
+nave2: Sprite = None
+toolbar: Inventory.Toolbar = None
+AtaqueJefe2: Sprite = None
+caballero2: Sprite = None
+puerta: Sprite = None
+agujero2: Sprite = None
+princesaGrande: Sprite = None
+MovimientoJefe = 0
+statusbar: StatusBarSprite = None
+porta_mine: Sprite = None
+cofre_plataformas: Sprite = None
+pluma: Sprite = None
+moneda: Sprite = None
+vidaJefe: StatusBarSprite = None
+caballeroGrande: Sprite = None
+CofreAbierto2: Sprite = None
+portal2: Sprite = None
+jefe2: Sprite = None
+projectile: Sprite = None
+mago2: Sprite = None
+cofre22: Sprite = None
+cofre4: Sprite = None
+puerta22: Sprite = None
+princesa2: Sprite = None
+pelea = 0
+disparo = 0
+fuerza_salto = 0
+esta_sala3 = 0
+esta_porta_green = 0
+esta_plataformes = 0
+esta_porta_blue = 0
+esta_porta_red = 0
+esta_portal = 0
+esta_enemigos = 0
+esta_mapa_enemigos = 0
+mapa_abierto = 0
+nena: Sprite = None
 PantallaPrincipal()
-nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+nena = sprites.create(assets.image("""
+    nena-front
+    """), SpriteKind.player)
 mapa_abierto = 0
 esta_mapa_enemigos = 0
 esta_enemigos = 0
@@ -1740,5 +2088,11 @@ esta_porta_green = 0
 esta_sala3 = 0
 fuerza_salto = -163
 disparo = 0
-nena.setPosition(145, 88)
-controller.moveSprite(nena)
+pelea = 0
+nena.set_position(145, 88)
+controller.move_sprite(nena)
+
+def on_update_interval():
+    if pelea == 1:
+        PeleaJefeFinal()
+game.on_update_interval(2000, on_update_interval)

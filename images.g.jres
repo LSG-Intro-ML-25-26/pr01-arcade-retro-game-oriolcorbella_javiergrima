@@ -284,6 +284,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "nave_sala3"
     },
+    "image57": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDOzAAAAAAAzMzMLAAAAADMAMwsAAAAAMwAzCwAAAAAzMzMLAAAAADAzswAAAAAAADMLAAAAAAAAMwsAAAAAAAAzuwAAAAAAADMzCwAAAAAAM7sAAAAAAAAzM7MAAAAAADMzswAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "pinkkey"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
