@@ -97,7 +97,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puerta1, function (sprite20, oth
 })
 function JefeFinal () {
     jefe2 = sprites.create(assets.image`miImagen1`, SpriteKind.jefe)
-    vidaJefe = statusbars.create(115, 5, StatusBarKind.EnemyHealth)
+    vidaJefe = statusbars.create(50, 5, StatusBarKind.EnemyHealth)
     vidaJefe.setColor(7, 2, 5)
     vidaJefe.attachToSprite(jefe2)
     vidaJefe.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
@@ -889,6 +889,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.feather, function (sprite10, oth
     efecto_salto()
     sprites.destroy(statusbar)
 })
+function MovimientoJefeIzquieda () {
+    animation.runImageAnimation(
+    jefe2,
+    assets.animation`skellyAttackRight`,
+    200,
+    true
+    )
+    jefe2.setScale(2, ScaleAnchor.TopLeft)
+    MovimientoJefe = 5
+}
 function DialogoPrincesa () {
     princesaGrande = sprites.create(assets.image`miImagen16`, SpriteKind.npc)
     princesaGrande.setPosition(76, 10)
@@ -929,6 +939,16 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     )
     disparo = 2
 })
+function MovimientoJefeArriba () {
+    animation.runImageAnimation(
+    jefe2,
+    assets.animation`skellyAttackFront`,
+    200,
+    true
+    )
+    jefe2.setScale(2, ScaleAnchor.Top)
+    MovimientoJefe = 1
+}
 controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     if (disparo == 1) {
         projectile = sprites.createProjectileFromSprite(assets.image`bala_arriba`, nena, 0, -50)
@@ -1105,6 +1125,16 @@ function DevolverLaCorona () {
     sprites.destroy(ojos)
     pause(2000)
 }
+function MovimientoJefeArriba3 () {
+    animation.runImageAnimation(
+    jefe2,
+    assets.animation`skellyAttackFront`,
+    200,
+    true
+    )
+    jefe2.setScale(2, ScaleAnchor.TopLeft)
+    MovimientoJefe = 3
+}
 statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
     AnimacionFinal()
 })
@@ -1147,7 +1177,7 @@ function animacionJefe () {
     pause(1000)
 }
 function SaludPersonaje () {
-    vidaPersonaje = statusbars.create(50, 4, StatusBarKind.Health)
+    vidaPersonaje = statusbars.create(20, 4, StatusBarKind.Health)
     vidaPersonaje.max = 5
     vidaPersonaje.setColor(7, 2, 5)
     vidaPersonaje.attachToSprite(nena)
@@ -1245,6 +1275,16 @@ function CofreBueno () {
     portal2 = sprites.create(assets.image`miImagen6`, SpriteKind.portal)
     portal2.setPosition(81, 79)
     game.showLongText("Ya estas preparado, cruza el portal y derrota el mal!", DialogLayout.Bottom)
+}
+function MovimientoJefeDerecha () {
+    animation.runImageAnimation(
+    jefe2,
+    assets.animation`skellyAttackLeft`,
+    200,
+    true
+    )
+    jefe2.setScale(2, ScaleAnchor.TopRight)
+    MovimientoJefe = 4
 }
 controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mapa_abierto == 0) {
@@ -1397,6 +1437,16 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile14`, function (sprite37
 sprites.onOverlap(SpriteKind.Player, SpriteKind.princesa, function (sprite21, otherSprite10) {
     DialogoPrincesa()
 })
+function MovimientoJefeArriba2 () {
+    animation.runImageAnimation(
+    jefe2,
+    assets.animation`skellyAttackFront`,
+    200,
+    true
+    )
+    jefe2.setScale(2, ScaleAnchor.TopRight)
+    MovimientoJefe = 2
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.greenkey, function (sprite6, otherSprite3) {
     addItem(sprites.readDataString(otherSprite3, "name"), otherSprite3.image)
     sprites.destroy(otherSprite3)
@@ -1406,9 +1456,13 @@ function PisoJefe () {
     scene.setBackgroundImage(assets.image`castillo_trono`)
     tiles.setCurrentTilemap(tilemap`nivel15`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+    esta_plataformes = 1
     nena.setPosition(10, 104)
-    controller.moveSprite(nena)
+    nena.ay = 350
+    controller.moveSprite(nena, 100, 0)
     sprites.destroy(toolbar)
+    efecto_salto()
+    sprites.destroy(statusbar)
     JefeFinal()
     SaludPersonaje()
 }
@@ -1511,6 +1565,7 @@ let caballero2: Sprite = null
 let puerta: Sprite = null
 let agujero2: Sprite = null
 let princesaGrande: Sprite = null
+let MovimientoJefe = 0
 let statusbar: StatusBarSprite = null
 let porta_mine: Sprite = null
 let cofre_plataformas: Sprite = null
