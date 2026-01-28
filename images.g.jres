@@ -134,6 +134,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "tile_cofre_mine"
     },
+    "image29": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYGaGAAAAAABmZmYIAAAAAGYAZggAAAAAZgBmCAAAAABmZmYIAAAAAGBmhgAAAAAAAGYIAAAAAAAAZggAAAAAAABmiAAAAAAAAGZmCAAAAAAAZogAAAAAAABmZoYAAAAAAGZmhgAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "redkey"
+    },
     "image31": {
         "data": "hwQQABAAAAAAAGBmZmYAAABgZmZmZmYAAGaWmZmZZgYAZpmZmZlpBmCWmRERkZlmYJYZERERmWZglhkRERGZZmCWmRERkZlmAGaZERGRaQYAZpkZEZlpBgBglpmRmWYAAGBmmZlpZgAAAGaWmWYGAAAAYGZmZgAAAABgZmZmAAAAAABmYAYAAA==",
         "mimeType": "image/x-mkcd-f4",
@@ -279,15 +284,10 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "nave_sala3"
     },
-    "image29": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYGaGAAAAAABmZmYIAAAAAGYAZggAAAAAZgBmCAAAAABmZmYIAAAAAGBmhgAAAAAAAGYIAAAAAAAAZggAAAAAAABmiAAAAAAAAGZmCAAAAAAAZogAAAAAAABmZoYAAAAAAGZmhgAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "redkey"
-    },
     "image57": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDOzAAAAAAAzMzMLAAAAADMAMwsAAAAAMwAzCwAAAAAzMzMLAAAAADAzswAAAAAAADMLAAAAAAAAMwsAAAAAAAAzuwAAAAAAADMzCwAAAAAAM7sAAAAAAAAzM7MAAAAAADMzswAAAAAAAAAAAA==",
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
-        "displayName": "pinkkey"
+        "displayName": "miImagen24"
     },
     "anim1": {
         "namespace": "myAnimations",
