@@ -31,6 +31,7 @@ namespace SpriteKind {
     export const JefeDerrotado = SpriteKind.create()
     export const corona = SpriteKind.create()
     export const playerCorona = SpriteKind.create()
+    export const AtaqueJefe = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const salto_pluma = StatusBarKind.create()
@@ -896,7 +897,7 @@ function MovimientoJefeIzquieda () {
     200,
     true
     )
-    jefe2.setScale(2, ScaleAnchor.TopLeft)
+    jefe2.setScale(2, ScaleAnchor.BottomLeft)
     MovimientoJefe = 5
 }
 function DialogoPrincesa () {
@@ -1283,7 +1284,7 @@ function MovimientoJefeDerecha () {
     200,
     true
     )
-    jefe2.setScale(2, ScaleAnchor.TopRight)
+    jefe2.setScale(2, ScaleAnchor.BottomRight)
     MovimientoJefe = 4
 }
 controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -1427,6 +1428,36 @@ function Cofre3_nether () {
         tiles.placeOnTile(mechero2, value11)
     }
 }
+function PeleaJefeFinal () {
+    MovimientoJefe = 0
+    MovimientoJefe = randint(1, 5)
+    if (MovimientoJefe == 1) {
+        jefe2.setPosition(73, 22)
+        pause(500)
+        AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
+        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
+    } else if (MovimientoJefe == 2) {
+        jefe2.setPosition(18, 22)
+        pause(500)
+        AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
+        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
+    } else if (MovimientoJefe == 3) {
+        jefe2.setPosition(130, 22)
+        pause(500)
+        AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
+        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
+    } else if (MovimientoJefe == 4) {
+        jefe2.setPosition(130, 22)
+        pause(500)
+        AtaqueJefe = sprites.create(assets.image`miImagen10`, SpriteKind.AtaqueJefe)
+        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen10`, jefe2, -100, 0)
+    } else if (MovimientoJefe == 5) {
+        jefe2.setPosition(130, 22)
+        pause(500)
+        AtaqueJefe = sprites.create(assets.image`miImagen11`, SpriteKind.AtaqueJefe)
+        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen11`, jefe2, 100, 0)
+    }
+}
 function removeitem (name3: string) {
     toolbar.get_items().removeAt(findvalue(name3))
     toolbar.update()
@@ -1538,6 +1569,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.mago, function (sprite29, otherS
     DialogoMago()
 })
 let personajeCorona: Sprite = null
+let AtaqueJefe: Sprite = null
 let mechero2: Sprite = null
 let BlueKey: Sprite = null
 let mapSprite: Sprite = null
