@@ -1431,31 +1431,38 @@ function Cofre3_nether () {
 function PeleaJefeFinal () {
     MovimientoJefe = 0
     MovimientoJefe = randint(1, 5)
-    if (MovimientoJefe == 1) {
-        jefe2.setPosition(73, 22)
-        pause(500)
-        AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
-        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
-    } else if (MovimientoJefe == 2) {
-        jefe2.setPosition(18, 22)
-        pause(500)
-        AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
-        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
-    } else if (MovimientoJefe == 3) {
-        jefe2.setPosition(130, 22)
-        pause(500)
-        AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
-        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
-    } else if (MovimientoJefe == 4) {
-        jefe2.setPosition(130, 22)
-        pause(500)
-        AtaqueJefe = sprites.create(assets.image`miImagen10`, SpriteKind.AtaqueJefe)
-        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen10`, jefe2, -100, 0)
-    } else if (MovimientoJefe == 5) {
-        jefe2.setPosition(130, 22)
-        pause(500)
-        AtaqueJefe = sprites.create(assets.image`miImagen11`, SpriteKind.AtaqueJefe)
-        AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen11`, jefe2, 100, 0)
+    while (vidaJefe.value > 0) {
+        if (MovimientoJefe == 1) {
+            MovimientoJefeArriba()
+            jefe2.setPosition(73, 22)
+            pause(500)
+            AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
+            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
+        } else if (MovimientoJefe == 2) {
+            MovimientoJefeArriba2()
+            jefe2.setPosition(18, 22)
+            pause(500)
+            AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
+            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
+        } else if (MovimientoJefe == 3) {
+            MovimientoJefeArriba3()
+            jefe2.setPosition(130, 22)
+            pause(500)
+            AtaqueJefe = sprites.create(assets.image`miImagen9`, SpriteKind.AtaqueJefe)
+            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
+        } else if (MovimientoJefe == 4) {
+            MovimientoJefeDerecha()
+            jefe2.setPosition(130, 22)
+            pause(500)
+            AtaqueJefe = sprites.create(assets.image`miImagen10`, SpriteKind.AtaqueJefe)
+            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen10`, jefe2, -100, 0)
+        } else if (MovimientoJefe == 5) {
+            MovimientoJefeIzquieda()
+            jefe2.setPosition(130, 22)
+            pause(500)
+            AtaqueJefe = sprites.create(assets.image`miImagen11`, SpriteKind.AtaqueJefe)
+            AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen11`, jefe2, 100, 0)
+        }
     }
 }
 function removeitem (name3: string) {
