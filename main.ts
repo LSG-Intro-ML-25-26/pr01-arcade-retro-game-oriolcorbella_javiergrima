@@ -921,13 +921,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
     if (esta_porta_red == 1) {
-        if (findvalue("BLUEKEY") != -1) {
-            for (let value7 of tiles.getTilesByType(assets.tile`puertaCandadoBLUE`)) {
-                tiles.setTileAt(value7, assets.tile`puertaSinCandadoBLUE`)
-                tiles.setWallAt(value7, false)
-                removeitem("BLUEKEY")
-            }
-        }
+    	
     }
     if (esta_porta_green == 1) {
         if (findvalue("GREENKEY") != -1) {
