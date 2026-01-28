@@ -37,6 +37,7 @@ namespace SpriteKind {
     export const astronauta = SpriteKind.create()
     export const nave = SpriteKind.create()
     export const pinkkey = SpriteKind.create()
+    export const puertaOjo = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const salto_pluma = StatusBarKind.create()
@@ -84,14 +85,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function (sprite18, othe
     tiles.setCurrentTilemap(tilemap`PantallaCarga`)
     pause(1000)
     PisoEnemigos()
-})
-scene.onHitWall(SpriteKind.Player, function (sprite, location) {
-    if (esta_sala3 == 1) {
-        scene.cameraShake(4, 500)
-        sprites.destroy(nave2, effects.disintegrate, 1000)
-        esta_sala3 = 0
-        sala3()
-    }
 })
 function DialogoCaballero () {
     caballeroGrande = sprites.create(assets.image`miImagen17`, SpriteKind.npc)
@@ -893,43 +886,6 @@ function mine_plataformas () {
         `, SpriteKind.puerta_mine)
     tiles.placeOnTile(porta_mine, tiles.getTileLocation(59, 8))
 }
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (esta_portal == 1) {
-        if (findvalue("MECHERO") != -1) {
-            for (let value5 of tiles.getTilesByType(assets.tile`bloques_portal`)) {
-                tiles.setTileAt(value5, assets.tile`myTile1`)
-                removeitem("MECHERO")
-            }
-        }
-    }
-    if (esta_porta_red == 1) {
-        if (findvalue("REDKEY") != -1) {
-            for (let value6 of tiles.getTilesByType(assets.tile`puertaCandadoRED`)) {
-                tiles.setTileAt(value6, assets.tile`puertaSinCandadoRED`)
-                tiles.setWallAt(value6, false)
-                removeitem("REDKEY")
-            }
-        }
-    }
-    if (esta_porta_blue == 1) {
-        if (findvalue("BLUEKEY") != -1) {
-            for (let value7 of tiles.getTilesByType(assets.tile`puertaCandadoBLUE`)) {
-                tiles.setTileAt(value7, assets.tile`puertaSinCandadoBLUE`)
-                tiles.setWallAt(value7, false)
-                removeitem("BLUEKEY")
-            }
-        }
-    }
-    if (esta_porta_green == 1) {
-        if (findvalue("GREENKEY") != -1) {
-            for (let value72 of tiles.getTilesByType(assets.tile`puertaCandadoGREEN`)) {
-                tiles.setTileAt(value72, assets.tile`puertaSinCandadoGREEN`)
-                tiles.setWallAt(value72, false)
-                removeitem("GREENKEY")
-            }
-        }
-    }
-})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite31, otherSprite15) {
     addItem(sprites.readDataString(otherSprite15, "name"), otherSprite15.image)
     sprites.destroy(otherSprite15)
@@ -984,7 +940,7 @@ function PantallaPrincipal () {
     puerta.setPosition(66, 80)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.portal_espacio, function (sprite, otherSprite) {
-    sala3()
+	
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -1084,6 +1040,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         nena.vy = fuerza_salto
     }
     if (esta_sala3 == 1) {
+        let nave2: Sprite = null
         nave2.vy = -150
         nave2.startEffect(effects.fire)
     }
@@ -1109,8 +1066,14 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             }
         }
     }
-    if (esta_porta_red == 1) {
-    	
+    if (esta_porta_blue == 1) {
+        if (findvalue("BLUEKEY") != -1) {
+            for (let value7 of tiles.getTilesByType(assets.tile`puertaCandadoBLUE`)) {
+                tiles.setTileAt(value7, assets.tile`puertaSinCandadoBLUE`)
+                tiles.setWallAt(value7, false)
+                removeitem("BLUEKEY")
+            }
+        }
     }
     if (esta_porta_green == 1) {
         if (findvalue("GREENKEY") != -1) {
@@ -1124,6 +1087,22 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.cofre, function (sprite27, otherSprite13) {
     CofreBueno()
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.puertaOjo, function (sprite, otherSprite) {
+    if (llavePuertaOjo == 1) {
+        sprites.destroy(cofre_laberinto)
+        sprites.destroy(cofre_plataformas)
+        sprites.destroy(cofre22)
+        sprites.destroy(cofre32)
+        sprites.destroy(cofre4)
+        sprites.destroy(cofre_plataformas)
+        sprites.destroy(greenkey2)
+        sprites.destroy(puertaOjo)
+        sprites.destroyAllSpritesOfKind(SpriteKind.coin)
+        tiles.setCurrentTilemap(tilemap`PantallaCarga`)
+        pause(1000)
+        PisoJefe()
+    }
 })
 function DevolverLaCorona () {
     sprites.destroy(corona2)
@@ -1233,12 +1212,13 @@ function PisoEnemigos () {
     tiles.placeOnTile(cofre_laberinto, tiles.getTileLocation(2, 6))
     scene.cameraFollowSprite(nena)
     tiles.placeOnTile(nena, tiles.getTileLocation(31, 39))
-    puertaOjo = sprites.create(assets.image`miImagen7`, SpriteKind.Player)
+    puertaOjo = sprites.create(assets.image`miImagen7`, SpriteKind.puertaOjo)
     tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 9))
     portal_espacio2 = sprites.create(assets.image`portal al espacio`, SpriteKind.portal_espacio)
     tiles.placeOnTile(portal_espacio2, tiles.getTileLocation(54, 31))
 }
 function animacionJefe () {
+    tiles.setCurrentTilemap(tilemap`piso1Castillo`)
     scene.setBackgroundImage(assets.image`castillo_trono`)
     sprites.destroy(toolbar)
     jefe2 = sprites.create(assets.image`miImagen1`, SpriteKind.jefe)
@@ -1283,6 +1263,7 @@ function cofre_obert_laberint () {
             `, SpriteKind.greenkey)
         sprites.setDataString(greenkey2, "name", "GREENKEY")
         tiles.placeOnTile(greenkey2, value12)
+        llavePuertaOjo = 1
     }
 }
 statusbars.onZero(StatusBarKind.Health, function (status) {
@@ -1315,27 +1296,6 @@ function AnimacionFinal () {
         }
     }
     game.gameOver(true)
-}
-function sala3 () {
-    if (esta_sala3 == 0) {
-        sprites.destroy(puertaOjo)
-        esta_sala3 = 1
-        scene.setBackgroundColor(15)
-        tiles.setCurrentTilemap(tilemap`level1`)
-        nave2 = sprites.create(assets.image`nave_sala3`, SpriteKind.nave)
-        nave2.setScale(0.5, ScaleAnchor.Middle)
-        tiles.placeOnTile(nave2, tiles.getTileLocation(2, 2))
-        nave2.vx = 100
-        nave2.ay = 400
-        scene.cameraFollowSprite(nave2)
-        info.setScore(0)
-        effects.starField.startScreenEffect()
-        for (let value10 of tiles.getTilesByType(assets.tile`myTile23`)) {
-            pinkkey2 = sprites.create(assets.image`pinkkey`, SpriteKind.pinkkey)
-            sprites.setDataString(pinkkey2, "name", "PINKKEY")
-            tiles.placeOnTile(pinkkey2, tiles.getTileLocation(91, 6))
-        }
-    }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.astronauta, function (sprite29, otherSprite14) {
     DialogoAstronauta()
@@ -1685,13 +1645,10 @@ let BlueKey: Sprite = null
 let mapSprite: Sprite = null
 let myMinimap: minimap.Minimap = null
 let RedKey: Sprite = null
-let pinkkey2: Sprite = null
 let eleccion = 0
 let JefeDerrotado2: Sprite = null
-let greenkey2: Sprite = null
 let vidaPersonaje: StatusBarSprite = null
 let portal_espacio2: Sprite = null
-let cofre_laberinto: Sprite = null
 let persona_espacio: Sprite = null
 let MagoGrande: Sprite = null
 let ojos: Sprite = null
@@ -1703,6 +1660,8 @@ let npc2: Sprite = null
 let npc1: Sprite = null
 let princesaCorona: Sprite = null
 let corona2: Sprite = null
+let greenkey2: Sprite = null
+let cofre_laberinto: Sprite = null
 let toolbar: Inventory.Toolbar = null
 let AtaqueJefe2: Sprite = null
 let caballero2: Sprite = null
@@ -1721,7 +1680,6 @@ let cofre32: Sprite = null
 let puertaOjo: Sprite = null
 let vidaJefe: StatusBarSprite = null
 let caballeroGrande: Sprite = null
-let nave2: Sprite = null
 let CofreAbierto2: Sprite = null
 let portal2: Sprite = null
 let jefe2: Sprite = null
@@ -1731,19 +1689,20 @@ let cofre22: Sprite = null
 let cofre4: Sprite = null
 let puerta22: Sprite = null
 let princesa2: Sprite = null
+let llavePuertaOjo = 0
 let pelea = 0
 let disparo = 0
 let fuerza_salto = 0
 let esta_sala3 = 0
-let esta_porta_green = 0
 let esta_plataformes = 0
 let esta_porta_blue = 0
-let esta_porta_red = 0
-let esta_portal = 0
 let esta_enemigos = 0
 let esta_mapa_enemigos = 0
 let mapa_abierto = 0
 let nena: Sprite = null
+let esta_portal = 0
+let esta_porta_red = 0
+let esta_porta_green = 0
 PantallaPrincipal()
 nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
 mapa_abierto = 0
@@ -1758,6 +1717,7 @@ esta_sala3 = 0
 fuerza_salto = -163
 disparo = 0
 pelea = 0
+llavePuertaOjo = 0
 nena.setPosition(145, 88)
 controller.moveSprite(nena)
 game.onUpdateInterval(2000, function () {
