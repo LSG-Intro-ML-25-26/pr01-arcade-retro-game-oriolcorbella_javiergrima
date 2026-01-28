@@ -1208,11 +1208,10 @@ function animacionJefe () {
     tiles.setCurrentTilemap(tilemap`PantallaCarga`)
     sprites.destroy(jefe2)
     pause(1000)
-    animacionJefe()
 }
 function SaludPersonaje () {
     vidaPersonaje = statusbars.create(20, 4, StatusBarKind.Health)
-    vidaPersonaje.max = 5
+    vidaPersonaje.max = 10
     vidaPersonaje.setColor(7, 2, 5)
     vidaPersonaje.attachToSprite(nena)
     vidaPersonaje.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
@@ -1332,23 +1331,6 @@ function CofreBueno () {
     portal2.setPosition(81, 79)
     game.showLongText("Ya estas preparado, cruza el portal y derrota el mal!", DialogLayout.Bottom)
 }
-sprites.onDestroyed(SpriteKind.greenkey, function (sprite) {
-    PantallaPrincipal()
-    nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
-    mapa_abierto = 0
-    esta_mapa_enemigos = 0
-    esta_enemigos = 0
-    esta_portal = 0
-    esta_porta_red = 0
-    esta_porta_blue = 0
-    esta_plataformes = 0
-    esta_porta_green = 0
-    esta_sala3 = 0
-    fuerza_salto = -163
-    disparo = 0
-    nena.setPosition(145, 88)
-    controller.moveSprite(nena)
-})
 function MovimientoJefeDerecha () {
     animation.runImageAnimation(
     jefe2,
@@ -1537,6 +1519,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.greenkey, function (sprite6, oth
     sprites.destroy(otherSprite3)
 })
 function PisoJefe () {
+    animacionJefe()
     scene.setBackgroundImage(assets.image`castillo_trono`)
     tiles.setCurrentTilemap(tilemap`nivel15`)
     nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
@@ -1547,6 +1530,7 @@ function PisoJefe () {
     sprites.destroy(toolbar)
     efecto_salto()
     sprites.destroy(statusbar)
+    pelea = 1
     JefeFinal()
     SaludPersonaje()
     PeleaJefeFinal()
@@ -1661,7 +1645,6 @@ let mechero2: Sprite = null
 let BlueKey: Sprite = null
 let mapSprite: Sprite = null
 let myMinimap: minimap.Minimap = null
-let mapa_abierto = 0
 let RedKey: Sprite = null
 let eleccion = 0
 let JefeDerrotado2: Sprite = null
@@ -1670,8 +1653,6 @@ let vidaPersonaje: StatusBarSprite = null
 let portal_espacio: Sprite = null
 let puertaOjo: Sprite = null
 let cofre_laberinto: Sprite = null
-let esta_enemigos = 0
-let esta_mapa_enemigos = 0
 let persona_espacio: Sprite = null
 let cofre32: Sprite = null
 let MagoGrande: Sprite = null
@@ -1684,15 +1665,9 @@ let npc2: Sprite = null
 let npc1: Sprite = null
 let princesaCorona: Sprite = null
 let corona2: Sprite = null
-let esta_porta_red = 0
-let esta_portal = 0
 let nave: Sprite = null
-let esta_sala3 = 0
-let fuerza_salto = 0
 let toolbar: Inventory.Toolbar = null
-let esta_porta_green = 0
 let AtaqueJefe: Sprite = null
-let disparo = 0
 let caballero2: Sprite = null
 let puerta: Sprite = null
 let agujero2: Sprite = null
@@ -1705,7 +1680,6 @@ let tp_plataformas2: Sprite = null
 let tp_plataformas: Sprite = null
 let pluma: Sprite = null
 let moneda: Sprite = null
-let esta_plataformes = 0
 let vidaJefe: StatusBarSprite = null
 let caballeroGrande: Sprite = null
 let CofreAbierto2: Sprite = null
@@ -1717,9 +1691,37 @@ let cofre22: Sprite = null
 let cofre4: Sprite = null
 let puerta22: Sprite = null
 let princesa2: Sprite = null
+let pelea = 0
+let disparo = 0
+let fuerza_salto = 0
+let esta_sala3 = 0
+let esta_porta_green = 0
+let esta_plataformes = 0
 let esta_porta_blue = 0
+let esta_porta_red = 0
+let esta_portal = 0
+let esta_enemigos = 0
+let esta_mapa_enemigos = 0
+let mapa_abierto = 0
 let nena: Sprite = null
-PisoJefe()
+PantallaPrincipal()
+nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+mapa_abierto = 0
+esta_mapa_enemigos = 0
+esta_enemigos = 0
+esta_portal = 0
+esta_porta_red = 0
+esta_porta_blue = 0
+esta_plataformes = 0
+esta_porta_green = 0
+esta_sala3 = 0
+fuerza_salto = -163
+disparo = 0
+pelea = 0
+nena.setPosition(145, 88)
+controller.moveSprite(nena)
 game.onUpdateInterval(2000, function () {
-    PeleaJefeFinal()
+    if (pelea == 1) {
+        PeleaJefeFinal()
+    }
 })
