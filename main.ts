@@ -35,6 +35,7 @@ namespace SpriteKind {
     export const portal_espacio = SpriteKind.create()
     export const GapKind = SpriteKind.create()
     export const astronauta = SpriteKind.create()
+    export const nave = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const salto_pluma = StatusBarKind.create()
@@ -1236,6 +1237,13 @@ function cofre_obert_laberint () {
 statusbars.onZero(StatusBarKind.Health, function (status) {
     PisoEnemigos()
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile21`, function (sprite, location) {
+    scene.cameraShake(4, 500)
+    sprites.destroy(nave, effects.disintegrate, 1000)
+    pause(1400)
+    esta_sala3 = 0
+    sala3()
+})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     nena,
@@ -1278,18 +1286,18 @@ function sala3 () {
         esta_sala3 = 1
         scene.setBackgroundColor(15)
         tiles.setCurrentTilemap(tilemap`level1`)
-        nave = sprites.create(assets.image`nave_sala3`, SpriteKind.Player)
+        nave = sprites.create(assets.image`nave_sala3`, SpriteKind.nave)
         nave.setScale(0.5, ScaleAnchor.Middle)
-        tiles.placeOnTile(nave, tiles.getTileLocation(2, 8))
+        tiles.placeOnTile(nave, tiles.getTileLocation(2, 2))
         nave.vx = 100
-        nave.ay = 500
+        nave.ay = 400
         scene.cameraFollowSprite(nave)
         info.setScore(0)
         effects.starField.startScreenEffect()
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.astronauta, function (sprite29, otherSprite14) {
-	
+    DialogoAstronauta()
 })
 function CofreBueno () {
     sprites.destroy(cofre4)
@@ -1570,7 +1578,11 @@ function DialogoAstronauta () {
         . . . . . f f f f f f . . . . . 
         . . . . . f f . . f f . . . . . 
         `, SpriteKind.Player)
+    astronauta_grande.setPosition(76, 10)
+    astronauta_grande.setScale(4, ScaleAnchor.Top)
     story.printCharacterText("Puedo ayudar-te, metete en el portal. Apareceras dentro de una nave, esquiva los obstaculos para llegar al final i conseguir la llave", "Astronauta")
+    sprites.destroy(astronauta_grande)
+    pause(2000)
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite23, location12) {
     esta_porta_green = 1
@@ -1580,6 +1592,14 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite17
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.tp2, function (sprite19, otherSprite8) {
     tiles.placeOnTile(nena, tiles.getTileLocation(36, 10))
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile23`, function (sprite, location) {
+    scene.cameraShake(4, 500)
+    sprites.destroy(nave, effects.confetti, 500)
+    pause(500)
+    esta_sala3 = 0
+    nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
+    controller.moveSprite(nena, 100, 0)
 })
 function TomarElPoder () {
     sprites.destroy(corona2)
