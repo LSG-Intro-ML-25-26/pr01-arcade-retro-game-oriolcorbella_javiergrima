@@ -1452,13 +1452,13 @@ function PeleaJefeFinal () {
             AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen9`, jefe2, 0, 50)
         } else if (MovimientoJefe == 4) {
             MovimientoJefeDerecha()
-            jefe2.setPosition(130, 22)
+            jefe2.setPosition(133, 85)
             pause(500)
             AtaqueJefe = sprites.create(assets.image`miImagen10`, SpriteKind.AtaqueJefe)
             AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen10`, jefe2, -100, 0)
         } else if (MovimientoJefe == 5) {
             MovimientoJefeIzquieda()
-            jefe2.setPosition(130, 22)
+            jefe2.setPosition(15, 85)
             pause(500)
             AtaqueJefe = sprites.create(assets.image`miImagen11`, SpriteKind.AtaqueJefe)
             AtaqueJefe = sprites.createProjectileFromSprite(assets.image`miImagen11`, jefe2, 100, 0)
@@ -1503,6 +1503,7 @@ function PisoJefe () {
     sprites.destroy(statusbar)
     JefeFinal()
     SaludPersonaje()
+    PeleaJefeFinal()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite23, location12) {
     esta_porta_green = 1
