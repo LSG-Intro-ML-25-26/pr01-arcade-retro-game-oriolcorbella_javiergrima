@@ -2114,3 +2114,4 @@ def on_update_interval():
     if pelea == 1:
         PeleaJefeFinal()
 game.on_update_interval(2000, on_update_interval)
+

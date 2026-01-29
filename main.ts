@@ -111,7 +111,7 @@ function JefeFinal () {
     vidaJefe.max = 100
 }
 function mine_plataformas () {
-    sprites.destroy(puertaOjo)
+    sprites.destroy(puertaOjo2)
     sprites.destroy(cofre32)
     esta_plataformes = 1
     scene.setBackgroundImage(img`
@@ -964,11 +964,11 @@ function MovimientoJefeArriba () {
 controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     if (disparo == 1) {
         projectile = sprites.createProjectileFromSprite(assets.image`bala_arriba`, nena, 0, -50)
-        projectile.x += -15
+        projectile.y += -15
         music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
     } else if (disparo == 2) {
         projectile = sprites.createProjectileFromSprite(assets.image`bala_abajo`, nena, 0, 50)
-        projectile.x += -15
+        projectile.y += 15
         music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.UntilDone)
     } else if (disparo == 3) {
         projectile = sprites.createProjectileFromSprite(assets.image`bala_izquierda`, nena, -100, 0)
@@ -1097,7 +1097,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.puertaOjo, function (sprite, oth
         sprites.destroy(cofre4)
         sprites.destroy(cofre_plataformas)
         sprites.destroy(greenkey2)
-        sprites.destroy(puertaOjo)
+        sprites.destroy(puertaOjo2)
         sprites.destroyAllSpritesOfKind(SpriteKind.coin)
         tiles.setCurrentTilemap(tilemap`PantallaCarga`)
         pause(1000)
@@ -1132,7 +1132,7 @@ function DevolverLaCorona () {
     sprites.destroy(nena)
     sprites.destroy(princesaCorona)
     tiles.setCurrentTilemap(tilemap`nivel12`)
-    story.printText("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...", 80, 60, 1, 15, story.TextSpeed.Slow)
+    story.printText("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...", 100, 60, 1, 15, story.TextSpeed.Slow)
     music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
     ojos = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -1152,7 +1152,7 @@ function DevolverLaCorona () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Player)
-    ojos.setPosition(8, 40)
+    ojos.setPosition(70, 40)
     ojos.setScale(2, ScaleAnchor.Middle)
     animation.runImageAnimation(
     ojos,
@@ -1212,8 +1212,8 @@ function PisoEnemigos () {
     tiles.placeOnTile(cofre_laberinto, tiles.getTileLocation(2, 6))
     scene.cameraFollowSprite(nena)
     tiles.placeOnTile(nena, tiles.getTileLocation(31, 39))
-    puertaOjo = sprites.create(assets.image`miImagen7`, SpriteKind.puertaOjo)
-    tiles.placeOnTile(puertaOjo, tiles.getTileLocation(32, 9))
+    puertaOjo2 = sprites.create(assets.image`miImagen7`, SpriteKind.puertaOjo)
+    tiles.placeOnTile(puertaOjo2, tiles.getTileLocation(32, 9))
     portal_espacio2 = sprites.create(assets.image`portal al espacio`, SpriteKind.portal_espacio)
     tiles.placeOnTile(portal_espacio2, tiles.getTileLocation(54, 31))
 }
@@ -1601,7 +1601,7 @@ function TomarElPoder () {
     sprites.destroyAllSpritesOfKind(SpriteKind.npc)
     sprites.destroy(personajeCorona)
     tiles.setCurrentTilemap(tilemap`nivel10`)
-    story.printText("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...", 80, 60, 1, 15, story.TextSpeed.Slow)
+    story.printText("La paz llegó al reino, la armonía la acompañó, pero algo más se acercaba...", 100, 60, 1, 15, story.TextSpeed.Slow)
     music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.LoopingInBackground)
     ojos = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -1621,7 +1621,7 @@ function TomarElPoder () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Player)
-    ojos.setPosition(8, 40)
+    ojos.setPosition(70, 40)
     ojos.setScale(2, ScaleAnchor.Middle)
     animation.runImageAnimation(
     ojos,
@@ -1677,7 +1677,7 @@ let tp_plataformas: Sprite = null
 let pluma: Sprite = null
 let moneda: Sprite = null
 let cofre32: Sprite = null
-let puertaOjo: Sprite = null
+let puertaOjo2: Sprite = null
 let vidaJefe: StatusBarSprite = null
 let caballeroGrande: Sprite = null
 let CofreAbierto2: Sprite = null
@@ -1694,15 +1694,15 @@ let pelea = 0
 let disparo = 0
 let fuerza_salto = 0
 let esta_sala3 = 0
+let esta_porta_green = 0
 let esta_plataformes = 0
 let esta_porta_blue = 0
+let esta_porta_red = 0
+let esta_portal = 0
 let esta_enemigos = 0
 let esta_mapa_enemigos = 0
 let mapa_abierto = 0
 let nena: Sprite = null
-let esta_portal = 0
-let esta_porta_red = 0
-let esta_porta_green = 0
 PantallaPrincipal()
 nena = sprites.create(assets.image`nena-front`, SpriteKind.Player)
 mapa_abierto = 0
