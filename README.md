@@ -25,3 +25,70 @@ To edit this repository in MakeCode.
 
 * for PXT/arcade
 <script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+
+
+
+## 🧭 Temática
+
+El juego es un videojuego arcade de acción y aventura con un enfoque narrativo (lore). La historia gira en torno a una princesa que ha perdido su corona, la cual ha sido robada por un poderoso jefe final. El jugador deberá avanzar por distintos niveles, superar obstáculos para recuperar la corona y devolver la paz al reino.
+
+---
+
+## 🎯 Objetivos del juego
+
+El objetivo principal del juego es:
+
+Derrotar al jefe final y recuperar la corona de la princesa.
+
+Durante el juego, el jugador debe:
+
+* Superar los distintos niveles
+* Derrotar al jefe final
+* Recuperar la corona de la princesa
+
+### Finales posibles
+
+* ✅ **Tomar el poder**: el jugador derrota al jefe final y se queda con la corona y se convierte en el rey
+* ❌ **Devolver la corona**: el jugador derrota al jefe final y devuelve la corona a la princesa y se convierte en su caballero personal
+
+---
+
+## 👤 Personajes
+
+### Jugador
+
+Es el personaje que controla el jugador durante toda la partida. Su misión es recuperar la corona de la princesa
+
+### Princesa
+
+Es el personaje que el jugador debe ayudar. El objetivo del juego es conseguir la corona para la princesa.
+
+### Calavera (Jefe Final)
+
+Es el enemigo principal del juego. El jugador debe derrotarlo para poder recuperar la corona y completar el juego.
+
+---
+
+## 🗺️ Mapas (Tiles y Tilemaps)
+
+El juego utiliza tilemaps para crear los distintos niveles. Cada mapa está formado por tiles que representan elementos como suelos, paredes y obstáculos.
+
+Gracias a los tilemaps:
+
+* Cada nivel tiene un diseño propio
+* Se definen las zonas por donde el jugador puede moverse
+* Se crea una progresión clara a lo largo del juego
+
+---
+
+## 🚀 Estado del proyecto
+
+El juego es completamente jugable y cuenta con un sistema de niveles y un jefe final. En futuras versiones se podrían añadir más niveles, enemigos, animaciones y contenido narrativo.
+
+---
+
+## 👥 Autores
+
+* Javier Grima
+* Oriol Corbella
+
