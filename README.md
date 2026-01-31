@@ -55,14 +55,20 @@ Durante el juego, el jugador debe:
 
 ## 👤 Personajes
 
+
+<img width="106" height="104" alt="image" src="https://github.com/user-attachments/assets/aeea5471-e19f-4479-8cbc-6fbdb90930f9" />
 ### Jugador
 
 Es el personaje que controla el jugador durante toda la partida. Su misión es recuperar la corona de la princesa
 
+
+<img width="114" height="112" alt="image" src="https://github.com/user-attachments/assets/52bad414-0d67-4c66-a376-1850dadd58af" />
 ### Princesa
 
 Es el personaje que el jugador debe ayudar. El objetivo del juego es conseguir la corona para la princesa.
 
+
+<img width="107" height="105" alt="image" src="https://github.com/user-attachments/assets/4c706a21-7282-481f-beaf-44b8742dfab7" />
 ### Calavera (Jefe Final)
 
 Es el enemigo principal del juego. El jugador debe derrotarlo para poder recuperar la corona y completar el juego.
