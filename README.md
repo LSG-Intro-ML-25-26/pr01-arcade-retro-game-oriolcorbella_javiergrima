@@ -48,8 +48,8 @@ Durante el juego, el jugador debe:
 
 ### Finales posibles
 
-* ✅ **Tomar el poder**: el jugador derrota al jefe final y se queda con la corona y se convierte en el rey
-* ❌ **Devolver la corona**: el jugador derrota al jefe final y devuelve la corona a la princesa y se convierte en su caballero personal
+* **Tomar el poder**: el jugador derrota al jefe final y se queda con la corona y se convierte en el rey
+* **Devolver la corona**: el jugador derrota al jefe final y devuelve la corona a la princesa y se convierte en su caballero personal
 
 ---
 
